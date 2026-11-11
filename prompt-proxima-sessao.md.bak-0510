@@ -1,0 +1,18 @@
+Continuar a Jornada Marketing Cloud da Metax (Bunker). Esta é a CONTINUAÇÃO da sessão de 05/10/2026. NÃO refaça nada que o mapa registra como feito.
+
+Leia C:\Users\User\Documents\Bunker\Metax\onde-paramos.md, só a seção "05/10/2026: ESTADO ATUAL" (o resto é histórico). Ela já foi conferida contra a org, o Marketing Cloud e as issues em 05/10. Para confirmar, compare só as etapas das issues abertas de Bunker-Growth-and-Sales-Intelligence/metax-salesforce com o mapa (um `gh issue list`); não rode consultas na org nem no MC para "revalidar". O código está na main de C:\Users\User\code\metax-salesforce.
+
+Já FEITO em 05/10. Não repetir:
+- Conferência das cargas de 03, 04 e 05/10 (0 erros; 104 de 104 com o Salesforce). #11, #24, #25, #29 e #32 fechadas; #26, #27 e #28 em e5-reteste até 09/10.
+- Despedida no dia 90 montada e testada (jornada com 7 caminhos, em rascunho).
+- Data dos e-mails [TESTE] corrigida; regra do pré-cabeçalho registrada na #31.
+- 9 linhas TESTE apagadas (a DE tem só os 128 reais). Merges feitos; nenhuma branch pendente.
+
+O que fazer AGORA (só isto; é trabalho interno, sem depender de ninguém):
+1. Conferência da manhã, só se a data de hoje for posterior à "Última conferência registrada" do mapa (05/10). É só leitura: o job das 05:00 do agendamento 08ebL00000YLWhFQAX (recriado em 05/10 para a #34; o anterior era o 08ebL00000YA7StQAL), `scripts-mc\ler-totais-de-real.apex` e os e-mails recebidos do dia anterior. Registre nas issues e atualize essa linha do mapa. Em 09/10, se as 5 cargas estiverem sem falha, feche #26, #27 e #28.
+2. Guia do Raphael (#21): espere a minha revisão do texto; com o meu ok, gere o PDF no padrão Bunker, com a seção 5 marcada como pendente.
+3. Triagem de #1, #18 e #33: me mostre e eu decido.
+
+NÃO são próximo passo e NÃO devem ser propostos: o alinhamento com o Guilherme ou com a Metax (a pauta só quando eu pedir), o conteúdo dos e-mails (#31, a última etapa), a montagem dos definitivos e a ativação. Ficam na seção "DEPOIS do alinhamento" do mapa.
+
+Respeite as memórias: eu decido tudo; nada vai para o Guilherme nem para o cliente; não mexer na configuração da org; produção (Marketing Cloud incluído) só com o meu ok na hora; segredos nunca no chat. O `sf` só funciona pelo PowerShell; os scripts do MC estão em C:\Users\User\Documents\Bunker\Metax\scripts-mc\ (LEIA-ME.md).

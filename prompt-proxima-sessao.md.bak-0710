@@ -1,0 +1,29 @@
+Continuar a Jornada Marketing Cloud da Metax (Bunker). Esta é a CONTINUAÇÃO da sessão de 06/10/2026 (até o fim da tarde). Prioridade máxima: o layout e os textos dos e-mails (o layout eu monto à mão; textos em docs/jornada-mc/textos-emails-rascunho.md). O botão dos e-mails leva ao consultor (#38). NÃO refaça nada que o mapa registra como feito.
+
+Leia C:\Users\User\Documents\Bunker\Metax\onde-paramos.md, só a seção "06/10/2026: ESTADO ATUAL" (o resto é histórico). Para confirmar, compare só as etapas das issues abertas de Bunker-Growth-and-Sales-Intelligence/metax-salesforce com o mapa (um `gh issue list`); não rode consultas na org nem no MC para "revalidar". O código está na main de C:\Users\User\code\metax-salesforce; o trabalho de 06/10 está nas branches docs/i30-especificacao-e-layout (c43e6f0), fix/i37-email-repetido-interno e feat/i38-botao-consultor (5a3ed12), sem merge.
+
+A reunião com o Guilherme de 05/10, às 22h23, mudou a ordem (adotada por mim em 06/10): especificação por e-mail, só texto, com "de acordo" da Metax; NADA da jornada nem dos e-mails é mostrado à Metax antes disso (memória metax-nada-antes-do-aceite). O layout dos e-mails eu monto à mão no Content Builder; o Claude prepara e revisa, não monta.
+
+Já FEITO em 06/10. Não repetir:
+- Conferência da manhã de 06/10: carga 707bL000015kkjsQAA, 0 erros (4 de 5 da semana de aceite); DE com 139 reais, 113 abertas; EWS 05/10 = 81. Registrada na #26, #27, #28 e #32.
+- Decisões de 05/10, à noite, na #35: eu reviso a branch antes do deploy; critério de 10 dias aprovado.
+- Especificação no rascunho 8 (docs/jornada-mc/especificacao.md), com [DECIDIR] para mim.
+- Roteiro do layout (docs/jornada-mc/roteiro-layout-email.md) e modelo com área de blocos (docs/jornada-mc/modelo-email/modelo-jornada-metax.html), sobre o Email_Template da Metax (id 32482).
+- Guia do Raphael no rascunho 4 (docs/jornada-mc/guia-raphael.md); só vai à Metax depois do de acordo.
+- Memórias, mapa, briefing (seção "Atualização de 06/10") e comentários na #21, #30 e #31 atualizados.
+
+O que fazer AGORA (só isto; trabalho interno):
+0. PRIMEIRO: o envio de teste do e-mail do dia 7 NÃO chegou (06/10, 22h40), nem na caixa da Bunker nem no Gmail de teste. Diagnóstico só de leitura, passos no item 0a do mapa. Registrar na #31. E o alinhamento com o Guilherme não aconteceu em 06/10: a pauta curta está no briefing (seção "Pauta curta para 07/10"); não montar outra.
+1. Conferência da manhã, só se a data de hoje for posterior à "Última conferência registrada" do mapa (06/10). Só leitura: o job das 05:00 do agendamento 08ebL00000YRfoHQAT (recriado em 06/10, à noite, para a #35), `scripts-mc\ler-totais-de-real.apex`, `scripts-mc\ler-temperatura-whatsapp.apex` e os e-mails recebidos do dia anterior. Registre nas issues e atualize essa linha do mapa. Em 09/10, se as 5 cargas estiverem sem falha, feche #26, #27 e #28.
+2. Especificação (#30): espere a minha revisão e as minhas decisões nos [DECIDIR]. O envio à Metax é meu.
+3. Layout (#31): eu monto pelo roteiro. Quando eu disser que terminei, faça a revisão só de leitura (remetente, assunto, pré-cabeçalho, personalização, links, imagens, computador e celular).
+4. Guia (#21): espere a minha revisão; com o meu ok, gere o PDF no padrão Bunker, com a seção 5 marcada como pendente.
+5. #35: espere a minha revisão da branch; o deploy só com a minha liberação nas permissões.
+6. Merge da branch docs/i30-especificacao-e-layout só com o meu ok.
+7. #37 (uma pessoa, um e-mail) e #38 (botão para o consultor): NO AR desde 06/10, à noite (deploy 0AfbL000001RyqjSAC, colunas criadas, agendamento hoje 08ebL00000YRfoHQAT). Em 07/10, junto com a conferência: conferir ForaDaJornada nos 3 contatos com e-mail interno e NomeConsultor/EmailConsultor nos abertos; se ok, rodar scripts-mc\GRAVA-jornada-i37.apex (Divisão 1; aprovado por mim em 06/10 para depois da carga conferida; backup antes). O merge das branches na main espera o meu ok. 
+8. #35 NO AR desde 06/10, à noite (deploy 0AfbL000001S0EDSA0, da feat/i35-sobre-i38, que tem #35 + #37 + #38). Em 07/10: conferir a DataReferencia nova dos contatos com e-mail do consultor e fazer a VIGIA do Einstein (e-mails a contatos da jornada pelo processo automático, 'captura apenas de cabeçalho'; se aparecerem, propor o filtro 'consultor ou Einstein'). O merge da feat/i35-sobre-i38 na main espera o meu ok.
+9. Status de 06/10: rascunho em Documents\Bunker\Metax\status-2026-10-06.md (só texto); o envio é meu.
+
+NÃO são próximo passo e NÃO devem ser propostos: mostrar qualquer coisa à Metax antes do de acordo (os textos são rascunho interno), a conversa com a Metax (a pauta só quando eu pedir), a montagem na jornada, a ativação e a #36. Ficam na seção "DEPOIS do de acordo" do mapa.
+
+Respeite as memórias: eu decido tudo; nada vai para o Guilherme nem para o cliente; não mexer na configuração da org; produção (Marketing Cloud incluído) só com o meu ok na hora; segredos nunca no chat; antes de recomendar uma opção, simular um caso concreto. O `sf` só funciona pelo PowerShell; os scripts do MC estão em C:\Users\User\Documents\Bunker\Metax\scripts-mc\ (LEIA-ME.md). No PowerShell 5.1, comentários do `gh` com aspas vão por --body-file.
