@@ -35,7 +35,7 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 ## Em aberto
 
 - **Fase de execução:** a análise do GitHub da Metax terminou ([`analise/metax-github.md`](analise/metax-github.md)). Falta decidir o que da pesquisa entra na skill.
-- **Padrão global de levantamento:** em pesquisa na aba "Boas práticas + case Metax". Vai alimentar a checagem de cobertura e a fase de conhecimento.
+- **Padrão global de levantamento:** proposta em [`pesquisa/padrao-global-levantamento.md`](pesquisa/padrao-global-levantamento.md): 11 movimentos, a checagem de cobertura em perguntas de negócio (obrigatórias e por tipo), a regra de parada em 6 condições e 5 métricas. Falta o Thiago decidir o que entra na skill.
 - **Regras de issues para trabalho de projeto:** saem da Lighthouse pela decisão de 11/11/2026 (padrão da Bunker). Os indícios de [`analise/metax-arquivos-locais.md`](analise/metax-arquivos-locais.md), seção 3, ficam como sugestão para a skill dona, se o Thiago quiser levar adiante.
 - **Arquivo de estado e prompt da próxima sessão:** formalizar o que o Thiago fazia à mão na Metax (estado curto no repositório, histórico à parte, prompt gerado no fim do turno), conferindo antes a `bunker-fechar-turno-copilot`.
 - **Correções nas skills donas** (fora da Lighthouse, pedem alinhamento com quem decidiu as regras):
