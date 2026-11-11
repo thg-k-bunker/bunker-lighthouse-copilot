@@ -32,7 +32,9 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 ## Em aberto
 
 - **Fase de execução:** aguardando o fim da pesquisa (análise do GitHub da Metax na aba "Boas práticas + case Metax").
-- **Regras de issues para trabalho de projeto:** aguardando a mesma análise.
+- **Regras de issues para trabalho de projeto:** aguardando a mesma análise. Primeiros indícios em [`analise/metax-arquivos-locais.md`](analise/metax-arquivos-locais.md): issue é entrega verificável, e não evento ou aprovação; P0 escasso; a fila nasce da sentença.
+- **Portas de aprovação:** ficam só no irreversível ou no que sai para fora (produção, cliente, dado real), e o trabalho interno anda sem esperar ok? Pergunta para o Thiago.
+- **Arquivo de estado e prompt da próxima sessão:** formalizar o que o Thiago fazia à mão na Metax (estado curto no repositório, histórico à parte, prompt gerado no fim do turno), conferindo antes a `bunker-fechar-turno-copilot`.
 - **Correções nas skills donas** (fora da Lighthouse, pedem alinhamento com quem decidiu as regras):
   - a `bunker-wsjf-copilot` refaz todas as notas a cada rodada, inclusive as dadas à mão, e isso contradiz "nota dada uma vez";
   - a esteira e0 a e6 da `bunker-fix-bug-copilot` foi feita para defeito e, aplicada a trabalho de projeto, deixou entregas prontas esperando cerca de 7 dias para fechar;

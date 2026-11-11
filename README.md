@@ -23,6 +23,7 @@ Toda skill da Bunker vive no plugin `bunker-claude-skills`, que é por onde ela 
 docs/
   decisoes.md     o que está fechado e o que está em aberto
   origem/         o pedido original (transcrição dos áudios)
+    metax/        arquivos de trabalho do projeto Metax: o "onde paramos", os prompts de sessão e as decisões
   pesquisa/       boas práticas e lições do projeto Metax
   analise/        o que já existe nas skills da Bunker e onde há conflito
 ```
