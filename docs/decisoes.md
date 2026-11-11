@@ -22,6 +22,7 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 | Alcance | A skill cobre qualquer projeto, de qualquer tipo ou domínio, sem lista fechada de tipos. A checagem de cobertura combina perguntas universais, lentes pela natureza do trabalho e itens do especialista gerados na hora, que viram biblioteca com o uso (Thiago, 11/11/2026) |
 | Foco da pesquisa | Um padrão global de levantamento e mapeamento: o que um profissional muito eficiente faz toda vez antes de executar. A Metax é exemplo, não a lista completa dos problemas (Thiago, 11/11/2026) |
 | Portas de aprovação | Ficam as duas: o ok humano no que é irreversível ou sai para fora (produção, cliente, dado real) e também no trabalho interno (merge, saída da triagem, fechamento de issue). Motivo: a skill vai para outras pessoas da Bunker que também não dominam o que estão fazendo, e as portas não foram a causa do retrabalho na Metax (decisão do Thiago, 11/11/2026) |
+| Quem decide | O Thiago é sempre o responsável: decide o escopo e dá os oks das portas de aprovação. A skill não pergunta quem decide, quem paga nem quem assina. Se existir alguém que possa travar o projeto (TI, jurídico, diretoria, o cliente), isso vem na transcrição ou é informado por ele. Terceiro citado na transcrição é registrado na sentença; ausente, não vira pergunta (Thiago, 11/11/2026) |
 
 ## O que a skill usa sem copiar
 
