@@ -101,11 +101,12 @@ Comparação de estrutura com referências públicas de ciclo de vida com portõ
 
 **O que não foi verificado:** o método da Deloitte (não encontrei documento público com fases e portões, só páginas de marketing) e o conteúdo oficial do PMBOK 8 (só fontes secundárias, que divergem entre si sobre grupos de processos). A estrutura acima está alinhada com o que é público; não afirmamos conformidade com Deloitte, IBM ou PMI.
 
-**Decisões de desenho ainda abertas (não são lacunas de pesquisa):**
-1. Registro de quem decide e quem aprova (regra da Metax: "mapear quem decide de fato"): onde entra na sentença.
-2. Tolerâncias e como uma mudança as afeta (hoje só existe "aditamento", sem análise de impacto em prazo e esforço).
-3. Se a rota proporcional (`classify-size`) entra, e com quais sinais de projeto.
-4. Fase de execução e regras de issue de projeto: aguardam a análise do GitHub da Metax, feita em outra aba. Os arquivos dela ainda não estão neste repositório.
+**Decisões de desenho ainda abertas (não são lacunas de pesquisa).** Conferidas em 11/11/2026 contra `../decisoes.md` e `padrao-global-levantamento.md`, já com a análise da Metax no repositório:
+1. Quem decide e quem aprova: o levantamento global já tem o bloco "Pessoas e decisão" e a regra de parada exige o decisor confirmando. Falta definir onde isso fica registrado na sentença. As portas de aprovação já estão decididas.
+2. Tolerâncias: `boas-praticas-execucao.md` (C1, item 3, e C2, itens 1 e 7) propõe que a sentença fixe resultado, critério de pronto e tolerâncias, com o plano de passos revisável dentro delas. Falta decidir.
+3. Proporção do ritual: coberta pela Camada 0 (perfil do projeto em quatro eixos) do levantamento global. A `classify-size` do `genkovich/sdd` fica só como inspiração, porque os sinais dela são de software. Falta decidir se o perfil é perguntado ou inferido.
+
+A fase de execução e o processo no GitHub deixaram de ser pendência de pesquisa: a análise da Metax foi concluída e o processo de issues ficou fora da Lighthouse (decisão de 11/11/2026).
 
 ## Lacuna de mapeamento a partir de transcrição
 
