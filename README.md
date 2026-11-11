@@ -1,0 +1,28 @@
+# bunker-lighthouse-copilot
+
+Repositório de trabalho da skill **Lighthouse** (apelido nas conversas: Farol): o padrão de processo da Bunker para executar, com produtividade, trabalhos e projetos que a gente ainda não domina.
+
+**Status:** pesquisa e desenho. A skill ainda não foi escrita.
+
+## O que a skill vai fazer
+
+Toda tarefa nova passa por duas fases, na lógica do processo judicial:
+
+1. **Conhecimento (clarear).** A partir da transcrição ou da explicação colada pelo usuário, o Claude devolve o entendimento do serviço e do problema, pergunta só o que falta (uma pergunta por vez, com recomendação), faz a checagem de cobertura e emite a **sentença**. A emissão da sentença é o **catch**: o aviso de que a fase de conhecimento foi superada.
+2. **Execução (fazer).** A ordem segue o caminho crítico, depois a maior incerteza, e o WSJF desempata. Transcrição nova é confrontada com a sentença e não a substitui.
+
+O desenho completo e o que ainda está em aberto ficam em [`docs/decisoes.md`](docs/decisoes.md).
+
+## Onde a skill vai morar
+
+Toda skill da Bunker vive no plugin `bunker-claude-skills`, que é por onde ela chega a quem instalou. Este repositório guarda a pesquisa, as decisões e os rascunhos. A versão final entra no plugin por PR, em `skills/bunker-lighthouse-copilot/`, seguindo o padrão `bunker-<dominio>-copilot` e as checagens do README do plugin.
+
+## Estrutura
+
+```
+docs/
+  decisoes.md     o que está fechado e o que está em aberto
+  origem/         o pedido original (transcrição dos áudios)
+  pesquisa/       boas práticas e lições do projeto Metax
+  analise/        o que já existe nas skills da Bunker e onde há conflito
+```
