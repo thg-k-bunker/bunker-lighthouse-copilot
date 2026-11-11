@@ -76,6 +76,37 @@ Commits lidos: `genkovich/sdd` `b7e1e6e`, `OthmanAdi/planning-with-files` `51bf6
 | Prova do mapa e aprovação | `process-map-validation-and-signoff` |
 | Onde paramos | três arquivos e teste dos 5 pontos, sem os ganchos |
 
+## Terceira leitura (`agent-personas`, MIT, commit `e0524f5`)
+
+| Skill | Veredito |
+|---|---|
+| `process-architecture-levels` | Hierarquia L1 a L4 de processo, com correspondência ao APQC. Pensada para panorama de organização inteira, grande demais para uma skill por tarefa. Aproveitar só a **matriz de cobertura** (o que a evidência sustenta em cada nível) e duas regras: "nunca fabricar detalhe fino a partir de conversa grosseira" e "não colapsar evidência rica numa caixa e perdê-la: guardar como candidata" |
+| `momtest-interviewing` | Entrevistar comportamento passado, não opinião. Curta e já coberta pela escala de confiança da `process-source-elicitation` (observado vale mais que dito, dito vale mais que desejo). Descartar por redundância |
+
+## Fechamento da etapa de pesquisa de skills públicas
+
+**Concluída em 11/11/2026.** Todas as candidatas que passaram o critério mínimo foram lidas, e as lacunas da Lighthouse que a pesquisa podia cobrir estão cobertas (ver tabela "Conclusão: o que entra como referência de desenho").
+
+Comparação de estrutura com referências públicas de ciclo de vida com portões. Não é certificação.
+
+| Prática de referência | Cobertura na Lighthouse |
+|---|---|
+| Fase de criação seguida de fase de execução, com portão entre elas (IBM Garage: Co-Create, Co-Execute, Co-Operate; ciclos de governo do Reino Unido, Canadá e Victoria com pontos de decisão) | Conhecimento, catch e execução |
+| Termo de abertura e linha de base de escopo aprovada (PMI) | Sentença com resultado, critério de pronto e fora de escopo |
+| Levantamento de requisitos rastreável (prática de análise de negócio) | `process-source-elicitation`: livro de fatos com fonte e confiança |
+| Controle de mudança depois da linha de base | Aditamento da sentença, só com decisão do usuário |
+| Aceite formal pelo cliente | Regra "nada em produção antes do aceite da sentença" e registro de aprovação do `process-map-validation-and-signoff` |
+| Gestão de risco antecipada | `pre-mortem` |
+| Lições que viram regra | Regra "lição só vale se mudar o processo" |
+
+**O que não foi verificado:** o método da Deloitte (não encontrei documento público com fases e portões, só páginas de marketing) e o conteúdo oficial do PMBOK 8 (só fontes secundárias, que divergem entre si sobre grupos de processos). A estrutura acima está alinhada com o que é público; não afirmamos conformidade com Deloitte, IBM ou PMI.
+
+**Decisões de desenho ainda abertas (não são lacunas de pesquisa):**
+1. Registro de quem decide e quem aprova (regra da Metax: "mapear quem decide de fato"): onde entra na sentença.
+2. Tolerâncias e como uma mudança as afeta (hoje só existe "aditamento", sem análise de impacto em prazo e esforço).
+3. Se a rota proporcional (`classify-size`) entra, e com quais sinais de projeto.
+4. Fase de execução e regras de issue de projeto: aguardam a análise do GitHub da Metax, feita em outra aba. Os arquivos dela ainda não estão neste repositório.
+
 ## Lacuna de mapeamento a partir de transcrição
 
 `gersoncorreias/claude-bpmn` (0★) e `andrewluxem/standard-operating-procedures` (0★) saíram pelo critério mínimo. Podem servir só como referência de ideia, sem rodar nem copiar. A `process-source-elicitation` do `agent-personas` fecha essa lacuna (ver acima). A `business-process` do `AI-Unified-Process` foi avaliada e descartada.
