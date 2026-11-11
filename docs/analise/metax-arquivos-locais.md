@@ -63,7 +63,7 @@ Muitas não eram defeitos nem entregas, e sim rituais e eventos: "Status diário
 
 Também havia dependência de terceiro acompanhada por cobrança: "Cobrar o Thiago a cada sessão: o Guilherme já criou o caso da Metax (#30)?"
 
-**Pergunta para o Thiago:** na Lighthouse, as portas ficam só no que é irreversível ou sai para fora (produção, cliente, dado real), e o trabalho interno anda sem esperar ok?
+**Decisão do Thiago (11/11/2026):** as portas ficam, as externas e as internas. Elas não causaram o retrabalho, e a skill vai para outras pessoas da Bunker no mesmo cenário de quem não domina o trabalho. Os números do GitHub batem com isso: o tempo parado veio do rito aplicado a trabalho pronto (nota refeita, print para mudar etapa, reteste) e da espera do cliente, e não das aprovações.
 
 ## 5. A estimativa e a espera do cliente
 

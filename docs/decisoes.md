@@ -18,6 +18,7 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 | Catch | A emissão da sentença, que fecha a fase de conhecimento |
 | WSJF | Sai do conhecimento e vai para a execução. Ordem: caminho crítico, depois a maior incerteza, e o WSJF desempata, com a régua da `bunker-wsjf-copilot`. A nota é dada uma vez e só é refeita com fato novo |
 | Trabalho manual | Não entra na skill: se o usuário quiser fazer à mão, faz |
+| Portas de aprovação | Ficam as duas: o ok humano no que é irreversível ou sai para fora (produção, cliente, dado real) e também no trabalho interno (merge, saída da triagem, fechamento de issue). Motivo: a skill vai para outras pessoas da Bunker que também não dominam o que estão fazendo, e as portas não foram a causa do retrabalho na Metax (decisão do Thiago, 11/11/2026) |
 
 ## O que a skill usa sem copiar
 
@@ -33,7 +34,6 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 
 - **Fase de execução:** aguardando o fim da pesquisa (análise do GitHub da Metax na aba "Boas práticas + case Metax").
 - **Regras de issues para trabalho de projeto:** aguardando a mesma análise. Primeiros indícios em [`analise/metax-arquivos-locais.md`](analise/metax-arquivos-locais.md): issue é entrega verificável, e não evento ou aprovação; P0 escasso; a fila nasce da sentença.
-- **Portas de aprovação:** ficam só no irreversível ou no que sai para fora (produção, cliente, dado real), e o trabalho interno anda sem esperar ok? Pergunta para o Thiago.
 - **Arquivo de estado e prompt da próxima sessão:** formalizar o que o Thiago fazia à mão na Metax (estado curto no repositório, histórico à parte, prompt gerado no fim do turno), conferindo antes a `bunker-fechar-turno-copilot`.
 - **Correções nas skills donas** (fora da Lighthouse, pedem alinhamento com quem decidiu as regras):
   - a `bunker-wsjf-copilot` refaz todas as notas a cada rodada, inclusive as dadas à mão, e isso contradiz "nota dada uma vez";
