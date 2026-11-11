@@ -1,10 +1,11 @@
 # Padrão Farol: resumo da pesquisa
 
-Resumo da página "Padrão Farol" publicada em 11/11/2026 pela aba "Boas práticas + case Metax": https://claude.ai/artifact/JxPWyRWc87mNqVonL6jcVp (privada). A página completa tem as fontes, os níveis de evidência e a linha do tempo da Metax. Os arquivos de pesquisa daquela aba (`pesquisa_boas_praticas.md`, `pesquisa_evidencias.md`, `retro_metax.md`, `analise_repo_metax.md`) estão no container dela e ainda não entraram aqui.
+Resumo da página "Padrão Farol" publicada em 11/11/2026 pela aba "Boas práticas + case Metax": https://claude.ai/artifact/JxPWyRWc87mNqVonL6jcVp (privada). A página completa tem as fontes, os níveis de evidência e a linha do tempo da Metax. O padrão global de levantamento, pesquisado depois da página, está em [`padrao-global-levantamento.md`](padrao-global-levantamento.md). Os arquivos completos estão neste repositório: [`boas-praticas-execucao.md`](boas-praticas-execucao.md), [`evidencias.md`](evidencias.md), [`padrao-farol.html`](padrao-farol.html) (a página), [`../analise/metax-retrospectiva.md`](../analise/metax-retrospectiva.md), [`../analise/metax-repositorio-git.md`](../analise/metax-repositorio-git.md) e [`../analise/metax-github.md`](../analise/metax-github.md).
 
-**Atenção:** a página foi escrita antes de algumas decisões desta skill e diverge delas em três pontos. Valem as decisões de [`../decisoes.md`](../decisoes.md):
+**Atenção:** a página foi escrita antes de algumas decisões desta skill e diverge delas em quatro pontos. Valem as decisões de [`../decisoes.md`](../decisoes.md):
 - a página traz o mapa do terreno como primeiro passo, e ele deixou de ser obrigatório;
 - a página propõe lotes de 2 a 4 perguntas independentes, e ficou uma por vez com a regra da fix-bug;
+- a página propunha regras próprias de issue (arquivo `passos.json`, rito enxuto). Pela decisão de 11/11/2026, o processo no GitHub segue o padrão da Bunker e fica fora da Lighthouse;
 - a página tem muitas etapas (visão de fora, pre-mortem, spikes, tolerâncias, quatro arquivos, revisor independente, AAR, métricas). Ainda não foi decidido o que entra na skill e o que fica só como referência.
 
 ## Conclusões
@@ -13,7 +14,8 @@ Resumo da página "Padrão Farol" publicada em 11/11/2026 pela aba "Boas prátic
 2. **A maior ameaça é o falso "pronto".** Projetos parecem 90% prontos e levam o dobro (Ford e Sterman, MIT). Agentes declaram vitória cedo (Anthropic). Desenvolvedores com IA ficaram 19% mais lentos achando que estavam 20% mais rápidos (METR). Nada fecha sem evidência.
 3. **A sentença fixa o resultado, não todos os passos.** Ela traz o resultado, o critério de pronto e as tolerâncias. Os passos se revisam dentro das tolerâncias.
 4. **Na Metax, o retrabalho nasceu no mapeamento, não na execução técnica.**
-5. **Lição só vale se mudar o processo.** Na NASA, o banco de lições quase não é consultado. Cada lição precisa virar regra, pergunta ou item de checklist.
+5. **O maior gargalo foi não ter processo definido.** No GitHub da Metax, o trabalho de controle (rótulos, prints, comentários) foi quase todo do agente e pesou pouco no tempo humano, e o rito de correção pegou defeitos reais. O que faltou foi um caminho padrão do entendimento à entrega.
+6. **Lição só vale se mudar o processo.** Na NASA, o banco de lições quase não é consultado. Cada lição precisa virar regra, pergunta ou item de checklist.
 
 ## Regras que a Metax deixa
 
@@ -29,8 +31,7 @@ Resumo da página "Padrão Farol" publicada em 11/11/2026 pela aba "Boas prátic
 | Conhecimento | Data prometida nunca antes do fim da estimativa | Go-live prometido para 01/07 contra 30 a 45 dias |
 | Conhecimento | Incerteza de ferramenta vira teste curto antes do desenho | Journey Builder não junta ramos |
 | Execução | Nada em produção antes do aceite da sentença | Carga em produção em 03/10, sem aceite |
-| Execução | Issue de aceite, reunião ou ativação só fecha com a evidência do evento | Quadro zerado em 10/10 |
-| Execução | WSJF desde o primeiro dia; polimento só depois das P0 | 18 commits de status report |
+| Execução | Seguir um processo definido desde o primeiro dia, com WSJF na execução | Etapas decididas na hora; WSJF aplicado em 08/10 |
 | Execução | Checklist de acessos e permissões 48 h antes de presencial ou demo | Usuários sem permissão no presencial |
 | Execução | O "onde paramos" mora no repositório e é commitado a cada marco | Arquivo só local, sem histórico |
 | Encerramento | Nenhum job, integração ou credencial no nome de terceiro | #33 e a parada de 05/11 |
