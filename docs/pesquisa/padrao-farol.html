@@ -1,0 +1,437 @@
+<title>Padrão Farol</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: coluna de leitura única (~70ch) com índice fixo à esquerda no desktop; monocromático da marca Bunker, cantos retos */
+:root{
+  --bg:#ffffff; --fg:#111111; --muted:#5f5f5f; --line:#dddddd; --panel:#f3f3f3; --ink:#000000; --inv:#ffffff;
+  --font:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0e0e0e;--fg:#ededed;--muted:#a3a3a3;--line:#2e2e2e;--panel:#1a1a1a;--ink:#ffffff;--inv:#0e0e0e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e0e0e;--fg:#ededed;--muted:#a3a3a3;--line:#2e2e2e;--panel:#1a1a1a;--ink:#ffffff;--inv:#0e0e0e;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}nav.toc{display:none}}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;padding-top:40px;font-size:13px}
+nav.toc .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:t}
+nav.toc li{counter-increment:t;display:grid;grid-template-columns:24px 1fr}
+nav.toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:2px}
+nav.toc a{color:var(--fg);text-decoration:none}
+nav.toc a:hover,nav.toc a:focus-visible{text-decoration:underline}
+main{min-width:0;max-width:760px}
+header.hero{padding:48px 0 28px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-weight:900;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1.02;letter-spacing:-.02em;margin:12px 0 16px;text-wrap:balance}
+.lede{font-size:1.15rem;color:var(--fg);max-width:62ch;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:20px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+section{padding:44px 0 8px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2{font-weight:900;font-size:1.75rem;line-height:1.15;letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance}
+h2 .n{font-family:var(--mono);font-weight:400;font-size:.8rem;color:var(--muted);display:block;letter-spacing:.08em;margin-bottom:6px}
+h3{font-weight:700;font-size:1.12rem;margin:28px 0 8px;text-wrap:balance}
+p{margin:0 0 14px;max-width:68ch}
+.sub{color:var(--muted);margin-bottom:20px}
+ul.tight{margin:0 0 14px;padding-left:20px;display:grid;gap:6px;max-width:68ch}
+strong{font-weight:700}
+code{font-family:var(--mono);font-size:.86em;background:var(--panel);padding:1px 5px}
+a{color:var(--fg)}
+/* resumo */
+.verdict{display:grid;gap:0;border:2px solid var(--ink);margin:8px 0 12px}
+.verdict div{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:14px 16px;border-top:1px solid var(--line)}
+.verdict div:first-child{border-top:0}
+.verdict b{font-family:var(--mono);font-weight:600;font-size:13px;padding-top:3px}
+/* fases */
+.phase{border-left:4px solid var(--ink);padding:4px 0 4px 18px;margin:24px 0}
+.phase .tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.phase h3{margin:4px 0 10px}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:10px}
+ol.steps>li{counter-increment:s;display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px}
+ol.steps>li::before{content:counter(s);font-family:var(--mono);font-weight:600;font-size:13px;width:24px;height:24px;display:grid;place-items:center;background:var(--ink);color:var(--inv)}
+.rule{background:var(--ink);color:var(--inv);padding:14px 16px;margin:16px 0;font-weight:500}
+.rule b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:4px;font-weight:600}
+.cycle{display:flex;flex-wrap:wrap;gap:0;margin:12px 0 16px;border:1px solid var(--ink)}
+.cycle span{flex:1 1 120px;padding:10px 12px;border-right:1px solid var(--ink);font-weight:700;font-size:14px}
+.cycle span:last-child{border-right:0}
+.cycle small{display:block;font-weight:400;color:var(--muted);font-size:12px;line-height:1.35;margin-top:2px}
+/* tabelas */
+.tbl{overflow-x:auto;margin:12px 0 18px;border-top:2px solid var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th{font-family:var(--mono);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 10px 8px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+td:first-child{font-weight:700}
+/* níveis de evidência */
+.lv{font-family:var(--mono);font-size:11px;font-weight:600;display:inline-grid;place-items:center;min-width:22px;height:20px;padding:0 4px;border:1.5px solid var(--ink);margin-right:2px}
+.lv.A{background:var(--ink);color:var(--inv)}
+.lv.C{border-color:var(--muted);color:var(--muted)}
+.lv.D{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--muted);margin:4px 0 16px}
+/* princípios */
+.pr{display:grid;gap:0;margin:8px 0 12px}
+.pr article{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+.pr article .k{font-family:var(--mono);font-weight:600;font-size:22px;line-height:1}
+.pr h4{margin:0 0 6px;font-size:1.02rem;font-weight:700}
+.pr p{margin:0 0 6px;font-size:15px}
+.pr .ev{font-size:13px;color:var(--muted)}
+/* metax */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+@media (max-width:640px){.two{grid-template-columns:minmax(0,1fr)}}
+.box{border:1px solid var(--line);padding:16px}
+.box h4{margin:0 0 10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.box ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:14px}
+.cls{font-family:var(--mono);font-size:11px;white-space:nowrap;border:1px solid var(--muted);color:var(--muted);padding:1px 6px}
+.stat{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;border:1px solid var(--ink);margin:16px 0}
+.stat div{padding:14px;border-right:1px solid var(--line)}
+.stat div:last-child{border-right:0}
+.stat b{display:block;font-size:1.9rem;font-weight:900;line-height:1.05;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+.quote{border-left:2px solid var(--muted);padding-left:14px;color:var(--muted);font-size:14px}
+/* arquivos */
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0 16px}
+.files div{border:1px solid var(--ink);padding:12px}
+.files code{background:none;padding:0;font-weight:600;font-size:13px}
+.files p{font-size:13px;margin:6px 0 0;color:var(--muted)}
+footer{padding-top:28px;font-size:13px;color:var(--muted)}
+footer ol{padding-left:20px;display:grid;gap:4px}
+footer a{color:var(--muted);word-break:break-word}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Índice">
+  <div class="lbl">Índice</div>
+  <ol>
+    <li><a href="#resumo">O que concluímos</a></li>
+    <li><a href="#workflow">O workflow revisado</a></li>
+    <li><a href="#ajustes">Ajustes no desenho atual</a></li>
+    <li><a href="#principios">12 princípios com evidência</a></li>
+    <li><a href="#ia">Riscos humano + IA</a></li>
+    <li><a href="#metax">Metax: o que aprendemos</a></li>
+    <li><a href="#github">GitHub: decisão</a></li>
+    <li><a href="#mitos">O que não usar</a></li>
+    <li><a href="#metricas">Como medir</a></li>
+    <li><a href="#proximos">Próximos passos</a></li>
+    <li><a href="#fontes">Fontes</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">Bunker · Pesquisa de base para a skill Farol</div>
+  <h1>Padrão Farol</h1>
+  <p class="lede">O padrão de execução de projetos em domínios que não dominamos, com IA. Reúne as práticas mais bem fundamentadas do mundo, separadas pelo nível de evidência, e o que o projeto Metax nos ensinou sobre a fase de mapeamento.</p>
+  <div class="meta"><span>11/11/2026</span><span>3 frentes de pesquisa + repositório metax-salesforce (123 commits)</span><span>Status: base para a construção da skill</span></div>
+</header>
+
+<section id="resumo">
+  <h2><span class="n">01</span>O que concluímos</h2>
+  <div class="verdict">
+    <div><b>1</b><span><strong>O desenho do Farol está certo no essencial.</strong> Separar conhecimento de execução, fechar a fase com um documento e executar contra ele é exatamente o que a Anthropic recomenda para agentes em tarefas longas, e o que Flyvbjerg (Oxford, 16.000 projetos) resume como "pensar devagar, agir rápido".</span></div>
+    <div><b>2</b><span><strong>A maior ameaça é o falso "pronto".</strong> Projetos parecem 90% prontos e levam o dobro (MIT). Agentes declaram vitória cedo (Anthropic). Pessoas usando IA acham que ficaram 20% mais rápidas quando ficaram 19% mais lentas (METR). Nada fecha sem evidência.</span></div>
+    <div><b>3</b><span><strong>Quatro pontos do desenho precisam mudar:</strong> a sentença fixa o resultado e não todos os passos; o WSJF vira desempate e não critério principal; "uma pergunta por vez" só quando a resposta muda as seguintes; e a verificação nos marcos é feita por quem não executou.</span></div>
+    <div><b>4</b><span><strong>Na Metax, o retrabalho nasceu no mapeamento, não na execução técnica.</strong> A especificação foi escrita depois do código e nunca foi assinada; regras de como o cliente realmente trabalha apareceram tarde; itens entraram na proposta sem horas.</span></div>
+    <div><b>5</b><span><strong>O maior gargalo foi não ter processo definido.</strong> No GitHub, o trabalho de controle foi quase todo do agente e não pesou no tempo humano; por isso o processo de issues segue o padrão da Bunker e fica fora do Farol. O que faltou foi um caminho padrão do entendimento à entrega, e é isso que o Farol entrega.</span></div>
+    <div><b>6</b><span><strong>Lição só vale se mudar o processo.</strong> Na NASA, o banco de lições quase não é consultado. Cada lição desta página precisa virar regra, pergunta ou item de checklist dentro da skill.</span></div>
+  </div>
+</section>
+
+<section id="workflow">
+  <h2><span class="n">02</span>O workflow revisado</h2>
+  <p class="sub">O desenho que discutimos para o Farol, ajustado pelas três frentes de pesquisa e pelos erros da Metax. Cada ajuste está justificado na seção seguinte.</p>
+
+  <div class="phase">
+    <div class="tag">Antes de tudo</div>
+    <h3>Triagem de proporção</h3>
+    <p>Se a tarefa cabe em 3 ou 4 perguntas, roda o modo leve: conhecimento curto e sentença de meia página. O processo cresce com o problema, não o contrário.</p>
+  </div>
+
+  <div class="phase">
+    <div class="tag">Fase de conhecimento · define o quê</div>
+    <h3>Do problema à sentença</h3>
+    <ol class="steps">
+      <li><span><strong>Mapa do terreno.</strong> Em uma tela: como esse tipo de trabalho costuma ser feito, os 3 a 5 conceitos que você precisa conhecer e onde as pessoas costumam errar. Para quem não domina o assunto, um exemplo trabalhado ajuda mais do que deixar explorar sozinho.</span></li>
+      <li><span><strong>Visão de fora.</strong> Projetos parecidos levaram quanto? O prazo sai como faixa (provável e pessimista), nunca como data única.</span></li>
+      <li><span><strong>Realidade antes de desenho.</strong> Auditar os dados reais, o estado atual do ambiente, quem decide de fato e como as pessoas realmente trabalham. Foi aqui que a Metax falhou.</span></li>
+      <li><span><strong>Perguntas certas para a pessoa certa.</strong> Ao humano só se pergunta preferência, valor, restrição e fato que só ele sabe, sempre com opções e recomendação. Questão técnica vira pesquisa do agente. Uma por vez quando a resposta muda as seguintes; as independentes vão em lote de 2 a 4, com o padrão já marcado.</span></li>
+      <li><span><strong>Incógnitas classificadas.</strong> O que é só complicado, o agente pesquisa e recomenda. O que é complexo vira um teste curto com prazo fixo (spike), feito antes do desenho final.</span></li>
+      <li><span><strong>Pre-mortem.</strong> "Daqui a X semanas isto fracassou. Por quê?" Os riscos principais entram na sentença.</span></li>
+      <li><span><strong>Emitir a sentença.</strong> O catch é a emissão do documento e o aceite de quem precisa aceitar, inclusive o cliente.</span></li>
+    </ol>
+    <div class="rule"><b>Regra inegociável</b>Nada toca ambiente real antes do catch. Se o cliente precisa aceitar, o aceite dele faz parte do catch.</div>
+    <h3>O que a sentença contém</h3>
+    <ul class="tight">
+      <li>Resultado final e critério de pronto verificável, no formato "quando isto acontecer, então aquilo".</li>
+      <li>Tolerâncias de prazo, custo, escopo e qualidade. Elas definem o tamanho de cada incidente.</li>
+      <li>Fora do escopo e decisões de não fazer, com data e quem decidiu.</li>
+      <li>Premissas, cada uma com o fato que a invalidaria.</li>
+      <li>Riscos do pre-mortem, faixa de prazo e marcos.</li>
+      <li>Passos detalhados só para a próxima onda; o resto fica em pacotes, refinados a cada marco.</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="tag">Fase de execução · define em que ordem e como</div>
+    <h3>O ciclo, uma unidade de cada vez</h3>
+    <div class="cycle">
+      <span>Escolher<small>caminho crítico, depois incerteza, WSJF desempata</small></span>
+      <span>Declarar<small>o quê, critério, por que agora, orçamento</small></span>
+      <span>Executar<small>um passo em andamento por vez</small></span>
+      <span>Verificar<small>com evidência anexada</small></span>
+      <span>Registrar<small>estado curto e log</small></span>
+    </div>
+    <ul class="tight">
+      <li><strong>Escolher:</strong> primeiro o que desbloqueia o caminho crítico; depois o que tem mais incerteza, para a surpresa aparecer cedo; o WSJF da <code>bunker-wsjf-copilot</code> (a IA dá as notas, o código faz a conta) desempata o resto.</li>
+      <li><strong>Declarar:</strong> inclui onde a tarefa está em relação ao que a IA faz bem (dentro, na borda ou fora). Na borda ou fora, a verificação é independente.</li>
+      <li><strong>Orçamento por passo:</strong> se estourar, para e reavalia em vez de insistir. Duas correções falhas seguidas: recomeçar com uma abordagem nova.</li>
+      <li><strong>Verificar:</strong> a ficha de evidência da Metax é o modelo: defeito, causa, correção, prova com IDs de execução, antes e depois. Teste vermelho antes da correção.</li>
+      <li><strong>Incidentes pelas tolerâncias:</strong> pequeno se resolve dentro do passo; médio muda o plano sem estourar tolerância; grande estoura tolerância ou mexe no resultado, e abre um aditamento só sobre o ponto afetado.</li>
+      <li><strong>Ação irreversível:</strong> roteiro com estado esperado, conferência e reversão por passo, e ok humano na hora, como no roteiro de produção da Metax.</li>
+      <li><strong>Marcos:</strong> revisão por um agente que não executou o trabalho, comparando entrega com sentença; AAR de cinco linhas; premissas validadas em bloco.</li>
+    </ul>
+  </div>
+
+  <div class="phase">
+    <div class="tag">Encerramento</div>
+    <h3>Fechar sem deixar ponta solta</h3>
+    <ul class="tight">
+      <li>Conferir o critério de pronto final e o benefício entregue contra o prometido.</li>
+      <li>Passagem limpa: nenhum job, integração ou credencial fica no nome de terceiro. (Na Metax, a carga parou em 05/11 por isso.)</li>
+      <li>AAR completo: o que deveria acontecer, o que aconteceu, por que diferiu, o que manter e mudar.</li>
+      <li>Cada lição vira mudança concreta na skill, com dono. Lição sem destino é marcada como não incorporada.</li>
+      <li>"O que ficou claro": o resumo do que você agora sabe sobre esse tipo de tarefa.</li>
+    </ul>
+  </div>
+
+  <h3>Os arquivos do projeto</h3>
+  <p>Um documento único que só cresce perde qualidade de leitura para o modelo (context rot). Por isso o registro fica em três arquivos versionados no repositório do projeto, e os passos seguem nas issues, no padrão Bunker:</p>
+  <div class="files">
+    <div><code>SENTENCA.md</code><p>Estável e curta. Muda só por aditamento.</p></div>
+    <div><code>ESTADO.md</code><p>O "onde paramos": até 10 linhas, reescrito a cada ciclo e lido em toda retomada.</p></div>
+    <div><code>Issues</code><p>Os passos da execução viram issues no GitHub, no padrão Bunker (rito da fix-bug e régua WSJF).</p></div>
+    <div><code>LOG.md</code><p>Histórico que só acumula. Lido sob demanda.</p></div>
+  </div>
+</section>
+
+<section id="ajustes">
+  <h2><span class="n">03</span>Ajustes no desenho atual</h2>
+  <p class="sub">O que muda em relação ao que discutimos na outra conversa, e por quê.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Desenho atual</th><th>Ajuste</th><th>Por quê</th></tr></thead>
+    <tbody>
+      <tr><td>Mapear todas as etapas antes de executar</td><td>A sentença fixa resultado, critério e tolerâncias; os passos são revisáveis dentro das tolerâncias, sem aditamento</td><td>Em domínio desconhecido, o plano completo cristaliza a ignorância. Rolling-wave (PMI), Cynefin.</td></tr>
+      <tr><td>WSJF escolhe o próximo passo</td><td>Caminho crítico, depois maior incerteza, WSJF como desempate</td><td>WSJF foi feito para filas independentes; aqui há dependências. A pontuação Fibonacci não tem validação empírica.</td></tr>
+      <tr><td>Sempre uma pergunta por vez</td><td>Uma por vez só quando a resposta muda as seguintes; independentes em lote de 2 a 4 com padrão marcado</td><td>Cada pergunta é uma interrupção. A própria documentação do Claude Code usa entrevista de múltipla escolha. Não há estudo comparando os formatos.</td></tr>
+      <tr><td>Perguntar os parâmetros que faltam</td><td>Perguntar só o que só o humano sabe; o técnico vira pesquisa ou spike com recomendação</td><td>Na meta-análise do MIT, a dupla humano + IA perde quando o humano decide algo em que a IA é melhor.</td></tr>
+      <tr><td>Verificar contra o critério de pronto</td><td>Evidência anexada em todo passo e revisor independente nos marcos</td><td>Verificação incompleta e término prematuro são as falhas dominantes de agentes (taxonomia MAST, Anthropic).</td></tr>
+      <tr><td>Registrar tudo na sentença</td><td>Três arquivos (sentença, estado e log) e os passos nas issues, no padrão Bunker</td><td>Contexto longo degrada o desempenho dos modelos (Chroma, 2025).</td></tr>
+      <tr><td>Incidente pequeno, médio ou grande a olho</td><td>Classificação pelas tolerâncias fixadas na sentença</td><td>Gestão por exceção do PRINCE2 torna a classificação objetiva.</td></tr>
+      <tr><td>Fase de conhecimento termina com o documento</td><td>Termina com o documento e o aceite de quem precisa aceitar</td><td>Metax: a especificação chegou ao rascunho 10 sem ir ao cliente.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="principios">
+  <h2><span class="n">04</span>12 princípios com evidência</h2>
+  <p class="sub">Só o que foi medido. Cada princípio traz o nível da evidência mais forte que o sustenta.</p>
+  <div class="legend"><span><span class="lv A">A</span> meta-análise ou ensaio controlado</span><span><span class="lv">B</span> grande base observacional</span><span><span class="lv C">C</span> caso ou survey</span><span><span class="lv D">D</span> opinião ou prática sem teste</span></div>
+  <div class="pr">
+    <article><div class="k">1</div><div><h4>Visão de fora antes da visão de dentro <span class="lv">B</span></h4><p>Só 8,5% dos projetos cumprem custo e prazo, e 0,5% cumprem custo, prazo e benefício. Quem planeja pensa no plano atual e esquece os casos passados (falácia do planejamento).</p><p class="ev">Flyvbjerg, Oxford, 16.000+ projetos · Buehler et al. 1994 · Lovallo &amp; Kahneman, HBR 2003. Na skill: prazo como faixa, com classe de referência.</p></div></article>
+    <article><div class="k">2</div><div><h4>Duração é risco: planejar devagar, executar rápido <span class="lv">B</span></h4><p>Em TI grande, cada ano a mais de cronograma se associa a 15% a mais de estouro. Errar no planejamento é barato; errar na execução é caro.</p><p class="ev">McKinsey e Oxford 2012, 5.400 projetos. Na skill: investir na fase de conhecimento e manter marcos em dias, não meses.</p></div></article>
+    <article><div class="k">3</div><div><h4>Proteger contra a cauda, não contra a média <span class="lv">B</span></h4><p>Projetos de TI têm caudas gordas: cerca de 1 em 6 estoura 200%. O desastre raro pesa mais que o atraso médio.</p><p class="ev">Flyvbjerg &amp; Budzier, HBR 2011, 1.471 projetos. Na skill: critério de parada e de reabertura escrito na sentença.</p></div></article>
+    <article><div class="k">4</div><div><h4>Lotes pequenos, um de cada vez <span class="lv">B</span></h4><p>O sucesso de agentes cai com a duração da tarefa, e exigir mais confiabilidade encolhe o horizonte em várias vezes. Pequenos progressos são o maior motor de motivação diária das equipes.</p><p class="ev">METR 2025 e 2026 · Anthropic Economic Index, jan/2026 · Amabile &amp; Kramer, HBS, 12.000 diários. Na skill: uma unidade verificável por vez.</p></div></article>
+    <article><div class="k">5</div><div><h4>"Pronto" exige prova, nunca impressão <span class="lv A">A</span></h4><p>Retrabalho descoberto tarde faz o projeto parecer 90% pronto e levar o dobro. Desenvolvedores com IA ficaram 19% mais lentos achando que estavam 20% mais rápidos.</p><p class="ev">Ford &amp; Sterman, MIT 2003 · METR, ensaio controlado 2025 · Anthropic 2025. Na skill: sem evidência anexada, o passo não fecha.</p></div></article>
+    <article><div class="k">6</div><div><h4>Reservar capacidade para prevenção <span class="lv">B</span></h4><p>Sob pressão, cortam-se manutenção e melhoria. Funciona no curto prazo e corrói a capacidade no longo (armadilha de capacidade).</p><p class="ev">Repenning &amp; Sterman, MIT 2001. Na skill: risco conhecido de alto impacto não pode ficar no fim da fila. Na Metax, a #33 ficou e a carga parou.</p></div></article>
+    <article><div class="k">7</div><div><h4>Debrief curto e estruturado <span class="lv A">A</span></h4><p>Debriefs melhoram o desempenho em cerca de 25% (d = 0,67), em equipes e indivíduos, em ambiente real e simulado.</p><p class="ev">Tannenbaum &amp; Cerasoli, meta-análise de 46 amostras, 2013. Na skill: AAR de cinco linhas em cada marco.</p></div></article>
+    <article><div class="k">8</div><div><h4>Lição só vale se mudar o processo <span class="lv">B</span></h4><p>Na NASA, só 23% dos gerentes já tinham contribuído com o banco de lições. As lições circulavam pelas revisões de engenharia, não pelo banco.</p><p class="ev">GAO 2002 · NASA OIG 2012. Na skill: cada lição vira regra, pergunta ou item de checklist.</p></div></article>
+    <article><div class="k">9</div><div><h4>Franqueza obrigatória <span class="lv A">A</span></h4><p>Segurança psicológica se liga a compartilhamento de informação e desempenho. Esconder retrabalho conhecido degrada prazo e qualidade de forma desproporcional.</p><p class="ev">Frazier et al., meta-análise de 136 amostras, 2017 · Ford &amp; Sterman 2003. Na skill: o agente reporta má notícia na hora e diz "não sei".</p></div></article>
+    <article><div class="k">10</div><div><h4>Checklist curto, nos pontos de passagem, de uso real <span class="lv">B</span></h4><p>O checklist cirúrgico reduziu mortalidade de 1,5% para 0,8% em 2009, mas não teve efeito significativo em Ontário em 2014, por adesão ruim.</p><p class="ev">Haynes, NEJM 2009 · Urbach, NEJM 2014. Na skill: poucos itens, nas transições, com registro de execução.</p></div></article>
+    <article><div class="k">11</div><div><h4>Dividir o trabalho pela vantagem de cada um <span class="lv A">A</span></h4><p>Com IA, consultores fizeram mais e melhor dentro do que a IA faz bem, e erraram 19 pontos a mais fora disso. A dupla ganha quando o humano é melhor e perde quando a IA é melhor.</p><p class="ev">Dell'Acqua et al., Harvard e BCG 2023, 758 consultores · Vaccaro, Almaatouq &amp; Malone, MIT 2024, 106 experimentos. Na skill: o humano decide valor e ação irreversível; o agente decide o técnico, com recomendação.</p></div></article>
+    <article><div class="k">12</div><div><h4>Quem não domina precisa de orientação explícita <span class="lv A">A</span></h4><p>Para novatos, orientação mínima não funciona e exemplos trabalhados funcionam. IA sem salvaguardas deixou alunos 17% piores na prova sem IA.</p><p class="ev">Kirschner, Sweller &amp; Clark 2006 · Bastani et al., PNAS 2025. Na skill: mapa do terreno, o porquê de cada passo e, às vezes, pedir que você explique a decisão de volta.</p></div></article>
+  </div>
+</section>
+
+<section id="ia">
+  <h2><span class="n">05</span>Riscos de trabalhar com IA e como a skill se protege</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Risco</th><th>O que a pesquisa mostrou</th><th>Proteção na skill</th></tr></thead>
+    <tbody>
+      <tr><td>Falso "pronto"</td><td>Agentes declaram vitória cedo e marcam como feito sem teste ponta a ponta (Anthropic 2025)</td><td>Passos com status que só muda com prova; ficha de evidência</td></tr>
+      <tr><td>Percepção enganosa</td><td>Achavam +20%, mediram −19% (METR 2025)</td><td>Medir tempo real por passo; nunca usar "pareceu rápido"</td></tr>
+      <tr><td>Fronteira irregular</td><td>−19 pontos de acerto fora do que a IA faz bem (Harvard/BCG)</td><td>Classificar a fronteira ao declarar; verificação independente na borda</td></tr>
+      <tr><td>Aprovar sem ler</td><td>Complacência aparece em novatos e especialistas e não some com prática (Parasuraman &amp; Manzey 2010)</td><td>Conferir contra o critério escrito antes, não "ler e aprovar"</td></tr>
+      <tr><td>Concordância fácil</td><td>Modelos tendem a concordar com o usuário (Anthropic, sycophancy)</td><td>Toda recomendação traz a alternativa mais forte e o motivo de descartá-la</td></tr>
+      <tr><td>Perda de aprendizado</td><td>−17% na prova sem IA (PNAS 2025)</td><td>"O que ficou claro" no encerramento e explicação de volta nas decisões-chave</td></tr>
+      <tr><td>Tarefa longa demais</td><td>Sucesso cai com a duração; feedback humano em vários turnos amplia o horizonte de ~3,5h para ~19h (Anthropic, jan/2026)</td><td>Blocos menores que o horizonte confiável e checkpoints nos marcos</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="metax">
+  <h2><span class="n">06</span>Metax: o que aprendemos</h2>
+  <p class="sub">Reconstruído do repositório metax-salesforce (123 commits, 46 issues e PRs, 247 comentários), da pasta Metax no SharePoint, de e-mails e do Teams. As conversas no Claude não estão acessíveis daqui, e o arquivo "onde paramos" do seu computador ainda não foi lido.</p>
+
+  <div class="stat">
+    <div><b>10</b><span>rascunhos da especificação, sem ir ao cliente</span></div>
+    <div><b>4×</b><span>mudou o número de e-mails da jornada (3, 9, 6, 7)</span></div>
+    <div><b>0</b><span>processo definido do entendimento à entrega</span></div>
+    <div><b>10 sem.</b><span>de atraso no go-live: prometido 01/07, real 14/09</span></div>
+  </div>
+
+  <h3>Linha do tempo</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Quando</th><th>O que aconteceu</th></tr></thead>
+    <tbody>
+      <tr><td>abr a jun</td><td>Mapeamento: fluxo comercial, regras de proposta, planilhas da engenharia, documento funcional</td></tr>
+      <tr><td>16/06</td><td>Proposta Rev 02: Bloco 1 com 52 h, 13 itens de processo "incluídos" com 0 h, go-live prometido para 01/07 com estimativa de 30 a 45 dias</td></tr>
+      <tr><td>01/07</td><td>Reunião de alinhamento: o especialista da engenharia explica forma e tensor ao vivo</td></tr>
+      <tr><td>jul a ago</td><td>Guias entregues; validação do cliente volta com correções; base de clientes suja aparece no presencial</td></tr>
+      <tr><td>14/09</td><td>Go-live do Sales Cloud</td></tr>
+      <tr><td>28/09</td><td>Começa a jornada no Marketing Cloud. O código vem antes da especificação</td></tr>
+      <tr><td>30/09</td><td>28 commits num dia; nasce a especificação; a cadência muda de 3 para 9 para 6 e-mails</td></tr>
+      <tr><td>03/10</td><td>Carga diária em produção, sem aceite da especificação</td></tr>
+      <tr><td>05 e 06/10</td><td>Regras descobertas tarde: WhatsApp, e-mail do consultor, duplicados, resposta no noreply (#34, #35, #37, #38)</td></tr>
+      <tr><td>10/10</td><td>Issues fechadas para zerar o quadro, antes do aceite formal</td></tr>
+      <tr><td>05/11</td><td>A carga para: o job pertencia a um usuário de terceiro que foi desativado (risco já registrado na #33)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="two">
+    <div class="box">
+      <h4>O que deu certo</h4>
+      <ul>
+        <li>O fluxo do cliente virou especificação com critério de aceite por item.</li>
+        <li>O especialista certo entrou na reunião e resolveu dúvidas na hora.</li>
+        <li>O MVP foi simplificado junto com o cliente (sem Protheus, sem SKU fino).</li>
+        <li>Cada pedido do cliente foi casado com o item da proposta e classificado.</li>
+        <li>Teste vermelho antes da correção e ficha de evidência por issue.</li>
+        <li>Backup antes de toda mudança em produção.</li>
+        <li>Roteiro de implantação com conferência, reversão e ok humano na hora.</li>
+        <li>Decisões nomeadas e datadas; fronteira de escopo explícita.</li>
+        <li>Revisão independente pegou a #25 antes de chegar à produção.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4>O que deu errado</h4>
+      <ul>
+        <li>Especificação escrita depois do código e nunca assinada. <span class="cls">fase</span></li>
+        <li>13 itens de processo na proposta sem horas e sem critério mensurável. <span class="cls">priorização</span></li>
+        <li>Fala do especialista (o tensor) não virou requisito escrito. <span class="cls">mapeamento</span></li>
+        <li>Como o time comercial realmente conversa com o cliente só apareceu em produção. <span class="cls">mapeamento</span></li>
+        <li>Expectativa divergente sobre o NPX, sem conferir o estado do ambiente. <span class="cls">comunicação</span></li>
+        <li>Limitação do Journey Builder descoberta na hora; desenho refeito 3 vezes num dia. <span class="cls">técnica</span></li>
+        <li>Prazo prometido menor que a própria estimativa. <span class="cls">expectativa</span></li>
+        <li>Sem processo definido: cada etapa foi decidida na hora, e a priorização por WSJF só entrou no fim. <span class="cls">processo</span></li>
+        <li>Job no nome de terceiro na passagem. <span class="cls">técnica</span></li>
+        <li>Mapeamento de junho a setembro sem nenhum rastro no repositório. <span class="cls">registro</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>As regras que a Metax deixa para o Farol</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Onde</th><th>Regra</th><th>Origem</th></tr></thead>
+    <tbody>
+      <tr><td>Conhecimento</td><td>Toda fala de especialista vira linha de requisito, com fonte e data, confirmada por escrito</td><td>Tensor dito em 01/07, ausente da proposta</td></tr>
+      <tr><td>Conhecimento</td><td>Todo item listado tem horas e critério de aceite. Nunca "incluído, sem cobrança"</td><td>13 itens com 0 h</td></tr>
+      <tr><td>Conhecimento</td><td>Auditar dados reais: volume, inativos, duplicados, tamanho de campos, donos de jobs e integrações</td><td>Base suja, #25, #37, carga parada em 05/11</td></tr>
+      <tr><td>Conhecimento</td><td>Perguntar por onde as pessoas realmente falam com o cliente e quais as exceções</td><td>#34, #35, #38</td></tr>
+      <tr><td>Conhecimento</td><td>Mapear quem decide de fato, não só o usuário-chave</td><td>Decisor comercial só mapeado em 20/10</td></tr>
+      <tr><td>Conhecimento</td><td>Conferir no ambiente o estado do que o escopo liga ou desliga</td><td>NPX</td></tr>
+      <tr><td>Conhecimento</td><td>Escrever se o objetivo declarado pelo cliente será atendido ou não</td><td>Objetivo de aprendizado do Raphael fora do construído</td></tr>
+      <tr><td>Conhecimento</td><td>Data prometida nunca anterior ao fim da estimativa</td><td>01/07 contra 30 a 45 dias</td></tr>
+      <tr><td>Conhecimento</td><td>Toda incerteza de ferramenta vira spike antes do desenho</td><td>Journey Builder não junta ramos</td></tr>
+      <tr><td>Execução</td><td>Nada em produção antes do aceite da sentença</td><td>Carga em produção em 03/10, aceite nunca formalizado</td></tr>
+      <tr><td>Execução</td><td>Seguir um processo definido desde o primeiro dia, com WSJF na execução</td><td>Etapas decididas na hora; WSJF aplicado em 08/10</td></tr>
+      <tr><td>Execução</td><td>Checklist de prontidão (acessos, permissões, licenças) 48 h antes de presencial ou demo</td><td>Usuários sem permissão no presencial</td></tr>
+      <tr><td>Execução</td><td>O "onde paramos" mora no repositório e é commitado a cada marco</td><td>Arquivo só local, sem histórico</td></tr>
+      <tr><td>Encerramento</td><td>Nenhum job, integração ou credencial no nome de terceiro; risco de impacto alto bloqueia o fechamento</td><td>#33 e a parada de 05/11</td></tr>
+      <tr><td>Comercial</td><td>Trabalho bonificado só com instrumento formal: o que é, prazo e aceite</td><td>Jornada bonificada sem contrato próprio</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="github">
+  <h2><span class="n">07</span>GitHub: decisão registrada</h2>
+  <div class="rule"><b>Decisão de 11/11/2026</b>O processo de produção no GitHub fica fora do escopo do Farol e segue o padrão da Bunker: o rito da <code>bunker-fix-bug-copilot</code> e a régua da <code>bunker-wsjf-copilot</code>. O Farol não cria rótulos, etapas nem regras paralelas de issue.</div>
+  <p><strong>Por quê.</strong> Analisamos as 46 issues e PRs, os 247 comentários e os 876 eventos do repositório da Metax. A camada de rótulos e etapas gerou volume (699 trocas de rótulo), mas quase todo esse trabalho foi feito pelo agente, não pela pessoa: os prints, os comentários e as trocas de etapa tomaram pouco tempo humano. Os bloqueios que de fato atrasaram tinham motivo real (acesso, ok antes de produção, aceite do cliente), e o rito de correção pegou defeitos reais (#25, #26, #29, #17, #35).</p>
+  <p><strong>O diagnóstico que fica.</strong> A maior fonte de improdutividade não estava no GitHub. Estava na falta de um processo definido para levar o trabalho do entendimento à entrega: cada etapa foi decidida na hora, a especificação veio depois do código, o escopo mudou no meio e as regras do cliente apareceram tarde. É exatamente o vazio que o Farol existe para preencher.</p>
+</section>
+
+<section id="mitos">
+  <h2><span class="n">08</span>O que não usar como base</h2>
+  <p class="sub">Números e práticas populares que não resistem à verificação.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Crença comum</th><th>O que a evidência diz</th></tr></thead>
+    <tbody>
+      <tr><td>Pre-mortem aumenta a precisão em 30%</td><td>O estudo original mediu quantidade de razões geradas, não acerto. Técnica barata e plausível, evidência modesta.</td></tr>
+      <tr><td>Taxas de sucesso do Standish CHAOS</td><td>Metodologia criticada em IEEE Software e CACM.</td></tr>
+      <tr><td>95% dos pilotos de IA falham (MIT NANDA)</td><td>Metodologia opaca. Vale a hipótese da lacuna de aprendizagem, não o número.</td></tr>
+      <tr><td>WSJF como cálculo econômico preciso</td><td>Sem validação empírica. Serve como ordem relativa transparente.</td></tr>
+      <tr><td>Cynefin como diagnóstico validado</td><td>Heurística útil, sem teste controlado.</td></tr>
+      <tr><td>Humano no loop sempre melhora</td><td>Perde em tarefas de decisão quando a IA é melhor (MIT 2024).</td></tr>
+      <tr><td>Checklist resolve sozinho</td><td>Sem adesão, efeito nulo (NEJM 2014).</td></tr>
+      <tr><td>Banco de lições aprendidas</td><td>Quase não é consultado (NASA).</td></tr>
+      <tr><td>Produtividade autorrelatada com IA</td><td>Percepção e medida divergem (METR).</td></tr>
+      <tr><td>Regra das 10.000 horas</td><td>A prática deliberada explica cerca de 12% da variância.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="metricas">
+  <h2><span class="n">09</span>Como medir se o Farol funciona</h2>
+  <p>Medir, não perguntar se pareceu rápido. Painel mínimo, registrado em cada projeto e comparado entre projetos:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Métrica</th><th>Como calcular</th><th>O que revela</th></tr></thead>
+    <tbody>
+      <tr><td>Taxa de falso "pronto"</td><td>Passos reabertos depois de fechados ÷ passos fechados</td><td>Se a verificação funciona. Alvo: perto de zero</td></tr>
+      <tr><td>Precisão de estimativa</td><td>Tempo real ÷ faixa estimada, por passo e por projeto</td><td>Alimenta a classe de referência dos próximos</td></tr>
+      <tr><td>Lead time</td><td>Abertura ao encerramento; e tempo até a sentença como % do total</td><td>Custo da fase de conhecimento</td></tr>
+      <tr><td>Taxa de aditamento</td><td>Aditamentos por projeto e % de passos afetados</td><td>Alta: conhecimento raso. Zero com muitos incidentes: rigidez escondida</td></tr>
+      <tr><td>Interrupções por hora</td><td>Paradas para o humano ÷ horas de trabalho do agente; e % aprovadas sem mudança</td><td>Se paramos demais ou de menos</td></tr>
+      <tr><td>Benefício realizado</td><td>Entregue contra prometido na sentença</td><td>A dimensão mais esquecida da lei de ferro</td></tr>
+      <tr><td>Lições incorporadas</td><td>Lições que viraram mudança ÷ lições registradas</td><td>Se aprendemos de fato</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="proximos">
+  <h2><span class="n">10</span>Próximos passos</h2>
+  <ol class="steps">
+    <li><span><strong>Ler o "onde paramos" da Metax.</strong> O arquivo não está no repositório nem no histórico. Cole o conteúdo na conversa ou abra uma sessão no seu computador para lermos as versões antigas.</span></li>
+    <li><span><strong>Fechar a decisão aberta da outra conversa:</strong> na execução, o Claude segue sozinho e só para nos marcos, nos incidentes grandes e em ações irreversíveis. A evidência sustenta a recomendação, desde que os marcos sejam curtos e a verificação seja independente.</span></li>
+    <li><span><strong>Validar os ajustes da seção 03</strong> antes de escrever a skill.</span></li>
+    <li><span><strong>Varredura de repositórios públicos e gratuitos</strong> antes de construir: skills de Claude, harnesses de agentes, ferramentas de spec-driven development (Spec Kit, Kiro), templates de ADR e AAR. Obrigatória no início da construção.</span></li>
+    <li><span><strong>Reaproveitar o que já temos:</strong> a régua e os scripts da <code>bunker-wsjf-copilot</code>, a ficha de evidência e o roteiro de implantação da Metax, o checklist da <code>bunker-metadata-best-practices-copilot</code>.</span></li>
+    <li><span><strong>Testar o Farol num projeto real pequeno</strong> e medir o painel da seção 08 desde o primeiro dia.</span></li>
+  </ol>
+</section>
+
+<footer id="fontes">
+  <h2><span class="n">11</span>Fontes principais</h2>
+  <ol>
+    <li>Flyvbjerg &amp; Gardner, <em>How Big Things Get Done</em>, 2023 · Flyvbjerg &amp; Budzier, HBR 2011: <a href="https://papers.ssrn.com/abstract=2229735">ssrn.com/abstract=2229735</a></li>
+    <li>McKinsey e Oxford, projetos de TI grandes, 2012: <a href="https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/delivering-large-scale-it-projects-on-time-on-budget-and-on-value">mckinsey.com</a></li>
+    <li>Ford &amp; Sterman, "Overcoming the 90% Syndrome", MIT 2003: <a href="https://www.mit.edu/~jsterman/90_Syndrom_CERA2003_1.pdf">mit.edu</a></li>
+    <li>Repenning &amp; Sterman, "Nobody Ever Gets Credit for Fixing Problems that Never Happened", 2001: <a href="https://cmr.berkeley.edu/2001/08/43-4-nobody-ever-gets-credit-for-fixing-problems-that-never-happened-creating-and-sustaining-process-improvement">cmr.berkeley.edu</a></li>
+    <li>Tannenbaum &amp; Cerasoli, meta-análise de debriefs, 2013: <a href="https://pubmed.ncbi.nlm.nih.gov/23516804/">pubmed 23516804</a></li>
+    <li>GAO-02-195 e NASA OIG IG-12-012: <a href="https://www.gao.gov/products/gao-02-195">gao.gov</a> · <a href="https://www.oversight.gov/sites/default/files/oig-reports/IG-12-012.pdf">oversight.gov</a></li>
+    <li>Dell'Acqua et al., Harvard e BCG, 2023: <a href="https://mitsloan.mit.edu/sites/default/files/2023-10/SSRN-id4573321.pdf">mitsloan.mit.edu</a></li>
+    <li>Vaccaro, Almaatouq &amp; Malone, MIT, Nature Human Behaviour 2024: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11659167/">pmc.ncbi.nlm.nih.gov</a></li>
+    <li>METR, ensaio controlado 2025 e atualização 2026: <a href="https://arxiv.org/abs/2507.09089">arxiv.org/abs/2507.09089</a> · <a href="https://metr.org/blog/2026-02-24-uplift-update/">metr.org</a></li>
+    <li>Anthropic, "Effective harnesses for long-running agents" e "Building effective agents": <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents">anthropic.com</a> · <a href="https://www.anthropic.com/engineering/building-effective-agents">anthropic.com</a></li>
+    <li>Anthropic Economic Index, jan/2026: <a href="https://anthropic.com/research/anthropic-economic-index-january-2026-report">anthropic.com</a></li>
+    <li>Cemri et al., taxonomia MAST de falhas de agentes, 2025: <a href="https://arxiv.org/abs/2503.13657">arxiv.org/abs/2503.13657</a></li>
+    <li>Chroma, "Context rot", 2025: <a href="https://trychroma.com/research/context-rot">trychroma.com</a></li>
+    <li>Bastani et al., PNAS 2025: <a href="https://papers.ssrn.com/abstract=4895486">ssrn.com/abstract=4895486</a></li>
+    <li>Haynes, NEJM 2009 · Urbach, NEJM 2014: <a href="https://pubmed.ncbi.nlm.nih.gov/19144931/">pubmed 19144931</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/24620866/">pubmed 24620866</a></li>
+    <li>Claude Code, boas práticas: <a href="https://code.claude.com/docs/en/best-practices">code.claude.com</a> · Shape Up: <a href="https://basecamp.com/shapeup">basecamp.com/shapeup</a></li>
+  </ol>
+  <p style="margin-top:16px">Alguns números foram conferidos só em fonte secundária: o recorte de TI do livro de Flyvbjerg, os dias de Buehler (1994) e os horizontes do METR de maio/2026. PMBOK 7, PRINCE2 e Spec Kit foram checados em fontes secundárias.</p>
+</footer>
+</main>
+</div>

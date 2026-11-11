@@ -18,6 +18,8 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 | Catch | A emissão da sentença, que fecha a fase de conhecimento |
 | WSJF | Sai do conhecimento e vai para a execução. Ordem: caminho crítico, depois a maior incerteza, e o WSJF desempata, com a régua da `bunker-wsjf-copilot`. A nota é dada uma vez e só é refeita com fato novo |
 | Trabalho manual | Não entra na skill: se o usuário quiser fazer à mão, faz |
+| Processo no GitHub | Fica fora da Lighthouse e segue o padrão da Bunker: rito da `bunker-fix-bug-copilot` e régua da `bunker-wsjf-copilot`. A Lighthouse não cria rótulos, etapas nem regras de issue. Motivo: na Metax, o trabalho de controle no GitHub foi quase todo do agente e pesou pouco no tempo humano; o gargalo foi a falta de processo definido (decisão do Thiago, 11/11/2026). Análise em [`analise/metax-github.md`](analise/metax-github.md) |
+| Foco da pesquisa | Um padrão global de levantamento e mapeamento: o que um profissional muito eficiente faz toda vez antes de executar. A Metax é exemplo, não a lista completa dos problemas (Thiago, 11/11/2026) |
 | Portas de aprovação | Ficam as duas: o ok humano no que é irreversível ou sai para fora (produção, cliente, dado real) e também no trabalho interno (merge, saída da triagem, fechamento de issue). Motivo: a skill vai para outras pessoas da Bunker que também não dominam o que estão fazendo, e as portas não foram a causa do retrabalho na Metax (decisão do Thiago, 11/11/2026) |
 
 ## O que a skill usa sem copiar
@@ -32,8 +34,9 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 
 ## Em aberto
 
-- **Fase de execução:** aguardando o fim da pesquisa (análise do GitHub da Metax na aba "Boas práticas + case Metax").
-- **Regras de issues para trabalho de projeto:** aguardando a mesma análise. Primeiros indícios em [`analise/metax-arquivos-locais.md`](analise/metax-arquivos-locais.md): issue é entrega verificável, e não evento ou aprovação; P0 escasso; a fila nasce da sentença.
+- **Fase de execução:** a análise do GitHub da Metax terminou ([`analise/metax-github.md`](analise/metax-github.md)). Falta decidir o que da pesquisa entra na skill.
+- **Padrão global de levantamento:** em pesquisa na aba "Boas práticas + case Metax". Vai alimentar a checagem de cobertura e a fase de conhecimento.
+- **Regras de issues para trabalho de projeto:** saem da Lighthouse pela decisão de 11/11/2026 (padrão da Bunker). Os indícios de [`analise/metax-arquivos-locais.md`](analise/metax-arquivos-locais.md), seção 3, ficam como sugestão para a skill dona, se o Thiago quiser levar adiante.
 - **Arquivo de estado e prompt da próxima sessão:** formalizar o que o Thiago fazia à mão na Metax (estado curto no repositório, histórico à parte, prompt gerado no fim do turno), conferindo antes a `bunker-fechar-turno-copilot`.
 - **Correções nas skills donas** (fora da Lighthouse, pedem alinhamento com quem decidiu as regras):
   - a `bunker-wsjf-copilot` refaz todas as notas a cada rodada, inclusive as dadas à mão, e isso contradiz "nota dada uma vez";
