@@ -38,7 +38,7 @@ Commit conventional em pt-BR, PR para a `main`.
 
 ## O que já foi conferido numa cópia local do plugin 1.116.0
 
-- `check-plugin.py`: a Lighthouse passa (description com 982 caracteres pela conta do script) e o README fica com as 33 skills no catálogo.
+- `check-plugin.py`: a Lighthouse passa (description com 990 caracteres pela conta do script, na versão 2) e o README fica com as 33 skills no catálogo.
 - A trava de versão (`--base`) não rodou, porque a cópia local não tem histórico git. Roda no PR.
 - Os evals de roteamento passaram 6 de 6 (`evals/rota-lighthouse/RESULTADO.md`).
 

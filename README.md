@@ -1,8 +1,8 @@
 # bunker-lighthouse-copilot
 
-Repositório de trabalho da skill **Lighthouse** (apelido nas conversas: Farol): o padrão de processo da Bunker para executar, com produtividade, trabalhos e projetos que a gente ainda não domina.
+Repositório de trabalho da skill **Lighthouse** (apelido nas conversas: Farol): o padrão de processo da Bunker para executar, com produtividade, trabalhos e projetos que ainda não dominamos.
 
-**Status:** pesquisa e desenho. A skill ainda não foi escrita.
+**Status:** versão 2 do rascunho na branch `feat/rascunho-skill`, testada e esperando a revisão do Thiago. Nada foi enviado ao plugin.
 
 ## O que a skill vai fazer
 
@@ -20,6 +20,14 @@ Toda skill da Bunker vive no plugin `bunker-claude-skills`, que é por onde ela 
 ## Estrutura
 
 ```
+skills/
+  bunker-lighthouse-copilot/   a skill: SKILL.md e references/
+evals/
+  rota-lighthouse/             evals de roteamento, no formato do plugin
+testes/
+  comportamento/               casos com entrada, gabarito e resultado
+integracao/
+  PR-plugin.md                 o pacote do PR para o bunker-claude-skills
 docs/
   decisoes.md     o que está fechado e o que está em aberto
   origem/         o pedido original (transcrição dos áudios)

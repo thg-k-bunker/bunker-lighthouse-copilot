@@ -50,6 +50,8 @@ Atualizado em 12/11/2026. A pesquisa terminou e as decisões para começar a pro
 
 Nenhuma decisão de desenho pendente: as sete da [`sintese-pre-producao.md`](sintese-pre-producao.md) (D1 a D7) foram fechadas em 12/11/2026, todas pela recomendação. O rascunho do `SKILL.md`, da `description` e dos `references/` está em `skills/bunker-lighthouse-copilot/`, na branch `feat/rascunho-skill` (12/11/2026), esperando a revisão do Thiago. Depois vêm os evals de roteamento e o teste de comportamento com a Metax.
 
+**Pendente para o Thiago:** no teste com o caso Metax, a skill não levantou o aceite formal do cliente antes de construir (item M6 de `testes/comportamento/metax-jornada/resultado-v1.md`). É consequência da decisão "Quem decide": a skill só pede a confirmação de quem conduz. Na Metax, a especificação chegou ao rascunho 10 sem o aceite do cliente. Falta decidir se a sentença pede o aceite do cliente quando o trabalho é para um cliente.
+
 Ficam registrados, sem bloquear a produção:
 
 - **Regras de issues para trabalho de projeto:** saem da Lighthouse pela decisão de 11/11/2026 (padrão da Bunker). Os indícios de [`analise/metax-arquivos-locais.md`](analise/metax-arquivos-locais.md), seção 3, ficam como sugestão para a skill dona, se o Thiago quiser levar adiante.
