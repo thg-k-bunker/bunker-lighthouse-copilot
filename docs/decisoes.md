@@ -38,6 +38,8 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 
 ## Em aberto
 
+Síntese do que falta decidir antes da produção, com opções e recomendações: [`sintese-pre-producao.md`](sintese-pre-producao.md).
+
 - **Fase de execução:** a análise do GitHub da Metax terminou ([`analise/metax-github.md`](analise/metax-github.md)). Falta decidir o que da pesquisa entra na skill.
 - **Padrão global de levantamento:** proposta em [`pesquisa/padrao-global-levantamento.md`](pesquisa/padrao-global-levantamento.md): 11 movimentos, a checagem de cobertura em perguntas de negócio (obrigatórias e por tipo), a regra de parada em 6 condições e 5 métricas. Falta o Thiago decidir o que entra na skill.
 - **Regras de issues para trabalho de projeto:** saem da Lighthouse pela decisão de 11/11/2026 (padrão da Bunker). Os indícios de [`analise/metax-arquivos-locais.md`](analise/metax-arquivos-locais.md), seção 3, ficam como sugestão para a skill dona, se o Thiago quiser levar adiante.
