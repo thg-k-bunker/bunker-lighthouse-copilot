@@ -39,7 +39,9 @@ Ler a transcrição, os e-mails, a proposta e todo material colado. Separar fato
 
 ### 2. Devolver o entendimento
 
-Em 3 ou 4 linhas: qual é o serviço, que problema ele resolve, para quem, e o resultado esperado. Mais uma linha com o perfil. A confirmação vai na caixinha (`AskUserQuestion`): "está certo", "quero corrigir um ponto", "o pedido é outro". Com o entendimento confirmado, criar o `ESTADO.md` e o `HISTORICO.md`.
+Em 3 ou 4 linhas: qual é o serviço, que problema ele resolve, para quem, e o resultado esperado. Quando o material traz decisão já tomada por alguém de fora (uma arquitetura, um prazo), uma linha a mais com essas restrições. Por fim, uma linha com o perfil.
+
+A confirmação vai na caixinha (`AskUserQuestion`, ou em texto com as opções numeradas), com três opções fixas e sem recomendação: "está certo", "quero corrigir um ponto", "o pedido é outro". Ela não segue o formato de quatro opções do passo 0. Com o entendimento confirmado, criar o `ESTADO.md` e o `HISTORICO.md`. Sem repositório no projeto, a primeira pergunta depois da confirmação é onde guardar os arquivos.
 
 A checagem pode ser preparada antes, em silêncio, para a primeira pergunta já sair pronta. Nenhuma outra pergunta vai antes da confirmação.
 
@@ -66,8 +68,8 @@ Formato das perguntas: o do passo 0 da `bunker-fix-bug-copilot`, em `AskUserQues
 Regras próprias:
 
 - **Ao humano se pergunta só preferência, valor, restrição ou fato que só ele sabe.** O técnico, o Claude pesquisa na documentação ou confere no ambiente e traz como recomendação. Incerteza de ferramenta que nenhuma pesquisa resolve é testada num experimento curto antes do desenho.
-- **Pergunta de escolha traz a recomendação, o motivo e a alternativa mais forte**, com um caso concreto simulado ("com a opção A, o pedido feito na sexta à noite só aparece no relatório de segunda"). Pergunta de fato ("qual é o sistema?") vai sem recomendação.
-- **Questionário para terceiro, quando quem conduz pedir**, ou quando a resposta mora com o cliente e quem conduz aceitar a sugestão: no máximo oito perguntas, em ordem de importância, uma ideia por pergunta, "não sei" como resposta válida. Como sai para o cliente, segue o tom externo da `bunker-brand-copilot`.
+- **Pergunta de escolha traz a recomendação, o motivo e a alternativa mais forte**, com um caso concreto simulado ("com a opção A, o pedido feito na sexta à noite só aparece no relatório de segunda"). **Pergunta de fato** ("qual é o sistema?") vai sem recomendação e só com as opções naturais, ou aberta, sem completar quatro.
+- **Questionário para terceiro, quando quem conduz pedir.** Quando várias respostas moram com o cliente, a skill o oferece como opção da primeira pergunta que depende dele: no máximo oito perguntas, em ordem de importância, uma ideia por pergunta, "não sei" como resposta válida. Como sai para o cliente, segue o tom externo da `bunker-brand-copilot`.
 
 ### 7. Parar e emitir a sentença
 
@@ -75,7 +77,7 @@ O levantamento acaba quando valem as seis condições de `references/regra-de-pa
 
 Em perfil alto, e sempre que o plano tiver ação irreversível, fazer o pre-mortem antes de emitir: "daqui a X semanas isto fracassou; por quê?" Os riscos principais entram na sentença.
 
-Escrever a `SENTENCA.md` pelo modelo. Ela fixa três tolerâncias em faixa (mínimo, provável e máximo): **prazo, esforço e escopo**. A qualidade fica no critério de pronto: o essencial tem tolerância zero, e o desejável pode flexionar. Mostrar a quem conduz as premissas ainda não confirmadas, numa caixinha só, para confirmar em bloco. Commitar.
+Escrever a `SENTENCA.md` pelo modelo. Ela fixa três tolerâncias em faixa (mínimo, provável e máximo): **prazo, esforço e escopo**. A qualidade fica no critério de pronto: o essencial tem tolerância zero, e o desejável pode flexionar. Mostrar a quem conduz as premissas pendentes: a lista vai no texto, numerada, e a caixinha pergunta "confirmo todas" ou "quero corrigir algumas", com os números. Commitar.
 
 **O catch.** Com a sentença commitada, soltar o confete da `bunker-confetes-ou-perguntas-copilot`, com o caminho do arquivo, o primeiro passo do caminho crítico e a maior incerteza.
 
@@ -109,13 +111,13 @@ A conversa nova nunca substitui a sentença em silêncio. Toda pergunta de negó
 
 **Revisor independente.** Em perfil alto, nos marcos (o fim de cada pacote de passos do plano), e antes de toda ação irreversível, um agente que não fez o trabalho confere a entrega contra a sentença.
 
-**Portas de aprovação.** Pedem o ok de quem conduz, na hora: o que é irreversível ou sai para fora (produção, envio ao cliente, gravação em dado real) e também o trabalho interno (merge, saída da triagem, fechamento de issue). Se os passos virarem issues, elas seguem o rito da `bunker-fix-bug-copilot`. Esta skill não cria regra de issue.
+**Portas de aprovação.** Pedem o ok de quem conduz, na hora: o que é irreversível ou sai para fora (produção, envio ao cliente, gravação em dado real) e também o trabalho interno (merge, saída da triagem, fechamento de issue). Ler em produção sem gravar, para medir, pede o ok uma vez, registrado no estado. Quando o material diz que uma porta depende de outra pessoa, o ok continua sendo pedido a quem conduz, que decide se precisa ouvi-la. Se os passos virarem issues, elas seguem o rito da `bunker-fix-bug-copilot`. Esta skill não cria regra de issue.
 
 **Espera do cliente.** O `ESTADO.md` separa o trabalho nosso do que espera o cliente: o quê, de quem e desde quando.
 
 ## Fim de cada turno
 
-Um turno é cada resposta que devolve a vez a quem conduz.
+Um turno é cada resposta que devolve a vez a quem conduz. Antes da confirmação do entendimento, o turno termina na própria caixinha de confirmação, e os arquivos nascem depois dela.
 
 1. Reescrever o `ESTADO.md` e acrescentar ao `HISTORICO.md` o que foi feito, decidido e perguntado. Commitar.
 2. Gerar o prompt da próxima sessão pelo modelo de `references/modelos.md`. Ele traz os caminhos dos arquivos, e nunca um segredo.

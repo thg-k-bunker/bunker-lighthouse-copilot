@@ -29,12 +29,14 @@ Situação de cada item:
 | Situação | Quando |
 |---|---|
 | respondido | o material responde, com o trecho |
-| assumido | premissa, confirmada em bloco no catch |
+| respondido em parte | o material responde uma parte; o resto segue em outra situação |
+| assumido | premissa, confirmada em bloco no catch. Inclui a recomendação de desenho que o Claude propõe |
 | verificado | o Claude conferiu no ambiente ou na documentação |
 | em verificação | o Claude ainda vai conferir |
 | pergunta | está na fila para quem conduz |
 | fora de escopo | decidido que não entra |
-| não se aplica | item **T** que não vale para este trabalho |
+| não se aplica | item **T**, ou lente, que não vale para este trabalho |
+| condicional | lente ou item que só entra se uma resposta pedir |
 
 Na emissão da sentença, nenhum item fica em "pergunta" ou "em verificação".
 
@@ -49,7 +51,7 @@ Na emissão da sentença, nenhum item fica em "pergunta" ou "em verificação".
 
 ### Usuários e processo real
 - **O** Quem vai usar no dia a dia? Quantas pessoas, em que papel?
-- **O** Qual foi o último caso real, do começo ao fim? Quem fez o quê? Pedir o caso concreto, e não a descrição de como deveria ser.
+- **O** Qual foi o último caso real, do começo ao fim? Quem fez o quê? Pedir o caso concreto, e não a descrição de como deveria ser. Se o material não descreve nenhum caso real, este item conta como risco e vai para a fila, ou para o questionário ao cliente.
 - **O** O que dá errado hoje, e com que frequência?
 - **O** Quais são as exceções, o caso estranho que acontece uma vez por mês?
 - **O** Por onde as pessoas realmente falam com o cliente e trabalham fora do sistema (WhatsApp, e-mail pessoal, telefone, planilha)? No Brasil, o WhatsApp costuma ser o principal canal de venda e de atendimento, e é o que mais se esquece.
@@ -97,7 +99,7 @@ Na emissão da sentença, nenhum item fica em "pergunta" ou "em verificação".
 ### Riscos e incertezas
 - **O** O que precisa ser verdade para isso funcionar?
 - **O** Qual a maior incerteza hoje, e como ela se resolve primeiro?
-- **O** Do que dependemos do cliente (acesso, dado, aprovação), e até quando?
+- **O** Do que dependemos do cliente ou de terceiros (acesso, dado, aprovação, fornecedor, outro sistema), e até quando? Dependência de terceiro entra nos riscos da sentença.
 
 ## Camada 2: lentes pela natureza do trabalho
 
