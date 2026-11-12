@@ -7,7 +7,7 @@ description: "Padrão da Bunker para começar e conduzir um trabalho novo que qu
 
 Em trabalho que a pessoa ainda não domina, o tempo se perde em refazer e em esperar. As causas se repetem: o escopo muda a cada conversa, o que ninguém perguntou aparece no fim, e o fio se perde de uma sessão para a outra. Esta skill é o processo para evitar as três.
 
-Duas fases, na lógica do processo judicial. A **fase de conhecimento** termina com a **sentença**, o documento único do escopo. A **fase de execução** trabalha contra a sentença. A emissão da sentença é o **catch**: o aviso de que a fase de conhecimento foi superada.
+Duas fases, na lógica do processo judicial. A **fase de conhecimento** termina com a **sentença**, o documento único do escopo. A **fase de execução** trabalha contra a sentença. A emissão da sentença fecha a fase de conhecimento, com um aviso de que ela foi superada.
 
 **Quem conduz o projeto é sempre o responsável.** É a pessoa que chamou a skill: ela decide o escopo e dá o ok nas portas de aprovação. A skill não pergunta quem decide, quem paga nem quem assina. Se alguém de fora pode travar o trabalho, isso vem na transcrição ou é dito por quem conduz, e entra na sentença.
 
@@ -27,7 +27,7 @@ Moram em `docs/lighthouse/`, no repositório do projeto, e são commitados no fi
 |---|---|---|---|
 | `ESTADO.md` | Onde estamos, o próximo passo, o que espera quem conduz e o que espera o cliente | Na confirmação do entendimento | Cabe numa tela; reescrito a cada turno |
 | `HISTORICO.md` | O que foi feito, decidido e perguntado, com data | Na confirmação do entendimento | Só acumula; lido sob demanda |
-| `SENTENCA.md` | Resultado, critério de pronto, tolerâncias, fora de escopo, premissas, decisões e o plano | No catch | Resultado, critério de pronto e tolerâncias só mudam por aditamento. O plano muda dentro das tolerâncias, sem aditamento |
+| `SENTENCA.md` | Resultado, critério de pronto, tolerâncias, fora de escopo, premissas, decisões e o plano | Na emissão da sentença | Resultado, critério de pronto e tolerâncias só mudam por aditamento. O plano muda dentro das tolerâncias, sem aditamento |
 
 ## Fase 1: conhecimento
 
@@ -57,7 +57,7 @@ Para cada pedido em forma de solução ("quero um campo", "quero um painel"), en
 
 Rodar `references/checagem-de-cobertura.md`, em três camadas: as perguntas universais, as lentes pela natureza do trabalho e os itens do especialista do domínio. É interna: quem conduz vê só as perguntas que ela gera.
 
-**O padrão é responder pelo material ou assumir.** Cada item é respondido pelo material, assumido como premissa, verificado pelo Claude ou levado a quem conduz. Só vai para a fila de perguntas o que muda escopo, custo ou risco. O resto entra como premissa e é confirmado em bloco no catch.
+**O padrão é responder pelo material ou assumir.** Cada item é respondido pelo material, assumido como premissa, verificado pelo Claude ou levado a quem conduz. Só vai para a fila de perguntas o que muda escopo, custo ou risco. O resto entra como premissa e é confirmado em bloco na emissão da sentença.
 
 ### 6. Perguntar o que falta
 
@@ -79,9 +79,9 @@ Em perfil alto, e sempre que o plano tiver ação irreversível, fazer o pre-mor
 
 Escrever a `SENTENCA.md` pelo modelo. Ela fixa três tolerâncias em faixa (mínimo, provável e máximo): **prazo, esforço e escopo**. A qualidade fica no critério de pronto: o essencial tem tolerância zero, e o desejável pode flexionar. Mostrar a quem conduz as premissas pendentes: a lista vai no texto, numerada, e a caixinha pergunta "confirmo todas" ou "quero corrigir algumas", com os números. Commitar.
 
-**O catch.** Com a sentença commitada, soltar o confete da `bunker-confetes-ou-perguntas-copilot`, com o caminho do arquivo, o primeiro passo do caminho crítico e a maior incerteza.
+**O aviso de virada.** Com a sentença commitada, soltar o confete da `bunker-confetes-ou-perguntas-copilot`, com o caminho do arquivo, o primeiro passo do caminho crítico e a maior incerteza.
 
-**Escopo para o cliente.** Quando o trabalho é para um cliente, junto com o catch a skill prepara a versão da sentença para ele: o resultado, o que entra, o que fica fora e como se prova que ficou pronto, em linguagem de negócio e no tom externo da `bunker-brand-copilot`. Quem conduz revisa e envia; o envio é dele. O aceite do cliente não bloqueia nada: a execução começa no catch. A sentença registra a situação do aceite (pendente ou obtido, por quem, quando), e, enquanto estiver pendente, ele aparece no `ESTADO.md` como espera do cliente.
+**Escopo para o cliente.** Quando o trabalho é para um cliente, junto com a emissão da sentença a skill prepara a versão da sentença para ele: o resultado, o que entra, o que fica fora e como se prova que ficou pronto, em linguagem de negócio e no tom externo da `bunker-brand-copilot`. Quem conduz revisa e envia; o envio é dele. O aceite do cliente não bloqueia nada: a execução começa na emissão da sentença. A sentença registra a situação do aceite (pendente ou obtido, por quem, quando), e, enquanto estiver pendente, ele aparece no `ESTADO.md` como espera do cliente.
 
 ## Conversa nova depois da sentença
 

@@ -6,7 +6,7 @@ Rodado em 12/11/2026 sobre a versão 2 (`d01eb14`), por um agente novo, sem pesq
 |---|---|---|
 | Itens do gabarito | 7 inteiros, 4 em parte, 1 não | 8 inteiros, 3 em parte, 1 não |
 | Perguntas na fila para quem conduz | 12, mais um questionário de 6 | 10 (o questionário é uma delas) |
-| Premissas confirmadas em bloco no catch | não existia | 19 |
+| Premissas confirmadas em bloco na emissão da sentença | não existia | 19 |
 
 Continua de fora o M6, o aceite formal do cliente antes de construir, pela decisão "Quem decide". Está registrado como pendente para o Thiago em `docs/decisoes.md`.
 

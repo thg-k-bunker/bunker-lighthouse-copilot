@@ -91,7 +91,7 @@ Na fase de conhecimento, o estado traz também:
 
 ```markdown
 **Perguntas abertas:** <as próximas da fila, em ordem>
-**Premissas a confirmar no catch:** <lista curta>
+**Premissas a confirmar na emissão da sentença:** <lista curta>
 **Em verificação pelo Claude:** <o que falta conferir>
 ```
 

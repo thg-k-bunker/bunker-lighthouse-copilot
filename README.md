@@ -8,7 +8,7 @@ Repositório de trabalho da skill **Lighthouse** (apelido nas conversas: Farol):
 
 Toda tarefa nova passa por duas fases, na lógica do processo judicial:
 
-1. **Conhecimento (clarear).** A partir da transcrição ou da explicação colada pelo usuário, o Claude devolve o entendimento do serviço e do problema, pergunta só o que falta (uma pergunta por vez, com recomendação), faz a checagem de cobertura e emite a **sentença**. A emissão da sentença é o **catch**: o aviso de que a fase de conhecimento foi superada.
+1. **Conhecimento (clarear).** A partir da transcrição ou da explicação colada pelo usuário, o Claude devolve o entendimento do serviço e do problema, pergunta só o que falta (uma pergunta por vez, com recomendação), faz a checagem de cobertura e emite a **sentença**. A emissão da sentença fecha a fase, com um aviso de que ela foi superada.
 2. **Execução (fazer).** A ordem segue o caminho crítico, depois a maior incerteza, e o WSJF desempata. Transcrição nova é confrontada com a sentença e não a substitui.
 
 O desenho completo e o que ainda está em aberto ficam em [`docs/decisoes.md`](docs/decisoes.md).

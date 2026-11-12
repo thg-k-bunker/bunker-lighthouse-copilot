@@ -1,6 +1,6 @@
 # Checagem de cobertura
 
-Roda antes do catch. Responde a uma pergunta: o que todo trabalho deste tipo precisa ter e ainda não tem?
+Roda antes da emissão da sentença. Responde a uma pergunta: o que todo trabalho deste tipo precisa ter e ainda não tem?
 
 Funciona para qualquer projeto em três camadas: **(1)** as perguntas universais, que valem para todo trabalho; **(2)** as lentes pela natureza do trabalho, que todo projeto combina; **(3)** os itens do especialista do domínio, gerados na hora. A profundidade de cada camada segue o perfil do projeto (`perfil-do-projeto.md`).
 
@@ -30,7 +30,7 @@ Situação de cada item:
 |---|---|
 | respondido | o material responde, com o trecho |
 | respondido em parte | o material responde uma parte; o resto segue em outra situação |
-| assumido | premissa, confirmada em bloco no catch. Inclui a recomendação de desenho que o Claude propõe |
+| assumido | premissa, confirmada em bloco na emissão da sentença. Inclui a recomendação de desenho que o Claude propõe |
 | verificado | o Claude conferiu no ambiente ou na documentação |
 | em verificação | o Claude ainda vai conferir |
 | pergunta | está na fila para quem conduz |

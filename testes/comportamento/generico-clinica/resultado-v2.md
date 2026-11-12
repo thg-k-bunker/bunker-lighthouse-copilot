@@ -6,7 +6,7 @@ Rodado em 12/11/2026 sobre a versão 2 (`d01eb14`), por um agente novo que leu s
 |---|---|---|
 | Itens do gabarito levantados | 10 de 10 | 10 de 10 |
 | Perguntas na fila para quem conduz | 9, mais um questionário de 9 | 6, mais 1 condicional; questionário só como opção |
-| Premissas confirmadas em bloco no catch | não existia | 15 |
+| Premissas confirmadas em bloco na emissão da sentença | não existia | 15 |
 
 O que mudou no comportamento: o entendimento tratou "mês que vem" como desejo; a checagem usou as situações novas ("em verificação", "não se aplica", lente condicional); a pergunta de fato saiu sem recomendação.
 
