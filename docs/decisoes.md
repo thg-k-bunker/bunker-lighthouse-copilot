@@ -33,6 +33,7 @@ Atualizado em 12/11/2026. A pesquisa terminou e as decisões para começar a pro
 | Biblioteca do especialista (D6) | Fica para a v2. Na v1, no encerramento, o Claude propõe os itens que pegaram algo, e o Thiago decide se entram no plugin por PR (Thiago, 12/11/2026) |
 | Métricas (D7) | Sem painel na v1. O histórico registra só três fatos: perguntas feitas depois da sentença, aditamentos e passos reabertos (Thiago, 12/11/2026) |
 | A Metax não é escopo | A Metax foi só o exemplo que originou a skill. Nada dela entra no que vai para o plugin (`SKILL.md`, `description`, `references/` e evals): nem nome, nem pessoas, nem números de issue, nem termos do projeto (tensor, NPX, Journey Builder, canais da Metax). Os exemplos da skill são genéricos, de qualquer domínio. Os parênteses "o que teria pegado na Metax" do [`padrao-global-levantamento.md`](pesquisa/padrao-global-levantamento.md) e os itens do especialista semeados a partir dela ficam só como pesquisa. Na skill, "o Thiago" vira "quem conduz o projeto", porque ela vai para outras pessoas da Bunker. As pastas `analise/` e `origem/metax/` são evidência e não vão para o plugin (Thiago, 12/11/2026) |
+| Testes | O caso Metax é usado como teste de comportamento à mão, só neste repositório, porque é o único com gabarito real do que faltou perguntar. Para os evals do plugin, um caso genérico de outro domínio. Nada da Metax vai para o plugin (Thiago, 12/11/2026) |
 | Confete no catch | Na troca da fase de conhecimento para a de execução, a skill solta o confete da `bunker-confetes-ou-perguntas-copilot`, como numa entrega: a sentença emitida é verificável (o arquivo existe no caminho dito). Continua valendo o confete no fim da entrega (Thiago, 12/11/2026) |
 
 ## O que a skill usa sem copiar
@@ -47,7 +48,7 @@ Atualizado em 12/11/2026. A pesquisa terminou e as decisões para começar a pro
 
 ## Em aberto
 
-Nenhuma decisão de desenho pendente: as sete da [`sintese-pre-producao.md`](sintese-pre-producao.md) (D1 a D7) foram fechadas em 12/11/2026, todas pela recomendação. O próximo passo é a produção, na ordem da seção 8 da síntese: rascunho do `SKILL.md`, da `description` e dos `references/`, depois os evals de roteamento e o teste de comportamento com a Metax.
+Nenhuma decisão de desenho pendente: as sete da [`sintese-pre-producao.md`](sintese-pre-producao.md) (D1 a D7) foram fechadas em 12/11/2026, todas pela recomendação. O rascunho do `SKILL.md`, da `description` e dos `references/` está em `skills/bunker-lighthouse-copilot/`, na branch `feat/rascunho-skill` (12/11/2026), esperando a revisão do Thiago. Depois vêm os evals de roteamento e o teste de comportamento com a Metax.
 
 Ficam registrados, sem bloquear a produção:
 
