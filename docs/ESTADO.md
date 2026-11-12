@@ -2,7 +2,7 @@
 
 Atualizado em 12/11/2026.
 
-**Onde estamos:** a versão 3 da skill está na branch `feat/rascunho-skill`, testada e esperando a sua revisão. Nada foi para a `main` nem para o plugin.
+**Onde estamos:** a skill está na `main` deste repositório (versão 3, mais a decisão do aceite do cliente). O PR no plugin está pronto como patch em `integracao/`, conferido contra a `main` do plugin; falta só alguém com acesso de escrita abrir.
 
 **O que foi feito enquanto você estava fora**
 - Rascunho da skill (`skills/bunker-lighthouse-copilot/`) com 504 linhas, contando o `SKILL.md` e os quatro `references/`.
@@ -16,9 +16,9 @@ Atualizado em 12/11/2026.
 
 **Esperando você**
 1. ~~Aceite do cliente~~: decidido em 12/11/2026. O escopo vai ao cliente na emissão da sentença, e o aceite não bloqueia a execução.
-2. **Revisão do `SKILL.md` v3** e ok para o merge da branch na `main`.
-3. **PR no `bunker-claude-skills`:** ok para abrir. Também decidir em que seção do README a skill entra; a proposta é "Começar o dia, e saber o que fazer agora".
-4. **Achado fora do escopo, para o Guilherme:** três skills do plugin passam do limite da `description` na checagem oficial (`integracao/PR-plugin.md`).
+2. ~~Merge na `main`~~: feito em 12/11/2026.
+3. **Abrir o PR no `bunker-claude-skills`**, com o patch e os comandos de `integracao/PR-plugin.md`. A sessão do Claude só tem leitura no plugin.
+4. ~~Achado das descriptions acima do limite~~: já corrigido na `main` do plugin.
 5. **Correções nas skills donas, para o Guilherme:**
    - a wsjf refaz as notas a cada rodada;
    - a esteira de defeito foi aplicada a trabalho de projeto;

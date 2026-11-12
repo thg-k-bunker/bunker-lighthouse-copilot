@@ -1,0 +1,874 @@
+From 40bcbdd70bed2af8637adbebc279fa82e1c7a243 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 12 Nov 2026 13:49:44 +0000
+Subject: [PATCH] =?UTF-8?q?feat(lighthouse-copilot)=201.117.0:=20padr?=
+ =?UTF-8?q?=C3=A3o=20para=20come=C3=A7ar=20e=20conduzir=20trabalho=20novo?=
+ =?UTF-8?q?=20que=20quem=20executa=20ainda=20n=C3=A3o=20domina?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Skill nova, bunker-lighthouse-copilot. Duas fases, na lógica do
+processo judicial: a de conhecimento devolve o entendimento, pergunta
+só o que muda escopo, custo ou risco, roda a checagem de cobertura em
+três camadas e emite a sentença, o escopo único do trabalho, com
+resultado, critério de pronto e tolerâncias; a de execução segue o
+caminho crítico, resolve cedo a maior incerteza, confronta toda conversa
+nova com a sentença e guarda sentença, estado e histórico junto do
+projeto. Usa sem copiar o passo 0 da fix-bug, a régua da wsjf e o fecho
+da confetes-ou-perguntas.
+
+Entram também os evals de roteamento em evals/rota-lighthouse (6 casos,
+6 de 6 com nota máxima numa cópia do plugin 1.116.0). Sobe a version do
+plugin e do marketplace para 1.117.0 e acrescenta a skill ao catálogo
+do README.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01UkyHunwB1dW27U8MhP1HRC
+---
+ .claude-plugin/marketplace.json               |   4 +-
+ .claude-plugin/plugin.json                    |   2 +-
+ README.md                                     |   1 +
+ .../graders/nao-usa-a-lighthouse.md           |  10 ++
+ .../graders/usa-a-fix-bug.md                  |   8 +
+ .../defeito-reportado/prompt.md               |   7 +
+ .../monta-escopo/graders/usa-a-lighthouse.md  |   8 +
+ evals/rota-lighthouse/monta-escopo/prompt.md  |   7 +
+ .../graders/usa-a-lighthouse.md               |   8 +
+ .../rota-lighthouse/nunca-fiz-isso/prompt.md  |   7 +
+ .../graders/nao-usa-a-lighthouse.md           |  10 ++
+ .../graders/usa-a-consultant.md               |   8 +
+ .../o-que-faco-agora/prompt.md                |   7 +
+ .../graders/nao-usa-a-lighthouse.md           |  10 ++
+ .../graders/usa-o-onboarding.md               |   8 +
+ .../pergunta-da-casa/prompt.md                |   7 +
+ .../graders/usa-a-lighthouse.md               |   8 +
+ .../transcricao-projeto-novo/prompt.md        |   9 +
+ skills/bunker-lighthouse-copilot/SKILL.md     | 144 ++++++++++++++++
+ .../references/checagem-de-cobertura.md       | 161 ++++++++++++++++++
+ .../references/modelos.md                     | 134 +++++++++++++++
+ .../references/perfil-do-projeto.md           |  35 ++++
+ .../references/regra-de-parada.md             |  37 ++++
+ 23 files changed, 637 insertions(+), 3 deletions(-)
+ create mode 100644 evals/rota-lighthouse/defeito-reportado/graders/nao-usa-a-lighthouse.md
+ create mode 100644 evals/rota-lighthouse/defeito-reportado/graders/usa-a-fix-bug.md
+ create mode 100644 evals/rota-lighthouse/defeito-reportado/prompt.md
+ create mode 100644 evals/rota-lighthouse/monta-escopo/graders/usa-a-lighthouse.md
+ create mode 100644 evals/rota-lighthouse/monta-escopo/prompt.md
+ create mode 100644 evals/rota-lighthouse/nunca-fiz-isso/graders/usa-a-lighthouse.md
+ create mode 100644 evals/rota-lighthouse/nunca-fiz-isso/prompt.md
+ create mode 100644 evals/rota-lighthouse/o-que-faco-agora/graders/nao-usa-a-lighthouse.md
+ create mode 100644 evals/rota-lighthouse/o-que-faco-agora/graders/usa-a-consultant.md
+ create mode 100644 evals/rota-lighthouse/o-que-faco-agora/prompt.md
+ create mode 100644 evals/rota-lighthouse/pergunta-da-casa/graders/nao-usa-a-lighthouse.md
+ create mode 100644 evals/rota-lighthouse/pergunta-da-casa/graders/usa-o-onboarding.md
+ create mode 100644 evals/rota-lighthouse/pergunta-da-casa/prompt.md
+ create mode 100644 evals/rota-lighthouse/transcricao-projeto-novo/graders/usa-a-lighthouse.md
+ create mode 100644 evals/rota-lighthouse/transcricao-projeto-novo/prompt.md
+ create mode 100644 skills/bunker-lighthouse-copilot/SKILL.md
+ create mode 100644 skills/bunker-lighthouse-copilot/references/checagem-de-cobertura.md
+ create mode 100644 skills/bunker-lighthouse-copilot/references/modelos.md
+ create mode 100644 skills/bunker-lighthouse-copilot/references/perfil-do-projeto.md
+ create mode 100644 skills/bunker-lighthouse-copilot/references/regra-de-parada.md
+
+diff --git a/.claude-plugin/marketplace.json b/.claude-plugin/marketplace.json
+index 59efc4f..871a9ce 100644
+--- a/.claude-plugin/marketplace.json
++++ b/.claude-plugin/marketplace.json
+@@ -6,14 +6,14 @@
+   },
+   "metadata": {
+     "description": "Marketplace interno da Bunker. Fonte unica dos copilotos do time.",
+-    "version": "1.116.0"
++    "version": "1.117.0"
+   },
+   "plugins": [
+     {
+       "name": "bunker",
+       "source": "./",
+       "description": "Copilotos Claude Code do time Bunker: CX e on-demand, BDR, rotina de e-mail, pricing, forecast (cliente e fluxo de caixa da casa), TAAAS, documentos, marca, revisao de copy, rito de correcao de defeito, padrao de metadado Salesforce, oportunidade da descoberta (radar) a criacao e higiene de Opportunity, publicacao no site, fecho de turno, classificacao WSJF das issues com marcos e matrizes no README, live no YouTube com o OBS seguindo a ferramenta em foco, graficos para qualquer dado, apresentacoes em slides, a apresentacao comercial da Bunker (vendas e marketing) com preco do CRM, playbook de adocao de Go Live e pacote de entrega tecnica (relatorio NBR 10719 em retrato e telas em paisagem, sempre juntos).",
+-      "version": "1.116.0",
++      "version": "1.117.0",
+       "author": { "name": "Bunker Growth and Sales Intelligence" },
+       "keywords": ["bunker", "salesforce", "revops", "pricing", "cx", "bdr", "copy"]
+     }
+diff --git a/.claude-plugin/plugin.json b/.claude-plugin/plugin.json
+index e2c39dc..21a2ff2 100644
+--- a/.claude-plugin/plugin.json
++++ b/.claude-plugin/plugin.json
+@@ -1,6 +1,6 @@
+ {
+   "name": "bunker",
+-  "version": "1.116.0",
++  "version": "1.117.0",
+   "description": "Copilotos Claude Code do time Bunker: CX e on-demand, BDR, rotina de e-mail, pricing, forecast (cliente e fluxo de caixa da casa), TAAAS, documentos, marca, revisao de copy, rito de correcao de defeito, padrao de metadado Salesforce, oportunidade da descoberta (radar) a criacao e higiene de Opportunity, publicacao no site, fecho de turno, classificacao WSJF das issues com marcos e matrizes no README, live no YouTube com o OBS seguindo a ferramenta em foco, graficos para qualquer dado, apresentacoes em slides, a apresentacao comercial da Bunker (vendas e marketing) com preco do CRM, playbook de adocao de Go Live e pacote de entrega tecnica (relatorio NBR 10719 em retrato e telas em paisagem, sempre juntos).",
+   "author": {
+     "name": "Bunker Growth and Sales Intelligence",
+diff --git a/README.md b/README.md
+index 736383f..d1e90ce 100644
+--- a/README.md
++++ b/README.md
+@@ -186,6 +186,7 @@ Agrupadas pelo que voce quer fazer.
+ |---|---|
+ | `bunker-consultant-copilot` | O copiloto do consultor. Abre o dia varrendo as seis fontes, monta o placar por projeto e entrega UMA acao, com o dossie dela e o porque de ser essa. Quem esta esperando vence sempre a fila de defeito. |
+ | `bunker-onboarding-copilot` | A casa, para quem chegou agora: o que a Bunker vende, como a operacao funciona, os sistemas e como se conecta a cada um, os ritos e o vocabulario de todo dia. |
++| `bunker-lighthouse-copilot` | Começar e conduzir um trabalho novo que você ainda não domina, a partir de uma transcrição colada. Na fase de conhecimento: entendimento confirmado, uma pergunta por vez, checagem de cobertura e a sentença, o escopo único do trabalho. Na de execução: caminho crítico, depois a maior incerteza, WSJF de desempate, e sentença, estado e histórico no repositório do projeto. |
+ | `bunker-vacuo-zero-copilot` | Redirecionador: o vacuo zero agora e o foco da `bunker-routine-copilot`. |
+ | `bunker-aula-quatro-copilot` | Os 3 clientes para falar agora, direto do Salesforce: oportunidade quente (Opp parada na reta final e janela de expansao), selo de urgencia e historico completo de chamados num card. Feita para call ao vivo, sem assunto, valor nem faturamento. |
+ | `bunker-routine-copilot` | Rotina de e-mail: triagem da propria caixa, varredura reversa de 14 dias e rascunho pronto por thread pendente. |
+diff --git a/evals/rota-lighthouse/defeito-reportado/graders/nao-usa-a-lighthouse.md b/evals/rota-lighthouse/defeito-reportado/graders/nao-usa-a-lighthouse.md
+new file mode 100644
+index 0000000..cf3b546
+--- /dev/null
++++ b/evals/rota-lighthouse/defeito-reportado/graders/nao-usa-a-lighthouse.md
+@@ -0,0 +1,10 @@
++---
++type: tool_used
++tool: Skill
++input_match: lighthouse-copilot
++min: 0
++max: 0
++arm: both
++---
++
++Defeito já reportado não carrega a Lighthouse.
+diff --git a/evals/rota-lighthouse/defeito-reportado/graders/usa-a-fix-bug.md b/evals/rota-lighthouse/defeito-reportado/graders/usa-a-fix-bug.md
+new file mode 100644
+index 0000000..b782247
+--- /dev/null
++++ b/evals/rota-lighthouse/defeito-reportado/graders/usa-a-fix-bug.md
+@@ -0,0 +1,8 @@
++---
++type: tool_used
++tool: Skill
++input_match: fix-bug-copilot
++arm: both
++---
++
++Defeito já reportado carrega o rito de correção.
+diff --git a/evals/rota-lighthouse/defeito-reportado/prompt.md b/evals/rota-lighthouse/defeito-reportado/prompt.md
+new file mode 100644
+index 0000000..5a78c44
+--- /dev/null
++++ b/evals/rota-lighthouse/defeito-reportado/prompt.md
+@@ -0,0 +1,7 @@
++---
++max_turns: 3
++allowed_tools: [Skill]
++runs: 1
++---
++
++O cliente reportou que o formulário de contato do site não grava mais o telefone desde ontem. Preciso consertar esse bug.
+diff --git a/evals/rota-lighthouse/monta-escopo/graders/usa-a-lighthouse.md b/evals/rota-lighthouse/monta-escopo/graders/usa-a-lighthouse.md
+new file mode 100644
+index 0000000..0bffaae
+--- /dev/null
++++ b/evals/rota-lighthouse/monta-escopo/graders/usa-a-lighthouse.md
+@@ -0,0 +1,8 @@
++---
++type: tool_used
++tool: Skill
++input_match: lighthouse-copilot
++arm: both
++---
++
++"Monta o escopo" a partir de briefing de trabalho novo carrega a Lighthouse.
+diff --git a/evals/rota-lighthouse/monta-escopo/prompt.md b/evals/rota-lighthouse/monta-escopo/prompt.md
+new file mode 100644
+index 0000000..99b1d84
+--- /dev/null
++++ b/evals/rota-lighthouse/monta-escopo/prompt.md
+@@ -0,0 +1,7 @@
++---
++max_turns: 3
++allowed_tools: [Skill]
++runs: 1
++---
++
++Monta o escopo a partir deste briefing da reunião de ontem: a Transportadora Rota Norte quer um painel semanal com entregas no prazo e atrasadas por região, lendo os dados do sistema de rastreio deles. Quem pediu foi o gerente de operações, e a diretoria vai usar na reunião de segunda.
+diff --git a/evals/rota-lighthouse/nunca-fiz-isso/graders/usa-a-lighthouse.md b/evals/rota-lighthouse/nunca-fiz-isso/graders/usa-a-lighthouse.md
+new file mode 100644
+index 0000000..97b8506
+--- /dev/null
++++ b/evals/rota-lighthouse/nunca-fiz-isso/graders/usa-a-lighthouse.md
+@@ -0,0 +1,8 @@
++---
++type: tool_used
++tool: Skill
++input_match: lighthouse-copilot
++arm: both
++---
++
++Projeto novo em domínio que a pessoa não domina carrega a Lighthouse.
+diff --git a/evals/rota-lighthouse/nunca-fiz-isso/prompt.md b/evals/rota-lighthouse/nunca-fiz-isso/prompt.md
+new file mode 100644
+index 0000000..2f3a6aa
+--- /dev/null
++++ b/evals/rota-lighthouse/nunca-fiz-isso/prompt.md
+@@ -0,0 +1,7 @@
++---
++max_turns: 3
++allowed_tools: [Skill]
++runs: 1
++---
++
++Fechei um projeto para migrar a base de clientes de uma rede de lojas, que hoje vive em três planilhas, para um CRM novo. Nunca fiz uma migração dessas. Por onde eu começo esse projeto?
+diff --git a/evals/rota-lighthouse/o-que-faco-agora/graders/nao-usa-a-lighthouse.md b/evals/rota-lighthouse/o-que-faco-agora/graders/nao-usa-a-lighthouse.md
+new file mode 100644
+index 0000000..3456b27
+--- /dev/null
++++ b/evals/rota-lighthouse/o-que-faco-agora/graders/nao-usa-a-lighthouse.md
+@@ -0,0 +1,10 @@
++---
++type: tool_used
++tool: Skill
++input_match: lighthouse-copilot
++min: 0
++max: 0
++arm: both
++---
++
++Pergunta sobre a próxima ação do dia não carrega a Lighthouse.
+diff --git a/evals/rota-lighthouse/o-que-faco-agora/graders/usa-a-consultant.md b/evals/rota-lighthouse/o-que-faco-agora/graders/usa-a-consultant.md
+new file mode 100644
+index 0000000..721d91f
+--- /dev/null
++++ b/evals/rota-lighthouse/o-que-faco-agora/graders/usa-a-consultant.md
+@@ -0,0 +1,8 @@
++---
++type: tool_used
++tool: Skill
++input_match: consultant-copilot
++arm: both
++---
++
++Pergunta sobre a próxima ação do dia carrega o copiloto do consultor.
+diff --git a/evals/rota-lighthouse/o-que-faco-agora/prompt.md b/evals/rota-lighthouse/o-que-faco-agora/prompt.md
+new file mode 100644
+index 0000000..aa94e9e
+--- /dev/null
++++ b/evals/rota-lighthouse/o-que-faco-agora/prompt.md
+@@ -0,0 +1,7 @@
++---
++max_turns: 3
++allowed_tools: [Skill]
++runs: 1
++---
++
++Cheguei agora. O que eu faço agora?
+diff --git a/evals/rota-lighthouse/pergunta-da-casa/graders/nao-usa-a-lighthouse.md b/evals/rota-lighthouse/pergunta-da-casa/graders/nao-usa-a-lighthouse.md
+new file mode 100644
+index 0000000..3195985
+--- /dev/null
++++ b/evals/rota-lighthouse/pergunta-da-casa/graders/nao-usa-a-lighthouse.md
+@@ -0,0 +1,10 @@
++---
++type: tool_used
++tool: Skill
++input_match: lighthouse-copilot
++min: 0
++max: 0
++arm: both
++---
++
++Dúvida sobre a casa não carrega a Lighthouse.
+diff --git a/evals/rota-lighthouse/pergunta-da-casa/graders/usa-o-onboarding.md b/evals/rota-lighthouse/pergunta-da-casa/graders/usa-o-onboarding.md
+new file mode 100644
+index 0000000..812e2ef
+--- /dev/null
++++ b/evals/rota-lighthouse/pergunta-da-casa/graders/usa-o-onboarding.md
+@@ -0,0 +1,8 @@
++---
++type: tool_used
++tool: Skill
++input_match: onboarding-copilot
++arm: both
++---
++
++Dúvida sobre a casa carrega o onboarding.
+diff --git a/evals/rota-lighthouse/pergunta-da-casa/prompt.md b/evals/rota-lighthouse/pergunta-da-casa/prompt.md
+new file mode 100644
+index 0000000..fb907f5
+--- /dev/null
++++ b/evals/rota-lighthouse/pergunta-da-casa/prompt.md
+@@ -0,0 +1,7 @@
++---
++max_turns: 3
++allowed_tools: [Skill]
++runs: 1
++---
++
++Como eu me conecto no Salesforce da Bunker? Que sistemas a gente usa aqui?
+diff --git a/evals/rota-lighthouse/transcricao-projeto-novo/graders/usa-a-lighthouse.md b/evals/rota-lighthouse/transcricao-projeto-novo/graders/usa-a-lighthouse.md
+new file mode 100644
+index 0000000..a4c46ce
+--- /dev/null
++++ b/evals/rota-lighthouse/transcricao-projeto-novo/graders/usa-a-lighthouse.md
+@@ -0,0 +1,8 @@
++---
++type: tool_used
++tool: Skill
++input_match: lighthouse-copilot
++arm: both
++---
++
++Transcrição colada de um trabalho novo, que quem executa não domina, carrega a Lighthouse.
+diff --git a/evals/rota-lighthouse/transcricao-projeto-novo/prompt.md b/evals/rota-lighthouse/transcricao-projeto-novo/prompt.md
+new file mode 100644
+index 0000000..173ff62
+--- /dev/null
++++ b/evals/rota-lighthouse/transcricao-projeto-novo/prompt.md
+@@ -0,0 +1,9 @@
++---
++max_turns: 3
++allowed_tools: [Skill]
++runs: 1
++---
++
++Segue a transcrição da reunião de hoje com a Clínica Sorriso Pleno. Me ajuda a começar esse projeto, nunca fiz nada parecido.
++
++"Dra. Paula: Hoje a recepção confirma consulta por telefone, uma por uma, e perde metade da manhã nisso. Queria que o paciente recebesse um lembrete um dia antes e confirmasse sozinho. A agenda fica no sistema da clínica, mas a Joana também anota numa planilha os encaixes. Ah, e muita gente marca pelo WhatsApp da recepção. Se der para começar mês que vem, ótimo."
+diff --git a/skills/bunker-lighthouse-copilot/SKILL.md b/skills/bunker-lighthouse-copilot/SKILL.md
+new file mode 100644
+index 0000000..5827ede
+--- /dev/null
++++ b/skills/bunker-lighthouse-copilot/SKILL.md
+@@ -0,0 +1,144 @@
++---
++name: bunker-lighthouse-copilot
++description: "Padrão da Bunker para começar e conduzir um trabalho novo que quem executa ainda não domina, a partir da transcrição ou do briefing desse trabalho. Duas fases, como no processo judicial. Conhecimento: devolve o entendimento em 3 ou 4 linhas, pergunta só o que muda escopo, custo ou risco, uma pergunta por vez e com recomendação, roda a checagem de cobertura e emite a sentença, o escopo único do trabalho, com resultado, critério de pronto e tolerâncias. Execução: segue o caminho crítico, resolve cedo a maior incerteza, confronta toda conversa nova com a sentença e guarda sentença, estado e histórico junto do projeto. Use quando colarem a transcrição ou o briefing de um projeto novo, ou disserem \"projeto novo\", \"nunca fiz um projeto assim\", \"não domino esse assunto e preciso entregar\", \"monta o escopo desse trabalho\". Defeito já reportado é da bunker-fix-bug-copilot; a próxima ação do dia, da bunker-consultant-copilot; dúvida sobre a casa, da bunker-onboarding-copilot."
++---
++
++# Lighthouse: trabalho novo sem retrabalho
++
++Em trabalho que a pessoa ainda não domina, o tempo se perde em refazer e em esperar. As causas se repetem: o escopo muda a cada conversa, o que ninguém perguntou aparece no fim, e o fio se perde de uma sessão para a outra. Esta skill é o processo para evitar as três.
++
++Duas fases, na lógica do processo judicial. A **fase de conhecimento** termina com a **sentença**, o documento único do escopo. A **fase de execução** trabalha contra a sentença. A emissão da sentença fecha a fase de conhecimento, com um aviso de que ela foi superada.
++
++**Quem conduz o projeto é sempre o responsável.** É a pessoa que chamou a skill: ela decide o escopo e dá o ok nas portas de aprovação. A skill não pergunta quem decide, quem paga nem quem assina. Se alguém de fora pode travar o trabalho, isso vem na transcrição ou é dito por quem conduz, e entra na sentença.
++
++## Antes de tudo: é começo ou retomada?
++
++Procurar `docs/lighthouse/` no projeto.
++
++- **Existe `SENTENCA.md`:** é retomada na execução. Ler o `ESTADO.md`, depois a `SENTENCA.md`. Material novo segue "Conversa nova depois da sentença".
++- **Existe só `ESTADO.md`:** é retomada na fase de conhecimento. Ler o estado e continuar de onde parou.
++- **Não existe nada:** é começo. Seguir a fase 1.
++
++## Os três arquivos
++
++Moram em `docs/lighthouse/`, no repositório do projeto, e são commitados no fim de cada turno. Sem repositório, ficam na pasta que quem conduz indicar, e a skill recomenda criar um. Os modelos estão em `references/modelos.md`.
++
++| Arquivo | O que guarda | Quando nasce | Regra |
++|---|---|---|---|
++| `ESTADO.md` | Onde estamos, o próximo passo, o que espera quem conduz e o que espera o cliente | Na confirmação do entendimento | Cabe numa tela; reescrito a cada turno |
++| `HISTORICO.md` | O que foi feito, decidido e perguntado, com data | Na confirmação do entendimento | Só acumula; lido sob demanda |
++| `SENTENCA.md` | Resultado, critério de pronto, tolerâncias, fora de escopo, premissas, decisões e o plano | Na emissão da sentença | Resultado, critério de pronto e tolerâncias só mudam por aditamento. O plano muda dentro das tolerâncias, sem aditamento |
++
++## Fase 1: conhecimento
++
++**Perfil do projeto.** Ler o material e classificar os quatro eixos (novidade, tecnologia, complexidade e ritmo) pela tabela de `references/perfil-do-projeto.md`. O perfil decide a profundidade: trabalho pequeno e fácil de desfazer roda no modo leve.
++
++### 1. Ler tudo antes de perguntar
++
++Ler a transcrição, os e-mails, a proposta e todo material colado. Separar fato, opinião e solução já imaginada. Tudo o que vai ser requisito leva a fonte e o grau de confiança, pela tabela de `references/checagem-de-cobertura.md`. Conflito entre fontes é levado a quem conduz como pergunta.
++
++### 2. Devolver o entendimento
++
++Em 3 ou 4 linhas: qual é o serviço, que problema ele resolve, para quem, e o resultado esperado. Quando o material traz decisão já tomada por alguém de fora (uma arquitetura, um prazo), uma linha a mais com essas restrições. Por fim, uma linha com o perfil.
++
++A confirmação vai na caixinha (`AskUserQuestion`, ou em texto com as opções numeradas), com três opções fixas e sem recomendação: "está certo", "quero corrigir um ponto", "o pedido é outro". Ela não segue o formato de quatro opções do passo 0. Com o entendimento confirmado, criar o `ESTADO.md` e o `HISTORICO.md`. Sem repositório no projeto, a primeira pergunta depois da confirmação é onde guardar os arquivos.
++
++A checagem pode ser preparada antes, em silêncio, para a primeira pergunta já sair pronta. Nenhuma outra pergunta vai antes da confirmação.
++
++### 3. Ancorar o resultado
++
++Que número ou situação muda, para quem e até quando. Sem resultado verificável, a sentença não tem critério de pronto. Data que o cliente já pediu entra como desejo dele, e só passa a compromisso depois da estimativa em faixa.
++
++### 4. Separar problema de solução
++
++Para cada pedido em forma de solução ("quero um campo", "quero um painel"), entender que decisão ou trabalho ele serve. O pedido entra na sentença ligado ao problema. Pedido de simplicidade do cliente é restrição da entrega e não muda o perfil.
++
++### 5. Checagem de cobertura
++
++Rodar `references/checagem-de-cobertura.md`, em três camadas: as perguntas universais, as lentes pela natureza do trabalho e os itens do especialista do domínio. É interna: quem conduz vê só as perguntas que ela gera.
++
++**O padrão é responder pelo material ou assumir.** Cada item é respondido pelo material, assumido como premissa, verificado pelo Claude ou levado a quem conduz. Só vai para a fila de perguntas o que muda escopo, custo ou risco. O resto entra como premissa e é confirmado em bloco na emissão da sentença.
++
++### 6. Perguntar o que falta
++
++Formato das perguntas: o do passo 0 da `bunker-fix-bug-copilot`, em `AskUserQuestion`, em linguagem de negócio, opções com o que fazem e o que custam, a recomendada primeiro. A resposta vai para o `HISTORICO.md` e, quando decide algo, para as decisões da sentença. Sem `AskUserQuestion`, a mesma pergunta vai em texto, com as opções numeradas.
++
++**Uma pergunta por vez**, primeiro o que muda escopo ou arquitetura. Quando quem conduz pede pressa, até quatro de assuntos diferentes numa chamada, como a fix-bug permite, e depois volta ao ritmo normal. Nesta skill, essa exceção vale sobre a regra de uma decisão por chamada da `bunker-confetes-ou-perguntas-copilot`.
++
++Regras próprias:
++
++- **Ao humano se pergunta só preferência, valor, restrição ou fato que só ele sabe.** O técnico, o Claude pesquisa na documentação ou confere no ambiente e traz como recomendação. Incerteza de ferramenta que nenhuma pesquisa resolve é testada num experimento curto antes do desenho.
++- **Pergunta de escolha traz a recomendação, o motivo e a alternativa mais forte**, com um caso concreto simulado ("com a opção A, o pedido feito na sexta à noite só aparece no relatório de segunda"). **Pergunta de fato** ("qual é o sistema?") vai sem recomendação e só com as opções naturais, ou aberta, sem completar quatro.
++- **Questionário para terceiro, quando quem conduz pedir.** Quando várias respostas moram com o cliente, a skill o oferece como opção da primeira pergunta que depende dele: no máximo oito perguntas, em ordem de importância, uma ideia por pergunta, "não sei" como resposta válida. Como sai para o cliente, segue o tom externo da `bunker-brand-copilot`.
++
++### 7. Parar e emitir a sentença
++
++O levantamento acaba quando valem as seis condições de `references/regra-de-parada.md`.
++
++Em perfil alto, e sempre que o plano tiver ação irreversível, fazer o pre-mortem antes de emitir: "daqui a X semanas isto fracassou; por quê?" Os riscos principais entram na sentença.
++
++Escrever a `SENTENCA.md` pelo modelo. Ela fixa três tolerâncias em faixa (mínimo, provável e máximo): **prazo, esforço e escopo**. A qualidade fica no critério de pronto: o essencial tem tolerância zero, e o desejável pode flexionar. Mostrar a quem conduz as premissas pendentes: a lista vai no texto, numerada, e a caixinha pergunta "confirmo todas" ou "quero corrigir algumas", com os números. Commitar.
++
++**O aviso de virada.** Com a sentença commitada, soltar o confete da `bunker-confetes-ou-perguntas-copilot`, com o caminho do arquivo, o primeiro passo do caminho crítico e a maior incerteza.
++
++**Escopo para o cliente.** Quando o trabalho é para um cliente, junto com a emissão da sentença a skill prepara a versão da sentença para ele: o resultado, o que entra, o que fica fora e como se prova que ficou pronto, em linguagem de negócio e no tom externo da `bunker-brand-copilot`. Quem conduz revisa e envia; o envio é dele. O aceite do cliente não bloqueia nada: a execução começa na emissão da sentença. A sentença registra a situação do aceite (pendente ou obtido, por quem, quando), e, enquanto estiver pendente, ele aparece no `ESTADO.md` como espera do cliente.
++
++## Conversa nova depois da sentença
++
++Toda transcrição, reunião ou e-mail que chegar depois da sentença é confrontado com ela:
++
++| O que a conversa traz | O que acontece |
++|---|---|
++| Confirma | Registra no histórico e segue |
++| Acrescenta, dentro das tolerâncias | Entra como passo novo no plano, registrado no histórico |
++| Contradiz, ou estoura uma tolerância | Para e pergunta a quem conduz. Só com a decisão dele entra como aditamento, registrado na sentença com data |
++
++A conversa nova nunca substitui a sentença em silêncio. Toda pergunta de negócio feita depois da sentença é registrada no histórico como tal.
++
++## Fase 2: execução
++
++**A ordem.** Primeiro o que destrava o caminho crítico, a sequência de passos dependentes que define o prazo. Depois o passo de maior incerteza, para a surpresa aparecer cedo. Entre passos livres, o WSJF desempata: dar as notas pela régua de `references/regua.md` da `bunker-wsjf-copilot`, sem rodar aquela skill sobre o plano. A nota é dada uma vez, quando o passo nasce, e só é refeita com fato novo.
++
++**Cada passo.** Dizer em uma linha o que vai ser feito e como se sabe que ficou pronto. Fazer. Juntar a evidência. Atualizar o plano, o estado e o histórico.
++
++**Nada é "feito" sem evidência**: a saída do comando, o link, o id da execução ou o print. Projetos costumam parecer 90% prontos muito antes de estarem ([Ford e Sterman, MIT, 2003](https://www.mit.edu/~jsterman/90_Syndrom_CERA2003_1.pdf)), e agentes costumam declarar pronto antes da hora ([Anthropic](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)). Passo fechado que volta a abrir é registrado no histórico como reaberto.
++
++**Tolerâncias e incidentes.** A escalação é pela previsão de estouro, antes que ele aconteça.
++
++| Incidente | Quando | O que acontece |
++|---|---|---|
++| Pequeno | Resolve-se dentro do passo | Registra no histórico |
++| Médio | Muda o plano, sem estourar tolerância | Replaneja os passos afetados e avisa |
++| Grande | Atinge o resultado ou o critério de pronto, ou vai estourar uma tolerância | Para. Volta à fase de conhecimento só para o ponto afetado e termina com um aditamento |
++
++**Revisor independente.** Em perfil alto, nos marcos (o fim de cada pacote de passos do plano), e antes de toda ação irreversível, um agente que não fez o trabalho confere a entrega contra a sentença.
++
++**Portas de aprovação.** Pedem o ok de quem conduz, na hora: o que é irreversível ou sai para fora (produção, envio ao cliente, gravação em dado real) e também o trabalho interno (merge, saída da triagem, fechamento de issue). Ler em produção sem gravar, para medir, pede o ok uma vez, registrado no estado. Quando o material diz que uma porta depende de outra pessoa, o ok continua sendo pedido a quem conduz, que decide se precisa ouvi-la. Se os passos virarem issues, elas seguem o rito da `bunker-fix-bug-copilot`. Esta skill não cria regra de issue.
++
++**Espera do cliente.** O `ESTADO.md` separa o trabalho nosso do que espera o cliente: o quê, de quem e desde quando.
++
++## Fim de cada turno
++
++Um turno é cada resposta que devolve a vez a quem conduz. Antes da confirmação do entendimento, o turno termina na própria caixinha de confirmação, e os arquivos nascem depois dela.
++
++1. Reescrever o `ESTADO.md` e acrescentar ao `HISTORICO.md` o que foi feito, decidido e perguntado. Commitar.
++2. Gerar o prompt da próxima sessão pelo modelo de `references/modelos.md`. Ele traz os caminhos dos arquivos, e nunca um segredo.
++3. Terminar pela `bunker-confetes-ou-perguntas-copilot`: confete se a entrega fechou, caixinha se falta uma decisão de quem conduz.
++
++## Encerramento
++
++Começa quando todos os itens essenciais do critério de pronto têm evidência.
++
++1. Conferir o critério de pronto final, item por item.
++2. Revisão curta no histórico, com quatro perguntas: o que deveria acontecer, o que aconteceu, por que houve diferença, e o que manter e o que mudar.
++3. Cada lição é escrita como regra, pergunta ou item de checklist proposto para esta skill. Lição sem mudança escrita fica registrada como não incorporada.
++4. Propor os itens do especialista que pegaram algo e as perguntas que chegaram tarde. Quem conduz decide se entram no plugin por PR.
++5. Somar no histórico: perguntas feitas depois da sentença, aditamentos e passos reabertos.
++
++## O que esta skill não faz
++
++- Não cria rótulo, etapa nem regra de issue: isso é da `bunker-fix-bug-copilot` e da `bunker-wsjf-copilot`.
++- Não monta relatório ao cliente: isso é da `bunker-repo-pulse-copilot`.
++- Não conserta defeito já reportado: isso é da `bunker-fix-bug-copilot`.
++- Não explica a Bunker nem os sistemas da casa: isso é da `bunker-onboarding-copilot`.
++- Não explica o domínio por conta própria. Explica sob demanda, quando quem conduz não entende uma pergunta ou um passo.
+diff --git a/skills/bunker-lighthouse-copilot/references/checagem-de-cobertura.md b/skills/bunker-lighthouse-copilot/references/checagem-de-cobertura.md
+new file mode 100644
+index 0000000..72c06fe
+--- /dev/null
++++ b/skills/bunker-lighthouse-copilot/references/checagem-de-cobertura.md
+@@ -0,0 +1,161 @@
++# Checagem de cobertura
++
++Roda antes da emissão da sentença. Responde a uma pergunta: o que todo trabalho deste tipo precisa ter e ainda não tem?
++
++Funciona para qualquer projeto em três camadas: **(1)** as perguntas universais, que valem para todo trabalho; **(2)** as lentes pela natureza do trabalho, que todo projeto combina; **(3)** os itens do especialista do domínio, gerados na hora. A profundidade de cada camada segue o perfil do projeto (`perfil-do-projeto.md`).
++
++## Rastreio da origem
++
++Tudo o que vai ser requisito leva a fonte e o grau de confiança:
++
++| Confiança | Quando |
++|---|---|
++| visto | conferido no ambiente, no dado ou na tela |
++| dito por quem faz | quem executa o trabalho no dia a dia disse |
++| dito por gestor | quem gerencia disse, sem ver na prática |
++| só documentado | está num documento, e ninguém confirmou |
++| inferido | conclusão do Claude, marcada como premissa |
++
++Decisão que alguém de fora já tomou, como uma arquitetura ou um prazo, entra como restrição, com a fonte, e quem conduz a confirma no entendimento. Quando duas fontes discordam, o conflito é levado a quem conduz como pergunta, e a versão mais conveniente nunca é escolhida por conta própria.
++
++## Regras da checagem
++
++- **O** é obrigatório em todo trabalho. **T** depende do tipo.
++- Primeiro procurar a resposta no material que já existe. O padrão é responder pelo material ou assumir. Só vai para a fila de perguntas o que muda escopo, custo ou risco.
++- Item técnico que quem conduz não domina é verificado pelo Claude, no ambiente ou na documentação, com a recomendação registrada.
++
++Situação de cada item:
++
++| Situação | Quando |
++|---|---|
++| respondido | o material responde, com o trecho |
++| respondido em parte | o material responde uma parte; o resto segue em outra situação |
++| assumido | premissa, confirmada em bloco na emissão da sentença. Inclui a recomendação de desenho que o Claude propõe |
++| verificado | o Claude conferiu no ambiente ou na documentação |
++| em verificação | o Claude ainda vai conferir |
++| pergunta | está na fila para quem conduz |
++| fora de escopo | decidido que não entra |
++| não se aplica | item **T**, ou lente, que não vale para este trabalho |
++| condicional | lente ou item que só entra se uma resposta pedir |
++
++Na emissão da sentença, nenhum item fica em "pergunta" ou "em verificação".
++
++## Camada 1: perguntas universais
++
++### Objetivo e valor
++- **O** Que problema de negócio isso resolve, e o que acontece se nada for feito?
++- **O** Que número ou situação deve mudar, e quanto?
++- **O** Até quando precisa estar funcionando, e por que nessa data? Regra: a data prometida nunca vem antes do fim da estimativa.
++- **O** Como vamos saber, um mês depois, que deu certo?
++- **O** O cliente declarou algum objetivo próprio (aprender, ganhar autonomia, reduzir custo)? Ele será atendido? Se não for, a sentença diz.
++
++### Usuários e processo real
++- **O** Quem vai usar no dia a dia? Quantas pessoas, em que papel?
++- **O** Qual foi o último caso real, do começo ao fim? Quem fez o quê? Pedir o caso concreto, e não a descrição de como deveria ser. Se o material não descreve nenhum caso real, este item conta como risco e vai para a fila, ou para o questionário ao cliente.
++- **O** O que dá errado hoje, e com que frequência?
++- **O** Quais são as exceções, o caso estranho que acontece uma vez por mês?
++- **O** Por onde as pessoas realmente falam com o cliente e trabalham fora do sistema (WhatsApp, e-mail pessoal, telefone, planilha)? No Brasil, o WhatsApp costuma ser o principal canal de venda e de atendimento, e é o que mais se esquece.
++- **O** Alguma fala de especialista, numa reunião ou transcrição, ainda não foi escrita como item?
++
++### Dados
++- **O** De onde vêm os dados, quem é o dono e quanto volume tem?
++- **O** Em que estado estão: duplicados, campos vazios, formatos diferentes, tamanhos de campo? Abrir e medir antes de estimar.
++- **T** Precisa levar histórico? De quanto tempo?
++- **O** Tem dado pessoal? Qual a base legal na LGPD, quem pode ver, por quanto tempo se guarda?
++
++### Ambiente, integrações e donos
++- **O** Que sistemas e ferramentas já existem e serão tocados?
++- **O** O que o escopo liga ou desliga, e em que estado isso está hoje? Conferir no ambiente, e não pelo que alguém lembra.
++- **O** Que acessos e credenciais o trabalho precisa, e como se obtém cada um?
++- **O** Depois da entrega, em nome de quem ficam rotinas, integrações e credenciais?
++- **T** Que automações já rodam e podem conflitar?
++- **T** O que acontece se uma integração cair: quem é avisado e o que se refaz?
++
++### Restrições
++- **O** Qual o orçamento ou o limite de horas, e como as horas são consumidas?
++- **O** Há regras legais, contratuais ou de compliance?
++- **T** Há padrão de marca, linguagem ou identidade visual?
++- **T** Há janela de implantação, congelamento ou dependência de outro projeto?
++
++### Não-funcionais
++- **O** Quem não pode ver o quê (segurança e perfis)?
++- **T** Quão rápido precisa responder, e com quantos usuários ao mesmo tempo?
++- **T** Precisa funcionar no celular, em outro idioma, com acessibilidade?
++- **T** Que disponibilidade é aceitável, e quem dá suporte depois?
++
++### Pessoas
++- **O** O material cita alguém de fora que pode travar o trabalho (TI, jurídico, diretoria, o cliente)? O que o material cita entra na sentença, e a falta de citação dispensa a pergunta.
++
++### Aceite e fora de escopo
++- **O** Como vamos testar cada item para dizer "está pronto"? Escrever como "quando isto acontecer, então aquilo", com o caminho de erro ("se isto falhar, então...").
++- **O** Todo item listado tem esforço estimado e critério de aceite? Item "incluído" sem horas é escopo sem dono.
++- **O** O que fica explicitamente fora desta entrega, e o que acontece com pedidos depois do aceite?
++- **O** Em que ordem as partes acontecem?
++
++### Estimativa
++- **O** Quanto leva, em faixa (mínimo, provável e máximo), comparado com trabalho parecido?
++- **O** Quanto do prazo é esforço nosso e quanto é espera pelo cliente (acessos, dados, respostas, aprovações)? As duas coisas são estimadas separadas.
++
++### Riscos e incertezas
++- **O** O que precisa ser verdade para isso funcionar?
++- **O** Qual a maior incerteza hoje, e como ela se resolve primeiro?
++- **O** Do que dependemos do cliente ou de terceiros (acesso, dado, aprovação, fornecedor, outro sistema), e até quando? Dependência de terceiro entra nos riscos da sentença.
++
++## Camada 2: lentes pela natureza do trabalho
++
++Todo projeto combina poucas naturezas de trabalho, normalmente de uma a quatro. Identificar quais estão presentes e aplicar as perguntas de cada uma. Uma lente pode ficar condicional, ativada depois por uma resposta (por exemplo, a de comprar, se a solução exigir um fornecedor). Uma integração entre sistemas, por exemplo, combina as lentes 1, 2 e 3; um site institucional, 1 e 4; um estudo de viabilidade, 5.
++
++1. **Construir algo novo** (sistema, site, app, automação, espaço)
++   - O que já existe que isto substitui, toca ou pode quebrar?
++   - Onde é testado antes de valer, e quem testa?
++   - Que normas, padrões técnicos ou guias oficiais se aplicam?
++   - Quem mantém depois da entrega, e com que conhecimento?
++2. **Mover ou integrar dados e sistemas**
++   - De onde vem e para onde vai cada dado? Em que frequência e volume?
++   - Quem é dono de cada ponta e de cada credencial?
++   - O que acontece quando falha: quem é avisado e o que se refaz?
++3. **Mudar como as pessoas trabalham** (processo, adoção, treinamento)
++   - Quem muda o quê no dia a dia?
++   - Quem perde ou ganha com a mudança, e quem pode resistir?
++   - Como as pessoas aprendem, e quem dá suporte nas primeiras semanas?
++   - Como vamos saber que as pessoas adotaram de fato?
++4. **Produzir conteúdo ou comunicação** (documento, relatório, campanha, apresentação, e-mail, página)
++   - Quem lê, e que decisão ou ação deve tomar depois de ler?
++   - Quem escreve, que aprovação o texto precisa e em quanto tempo?
++   - De onde vem cada número e cada afirmação?
++   - Que tom, marca e canal? O que não pode aparecer?
++5. **Analisar, pesquisar ou recomendar**
++   - Que decisão a análise vai apoiar?
++   - Que fontes são aceitas como prova?
++   - Quanto de profundidade cabe no prazo, e qual nível de certeza basta?
++   - Como a incerteza deve aparecer no resultado?
++6. **Comprar ou contratar** (fornecedor, licença, serviço)
++   - Qual o critério de escolha, e que aprovação a compra precisa?
++   - O que o contrato garante: prazo, suporte, multa, saída?
++   - O que acontece se o fornecedor falhar, e quem cuida da relação?
++7. **Entregar em data fixa** (lançamento, entrada em produção, evento, treinamento presencial)
++   - O que precisa estar pronto, testado e com acesso 48 h antes?
++   - Qual o plano B se algo falhar no dia?
++   - O que acontece se a data escorregar?
++8. **Trabalhar em ambiente regulado ou com dado sensível** (saúde, financeiro, jurídico, setor público, ou dado sensível no sentido da LGPD, art. 5º, II)
++   - Que norma ou lei se aplica? A resposta vem de pesquisa do Claude, com a fonte, e quem conduz confirma.
++   - Que registro ou evidência uma auditoria vai pedir?
++   - O que precisa de aprovação jurídica ou de segurança antes de seguir?
++9. **Substituir ou desligar algo que existe** (migração, troca de sistema, descontinuação)
++   - Quem ainda usa o que vai sair, e o que depende dele?
++   - Os dois vão conviver por quanto tempo? Como se volta atrás?
++   - Quando o antigo é desligado?
++
++Parte do projeto que não cabe em nenhuma lente indica uma natureza nova: o Claude a nomeia, escreve as perguntas dela pela camada 3 e a propõe como lente nova no encerramento.
++
++## Camada 3: itens do especialista, gerados na hora
++
++Para o domínio do projeto, o Claude se pergunta: **o que um especialista sênior neste domínio sempre confere antes de começar?** E gera de 5 a 10 itens, com três regras:
++
++- **Cada item cita de onde vem:** documentação oficial, norma, guia do fornecedor ou boa prática publicada. Fonte citada de memória, sem conferir, leva "premissa do Claude, a conferir" e fica em verificação. O que não tiver fonte leva "premissa do Claude" e não é tratado como fato.
++- **Quem conduz só responde o que é de negócio.** O resto o Claude verifica e recomenda.
++- **No encerramento, os itens que pegaram algo são propostos** para entrar nesta skill por PR, junto com as perguntas que chegaram tarde. Quem conduz decide.
++
++Formato de cada item:
++
++> **Domínio: evento presencial.** Capacidade do local contra o número de inscritos, com a margem de quem aparece sem inscrição. Fonte: norma de segurança do local, a conferir. Situação: em verificação; quem conduz pede o número ao local.
+diff --git a/skills/bunker-lighthouse-copilot/references/modelos.md b/skills/bunker-lighthouse-copilot/references/modelos.md
+new file mode 100644
+index 0000000..970c538
+--- /dev/null
++++ b/skills/bunker-lighthouse-copilot/references/modelos.md
+@@ -0,0 +1,134 @@
++# Modelos
++
++Os três arquivos moram em `docs/lighthouse/`, no repositório do projeto, e são commitados. Datas em DD/MM/AAAA. Nada de credencial, token ou senha em nenhum deles.
++
++## SENTENCA.md
++
++```markdown
++# Sentença: <nome do trabalho>
++
++Emitida em DD/MM/AAAA. Quem conduz: <nome>.
++
++## Resultado
++<o que muda, para quem e até quando, em uma ou duas frases verificáveis>
++
++## Critério de pronto
++| Item | Como se prova | Essencial ou desejável |
++|---|---|---|
++| <item> | quando <isto acontecer>, então <aquilo>; se <falhar>, então <...> | essencial |
++
++## Tolerâncias
++| Aspecto | Mínimo | Provável | Máximo |
++|---|---|---|---|
++| Prazo | | | |
++| Esforço (horas nossas) | | | |
++| Escopo | <o que pode sair sem afetar o resultado> | | <o que pode entrar> |
++
++Espera estimada pelo cliente, à parte do esforço: <faixa>.
++
++## Fora de escopo
++- <item>: <por quê>, decidido em DD/MM por <quem>.
++
++## Premissas
++| Premissa | Fonte e confiança | O que a invalida | Confirmar até |
++|---|---|---|---|
++
++## Aceite do cliente
++Só quando o trabalho é para um cliente. Não bloqueia a execução.
++
++Situação: <pendente | obtido> · enviado em DD/MM/AAAA por <quem conduz> · aceito em DD/MM/AAAA por <quem, do lado do cliente>
++
++## Decisões
++| Data | Pergunta | Escolha | Alternativa descartada |
++|---|---|---|---|
++
++## Quem pode travar
++<só quem a transcrição cita ou quem conduz informou; se ninguém, "ninguém citado">
++
++## Riscos
++<do pre-mortem, quando houve: risco e o que se faz para evitar>
++
++## Maior incerteza
++<qual é, e o passo que a resolve primeiro>
++
++## Plano
++Muda sem aditamento, desde que fique dentro das tolerâncias.
++
++| # | Passo | Pacote | Depende de | Pronto quando | Esforço (h) | WSJF |
++|---|---|---|---|---|---|---|
++
++Só o próximo pacote vem detalhado em passos. Os seguintes ficam numa linha cada e são detalhados quando chega a vez deles. O fim de cada pacote é um marco.
++
++## Aditamentos
++Só para mudar resultado, critério de pronto ou tolerância.
++
++| Data | O que mudou | Por quê | Decidido por |
++|---|---|---|---|
++```
++
++## ESTADO.md
++
++Nasce na confirmação do entendimento. Cabe numa tela. Reescrito inteiro a cada turno, nunca acumulado.
++
++```markdown
++# Estado: <nome do trabalho>
++
++Fase: <conhecimento | execução>. Atualizado em DD/MM/AAAA, HHhMM.
++
++**Onde estamos:** <uma frase>
++**Próximo passo:** <o passo e por que ele vem agora>
++**Falta:** <passos abertos, em uma linha cada>
++
++**Esperando o cliente**
++| O quê | De quem | Desde |
++|---|---|---|
++
++**Esperando quem conduz:** <decisão ou ok pendente, se houver>
++**Não refazer:** <o que já está feito e pode parecer pendente, com a evidência>
++```
++
++Na fase de conhecimento, o estado traz também:
++
++```markdown
++**Perguntas abertas:** <as próximas da fila, em ordem>
++**Premissas a confirmar na emissão da sentença:** <lista curta>
++**Em verificação pelo Claude:** <o que falta conferir>
++```
++
++## Histórico
++
++Arquivo `HISTORICO.md`. Só acumula, do mais novo para o mais antigo.
++
++```markdown
++## DD/MM/AAAA
++- **Feito:** <passo> · evidência: <link, id ou print>
++- **Decidido:** <decisão> · por <quem>
++- **Perguntado:** <pergunta> · resposta: <escolha> · <antes ou depois da sentença>
++- **Conversa nova:** <fonte> · confirmou / acrescentou / contradisse <o quê>
++- **Incidente:** <pequeno, médio ou grande> · <o que houve e o que se fez>
++- **Reaberto:** <passo> · <por quê>
++```
++
++No encerramento, o histórico ganha uma seção final:
++
++```markdown
++## Encerramento DD/MM/AAAA
++**O que deveria acontecer:** <...>
++**O que aconteceu:** <...>
++**Por que houve diferença:** <...>
++**O que manter e o que mudar:** <...>
++
++Perguntas depois da sentença: <n> · aditamentos: <n> · passos reabertos: <n>
++Lições propostas para a skill: <lista, ou "nenhuma">
++```
++
++## Prompt da próxima sessão
++
++Gerado no fim de cada turno. Traz os caminhos dos arquivos, sem copiar o que está neles.
++
++```text
++Continuar <nome do trabalho> com a bunker-lighthouse-copilot, na fase de <conhecimento | execução>.
++Leia primeiro docs/lighthouse/ESTADO.md e, se já existir, docs/lighthouse/SENTENCA.md, em <repositório ou pasta>, branch <branch>. O histórico só se lê se o estado mandar.
++Próximo passo: <o mesmo do ESTADO.md>.
++Portas de aprovação: <o que espera o ok de quem conduz>.
++```
+diff --git a/skills/bunker-lighthouse-copilot/references/perfil-do-projeto.md b/skills/bunker-lighthouse-copilot/references/perfil-do-projeto.md
+new file mode 100644
+index 0000000..e86ed9a
+--- /dev/null
++++ b/skills/bunker-lighthouse-copilot/references/perfil-do-projeto.md
+@@ -0,0 +1,35 @@
++# Perfil do projeto
++
++O perfil decide a profundidade do levantamento e quais práticas da execução entram. O Claude infere os quatro eixos pelo material e mostra o resultado numa linha, junto do entendimento. Não é uma pergunta à parte.
++
++Os eixos vêm do modelo do diamante de Shenhar e Dvir (*Reinventing Project Management*, 2007). Cada eixo vale baixo, médio (entre os dois) ou alto.
++
++| Eixo | Baixo | Alto |
++|---|---|---|
++| Novidade | quem executa já fez trabalho igual | quem executa nunca fez trabalho assim |
++| Tecnologia | ferramenta ou técnica que quem executa conhece | ferramenta nova, uso dela que nunca fizemos, ou sistema que ainda não sabemos qual é |
++| Complexidade | uma peça, numa área | vários sistemas ou várias áreas |
++| Ritmo | prazo com folga | data fixa próxima, ou prazo pedido menor que a estimativa provável |
++
++A novidade se mede para quem executa, porque é a razão de existir desta skill. Se a Bunker já fez trabalho igual, o eixo continua o mesmo, e esse trabalho entra como referência para a estimativa e para os itens do especialista.
++
++**Perfil alto** quer dizer novidade, tecnologia ou complexidade alta. Ritmo urgente muda o levantamento, mas sozinho não conta como perfil alto.
++
++## O que muda com o perfil
++
++Quando mais de um eixo está alto, valem as linhas de todos eles.
++
++| Perfil | Levantamento | Execução |
++|---|---|---|
++| Baixo nos quatro eixos | Modo leve: perguntas universais respondidas pelo material ou assumidas, e a lente principal. Premissa explícita vale mais que mais uma pergunta | Evidência em todo passo |
++| Novidade ou tecnologia alta | Incerteza de ferramenta resolvida com teste curto antes do desenho; de 8 a 10 itens do especialista; pre-mortem antes da sentença | Maior incerteza resolvida cedo; revisor independente nos marcos |
++| Complexidade alta | Dependências entre as áreas mapeadas; uma lente por área envolvida; pre-mortem antes da sentença | Marcos mais frequentes; revisor independente nos marcos |
++| Ritmo urgente | Fora de escopo explícito e cortado cedo | Tolerâncias apertadas e escalação cedo |
++
++Ação irreversível pede pre-mortem e revisor independente em qualquer perfil.
++
++## Linha de perfil no entendimento
++
++Exemplo:
++
++> Perfil: novidade alta (nunca fizemos este tipo de entrega), tecnologia média, complexidade baixa (um sistema só), ritmo normal.
+diff --git a/skills/bunker-lighthouse-copilot/references/regra-de-parada.md b/skills/bunker-lighthouse-copilot/references/regra-de-parada.md
+new file mode 100644
+index 0000000..074baa9
+--- /dev/null
++++ b/skills/bunker-lighthouse-copilot/references/regra-de-parada.md
+@@ -0,0 +1,37 @@
++# Regra de parada
++
++A completude do levantamento depende mais de quando se decide parar do que da experiência de quem levanta. Quem para por sensação para cedo demais. Por isso a parada tem regra.
++
++## As seis condições
++
++O levantamento acaba quando as seis valem ao mesmo tempo:
++
++1. **Cobertura fechada.** Todo item **O**, todo **T** aplicável, as lentes presentes e os itens do especialista estão respondidos, assumidos, verificados ou fora de escopo. Nenhum está em "pergunta" ou "em verificação".
++2. **Quatro riscos tratados.** Vão usar, conseguem usar, dá para construir, faz sentido para o negócio: cada um com uma frase de evidência ou com a premissa a testar.
++3. **Saturação.** As duas últimas perguntas ou fontes não trouxeram nada que mude o escopo.
++4. **Quem conduz confirmou** o entendimento e o fora de escopo.
++5. **Teste do executor.** Um agente que não participou do levantamento, lendo só a sentença, consegue estimar em faixa e começar sem nova pergunta de negócio.
++6. **Maior incerteza nomeada,** com o plano para resolvê-la logo depois do que destrava o caminho crítico.
++
++**Proporção.** Em trabalho pequeno e fácil de desfazer, uma premissa explícita vale mais que mais uma pergunta. Em trabalho caro de desfazer (modelo de dados, integração, migração), pergunta-se até a saturação.
++
++## Antes de emitir
++
++- Em perfil alto, ou com ação irreversível no plano: pre-mortem. "Daqui a X semanas isto fracassou; por quê?" Listar as causas concretas e levar as principais para a sentença como risco, com o que se faz para evitar cada uma.
++- Conferir que toda inferência usada como requisito cita o trecho da fonte ou leva o rótulo "premissa".
++- Conferir que toda recomendação aceita trouxe o motivo e a alternativa mais forte.
++- Mostrar as premissas ainda não confirmadas a quem conduz, numa caixinha só.
++
++## Antipadrões
++
++| Antipadrão | Por que evitar |
++|---|---|
++| Aceitar a solução como requisito ("quero um campo") | Esconde o problema e trava a melhor solução |
++| Perguntar opinião ou futuro ("vocês usariam?") | As pessoas descrevem o trabalho de um jeito e fazem de outro. Pergunta-se o último caso real |
++| Formulário com vinte perguntas de uma vez | Mais abandono e respostas piores |
++| Parar por sensação ("já entendi") | Para cedo demais |
++| Tratar inferência do Claude como fato | Boa parte das inferências não se confirma |
++| Escopo sem fora de escopo e sem critério de aceite | No fim, o aceite depende de opinião |
++| Estimar sem abrir o ambiente e os dados | A estimativa nasce errada |
++| Prometer data única e misturar esforço com espera pelo cliente | O calendário passa a ser dominado pela espera, e ninguém vê |
++| Começar a construir antes da sentença | O código passa a definir o escopo, e a sentença só descreve o que já foi feito |
+-- 
+2.43.0
+

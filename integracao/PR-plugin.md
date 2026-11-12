@@ -1,47 +1,75 @@
-# Pacote do PR para o plugin `bunker-claude-skills`
+# PR da Lighthouse no plugin `bunker-claude-skills`
 
-Preparado em 12/11/2026. **Nada foi enviado ao repositório do plugin:** o PR espera o ok do Thiago.
+Preparado em 12/11/2026. **Pronto para abrir.** A sessão do Claude tem só leitura no repositório do plugin, então o push e o PR ficam com quem tem acesso de escrita.
 
-## O que entra
+## O que está pronto
 
-| Origem neste repositório | Destino no plugin |
-|---|---|
-| `skills/bunker-lighthouse-copilot/` (SKILL.md e references/) | `skills/bunker-lighthouse-copilot/` |
-| `evals/rota-lighthouse/` (sem o `RESULTADO.md`) | `evals/rota-lighthouse/` |
-| `testes/comportamento/generico-clinica/` | opcional, como referência de teste manual |
+- `lighthouse-1.117.0.patch`: um commit sobre a `main` do plugin em `c2b94d8` (versão 1.116.0, de 10/11/2026), com 23 arquivos:
+  - `skills/bunker-lighthouse-copilot/`: o `SKILL.md` e os quatro `references/`;
+  - `evals/rota-lighthouse/`: os 6 evals de roteamento;
+  - a linha da skill no README, na seção "Começar o dia, e saber o que fazer agora", logo abaixo da `bunker-onboarding-copilot`;
+  - a `version` em `.claude-plugin/plugin.json` e em `.claude-plugin/marketplace.json`, de 1.116.0 para 1.117.0.
+- Conferido numa cópia nova da `main` do plugin:
+  - o patch aplica sem conflito;
+  - `python3 scripts/check-plugin.py --base origin/main` dá "tudo certo": a skill entrou, a versão subiu e o marketplace está em sincronia;
+  - nenhuma menção à Metax nos arquivos que entram.
 
-**Não entra:** `testes/comportamento/metax-jornada/`, `docs/` e qualquer coisa da Metax.
+**Não entra:** `testes/comportamento/`, `docs/` e nada da Metax.
 
-## Mudanças em arquivos do plugin
+## Como abrir o PR
 
-1. **README, seção "Começar o dia, e saber o que fazer agora"**, logo abaixo da linha da `bunker-onboarding-copilot`:
+Num clone do plugin com acesso de escrita, a partir da `main` atualizada:
 
-```markdown
-| `bunker-lighthouse-copilot` | Começar e conduzir um trabalho novo que você ainda não domina, a partir de uma transcrição colada. Na fase de conhecimento: entendimento confirmado, uma pergunta por vez, checagem de cobertura e a sentença, o escopo único do trabalho. Na de execução: caminho crítico, depois a maior incerteza, WSJF de desempate, e sentença, estado e histórico no repositório do projeto. |
+```bash
+git checkout main && git pull
 ```
-
-2. **Versão:** subir a `version` em `.claude-plugin/plugin.json` e em `.claude-plugin/marketplace.json` (as duas precisam bater). Na cópia testada, de 1.116.0 para 1.117.0; no PR, a próxima versão a partir da `main` do dia.
-
-3. **Descrição do plugin** (`plugin.json` e `marketplace.json`), opcional: acrescentar à lista "início de trabalho novo com escopo fechado".
-
-## Rito do PR (README do plugin)
 
 ```bash
 git checkout -b feat/lighthouse
 ```
 
 ```bash
+git am /caminho/para/bunker-lighthouse-copilot/integracao/lighthouse-1.117.0.patch
+```
+
+```bash
 python3 scripts/check-plugin.py --base origin/main
 ```
 
-Commit conventional em pt-BR, PR para a `main`.
+```bash
+git push -u origin feat/lighthouse
+```
 
-## O que já foi conferido numa cópia local do plugin 1.116.0
+Se a `main` do plugin tiver subido de versão depois de 12/11, o `git am` vai conflitar nos dois arquivos de `.claude-plugin/`: ajuste para a versão seguinte à da `main` e rode o `check-plugin.py` de novo.
 
-- `check-plugin.py`: a Lighthouse passa (description com 990 caracteres pela conta do script, na versão 2) e o README fica com as 33 skills no catálogo.
-- A trava de versão (`--base`) não rodou, porque a cópia local não tem histórico git. Roda no PR.
-- Os evals de roteamento passaram 6 de 6 (`evals/rota-lighthouse/RESULTADO.md`).
+## Título do PR
 
-## Achado fora do escopo
+feat(lighthouse-copilot) 1.117.0: padrão para começar e conduzir trabalho novo que quem executa ainda não domina
 
-Na mesma checagem, três skills que já existem passam do limite de 1.024 caracteres na `description`, e o script diz que, acima disso, a skill é descartada sem aviso: `bunker-alumni-copilot` (1.030), `bunker-fix-bug-copilot` (1.033) e `bunker-playbook-de-adocao-copilot` (1.042). Na prática, a `bunker-fix-bug-copilot` carregou normalmente no eval `defeito-reportado`, então o script deve estar contando o texto bruto, com aspas e escapes, e a skill não chega a ser descartada. Mesmo assim, a checagem reprova, e o PR da Lighthouse pode acabar barrado por erro alheio. Vale conferir na `main` do plugin antes do PR, porque a cópia instalada aqui pode estar atrás.
+## Texto do PR
+
+```markdown
+## O que é
+
+Skill nova, `bunker-lighthouse-copilot`: o padrão da Bunker para começar e conduzir um trabalho novo que quem executa ainda não domina, a partir da transcrição ou do briefing desse trabalho.
+
+Duas fases, na lógica do processo judicial:
+
+- **Conhecimento:** devolve o entendimento em 3 ou 4 linhas, pergunta só o que muda escopo, custo ou risco (uma por vez, com recomendação), roda a checagem de cobertura em três camadas e emite a sentença, o escopo único do trabalho, com resultado, critério de pronto e tolerâncias.
+- **Execução:** segue o caminho crítico, resolve cedo a maior incerteza, usa o WSJF de desempate, confronta toda conversa nova com a sentença e guarda sentença, estado e histórico junto do projeto.
+
+Usa sem copiar: o formato de pergunta do passo 0 da `bunker-fix-bug-copilot`, a régua da `bunker-wsjf-copilot` e o fecho da `bunker-confetes-ou-perguntas-copilot`. Não cria regra de issue.
+
+## Como foi testada
+
+- Evals de roteamento (`evals/rota-lighthouse/`): 6 de 6 com nota máxima. Carrega para transcrição ou briefing de projeto novo; não carrega para defeito já reportado, "o que eu faço agora" e dúvida sobre a casa.
+- Testes de comportamento com gabarito, em dois casos (um inventado e um real), duas rodadas cada, por agentes que não viram o gabarito.
+- Revisão independente do texto contra as decisões de desenho.
+- `check-plugin.py --base origin/main`: tudo certo.
+
+## Checagens
+
+- [x] `name` igual ao nome da pasta; `description` com 990 caracteres
+- [x] skill no catálogo do README
+- [x] `version` 1.116.0 → 1.117.0 no `plugin.json` e no `marketplace.json`
+```
