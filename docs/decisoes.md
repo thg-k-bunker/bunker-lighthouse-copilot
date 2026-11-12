@@ -1,6 +1,6 @@
 # Decisões da bunker-lighthouse-copilot
 
-Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou.
+Atualizado em 12/11/2026. A pesquisa terminou e as decisões para começar a produção estão fechadas.
 
 ## Fechado
 
@@ -22,6 +22,17 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 | Alcance | A skill cobre qualquer projeto, de qualquer tipo ou domínio, sem lista fechada de tipos. A checagem de cobertura combina perguntas universais, lentes pela natureza do trabalho e itens do especialista gerados na hora, que viram biblioteca com o uso (Thiago, 11/11/2026) |
 | Foco da pesquisa | Um padrão global de levantamento e mapeamento: o que um profissional muito eficiente faz toda vez antes de executar. A Metax é exemplo, não a lista completa dos problemas (Thiago, 11/11/2026) |
 | Portas de aprovação | Ficam as duas: o ok humano no que é irreversível ou sai para fora (produção, cliente, dado real) e também no trabalho interno (merge, saída da triagem, fechamento de issue). Motivo: a skill vai para outras pessoas da Bunker que também não dominam o que estão fazendo, e as portas não foram a causa do retrabalho na Metax (decisão do Thiago, 11/11/2026) |
+| Quem decide | O Thiago é sempre o responsável: decide o escopo e dá os oks das portas de aprovação. A skill não pergunta quem decide, quem paga nem quem assina. Se existir alguém que possa travar o projeto (TI, jurídico, diretoria, o cliente), isso vem na transcrição ou é informado por ele. Terceiro citado na transcrição é registrado na sentença; ausente, não vira pergunta (Thiago, 11/11/2026) |
+| Tolerâncias | A sentença fixa o resultado, o critério de pronto e três tolerâncias, em faixa (mínimo, provável, máximo): **prazo, esforço e escopo**. A qualidade é coberta pelo critério de pronto, em que o essencial tem tolerância zero e o desejável pode flexionar. O plano de passos é revisável dentro das tolerâncias, sem aditamento. Só vira aditamento a mudança de resultado, de critério de pronto ou de tolerância. A escalação é pela **previsão** de estouro, não depois dele. Incidente pequeno: resolvido dentro do passo. Médio: muda o plano sem estourar tolerância. Grande: atinge resultado ou critério de pronto, ou estoura tolerância. Método verificado em [`pesquisa/prince2-tolerancias.md`](pesquisa/prince2-tolerancias.md) (Thiago, 12/11/2026) |
+| Perfil do projeto | O Claude **infere** o perfil (novidade, tecnologia, complexidade e ritmo, Camada 0 do [`padrao-global-levantamento.md`](pesquisa/padrao-global-levantamento.md)) a partir da transcrição e o confirma dentro do entendimento de 3 ou 4 linhas, sem pergunta extra. O perfil define a profundidade do levantamento (Thiago, 12/11/2026) |
+| Formato (D1) | O `SKILL.md` leva só o fluxo: entendimento, perguntas, cobertura, sentença e execução. Em `references/` ficam as perguntas universais, as lentes, a regra de parada e o modelo da sentença, lidos conforme o perfil do projeto (Thiago, 12/11/2026) |
+| Etapas da fase de conhecimento (D2) | Sete, tiradas dos 11 movimentos do [`padrao-global-levantamento.md`](pesquisa/padrao-global-levantamento.md): ler tudo antes de perguntar (1), devolver o entendimento (2), ancorar o resultado com métrica (parte do 3, sem o decisor), separar problema de solução (4), checagem de cobertura (7), uma pergunta por vez (8), regra de parada e sentença (11). Processo real (5), dados e ambiente (6), critério verificável (9) e estimativa em faixa (10) viram itens obrigatórios da checagem de cobertura, sem etapa própria (Thiago, 12/11/2026) |
+| Rastreio da origem (D3) | Leve. Só o que vira requisito leva a fonte e o grau de confiança: visto, dito por quem faz, dito por gestor, só documentado ou inferido. Conflito entre fontes vira pergunta e nunca é resolvido por conveniência. Opcional, sob demanda: um questionário para terceiro responder, quando a resposta mora com o cliente (Thiago, 12/11/2026) |
+| Sentença, estado e histórico (D4) | Três arquivos no repositório do projeto, commitados: `SENTENCA.md` (estável, só muda por aditamento), `ESTADO.md` (cabe numa tela, reescrito a cada ciclo, inclui o que se espera do cliente) e `HISTORICO.md` (só acumula, lido sob demanda). O prompt da próxima sessão sai pronto no fim de cada turno. A `bunker-fechar-turno-copilot` não cobre estado nem prompt, então a Lighthouse é a dona desse formato (Thiago, 12/11/2026) |
+| Práticas da execução (D5) | Proporcionais ao perfil. Sempre: nada é "feito" sem evidência (saída, link ou print); ao humano só se pergunta preferência, valor, restrição ou fato que só ele sabe, e o técnico o Claude pesquisa; o passo que vai estourar a tolerância para e é reavaliado. Só em perfil alto ou ação irreversível: pre-mortem antes da sentença e revisor independente nos marcos. No encerramento: revisão curta de 4 perguntas, e a lição só vale se virar regra, pergunta ou item de checklist. WIP = 1 não é escrito, porque a ordem já é um passo por vez (Thiago, 12/11/2026) |
+| Biblioteca do especialista (D6) | Fica para a v2. Na v1, no encerramento, o Claude propõe os itens que pegaram algo, e o Thiago decide se entram no plugin por PR (Thiago, 12/11/2026) |
+| Métricas (D7) | Sem painel na v1. O histórico registra só três fatos: perguntas feitas depois da sentença, aditamentos e passos reabertos (Thiago, 12/11/2026) |
+| Confete no catch | Na troca da fase de conhecimento para a de execução, a skill solta o confete da `bunker-confetes-ou-perguntas-copilot`, como numa entrega: a sentença emitida é verificável (o arquivo existe no caminho dito). Continua valendo o confete no fim da entrega (Thiago, 12/11/2026) |
 
 ## O que a skill usa sem copiar
 
@@ -35,10 +46,12 @@ Atualizado em 11/11/2026. O desenho ainda está aberto: a pesquisa não terminou
 
 ## Em aberto
 
-- **Fase de execução:** a análise do GitHub da Metax terminou ([`analise/metax-github.md`](analise/metax-github.md)). Falta decidir o que da pesquisa entra na skill.
-- **Padrão global de levantamento:** proposta em [`pesquisa/padrao-global-levantamento.md`](pesquisa/padrao-global-levantamento.md): 11 movimentos, a checagem de cobertura em perguntas de negócio (obrigatórias e por tipo), a regra de parada em 6 condições e 5 métricas. Falta o Thiago decidir o que entra na skill.
+Nenhuma decisão de desenho pendente: as sete da [`sintese-pre-producao.md`](sintese-pre-producao.md) (D1 a D7) foram fechadas em 12/11/2026, todas pela recomendação. O próximo passo é a produção, na ordem da seção 8 da síntese: rascunho do `SKILL.md`, da `description` e dos `references/`, depois os evals de roteamento e o teste de comportamento com a Metax.
+
+Ficam registrados, sem bloquear a produção:
+
 - **Regras de issues para trabalho de projeto:** saem da Lighthouse pela decisão de 11/11/2026 (padrão da Bunker). Os indícios de [`analise/metax-arquivos-locais.md`](analise/metax-arquivos-locais.md), seção 3, ficam como sugestão para a skill dona, se o Thiago quiser levar adiante.
-- **Arquivo de estado e prompt da próxima sessão:** formalizar o que o Thiago fazia à mão na Metax (estado curto no repositório, histórico à parte, prompt gerado no fim do turno), conferindo antes a `bunker-fechar-turno-copilot`.
+- **Ajustes de texto em outros arquivos:** os da seção 6 da síntese (bloco "Pessoas e decisão" do padrão global e o resumo da página Padrão Farol, já superado por este arquivo).
 - **Correções nas skills donas** (fora da Lighthouse, pedem alinhamento com quem decidiu as regras):
   - a `bunker-wsjf-copilot` refaz todas as notas a cada rodada, inclusive as dadas à mão, e isso contradiz "nota dada uma vez";
   - a esteira e0 a e6 da `bunker-fix-bug-copilot` foi feita para defeito e, aplicada a trabalho de projeto, deixou entregas prontas esperando cerca de 7 dias para fechar;
