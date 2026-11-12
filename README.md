@@ -13,6 +13,26 @@ Toda tarefa nova passa por duas fases, na lógica do processo judicial:
 
 O desenho completo e o que ainda está em aberto ficam em [`docs/decisoes.md`](docs/decisoes.md).
 
+## Instalar para uso pessoal
+
+Este repositório é também um plugin do Claude Code, só da sua conta, para usar a skill antes de ela ir para o plugin da Bunker. No Claude Code, num passo:
+
+```
+/plugin install lighthouse --marketplace thg-k-bunker/bunker-lighthouse-copilot
+```
+
+Ou pelo terminal, em dois:
+
+```bash
+claude plugin marketplace add thg-k-bunker/bunker-lighthouse-copilot
+```
+
+```bash
+claude plugin install lighthouse@lighthouse
+```
+
+O repositório é privado: a máquina precisa ter acesso a ele pelo `gh` autenticado, como no plugin da Bunker. Para receber uma versão nova, subir a `version` em `.claude-plugin/plugin.json` e em `.claude-plugin/marketplace.json` e rodar `claude plugin update lighthouse`. Quando a skill entrar no plugin da Bunker, desinstalar este com `claude plugin uninstall lighthouse`, para não haver duas cópias.
+
 ## Onde a skill vai morar
 
 Toda skill da Bunker vive no plugin `bunker-claude-skills`, que é por onde ela chega a quem instalou. Este repositório guarda a pesquisa, as decisões e os rascunhos. A versão final entra no plugin por PR, em `skills/bunker-lighthouse-copilot/`, seguindo o padrão `bunker-<dominio>-copilot` e as checagens do README do plugin.

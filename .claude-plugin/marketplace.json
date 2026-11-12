@@ -1,0 +1,21 @@
+{
+  "name": "lighthouse",
+  "owner": {
+    "name": "Thiago Klock",
+    "url": "https://github.com/thg-k-bunker"
+  },
+  "metadata": {
+    "description": "Marketplace pessoal da Lighthouse, para uso antes de ir para o plugin da Bunker.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "lighthouse",
+      "source": "./",
+      "description": "A bunker-lighthouse-copilot em uso pessoal: começar e conduzir trabalho novo que quem executa ainda não domina.",
+      "version": "0.1.0",
+      "author": { "name": "Thiago Klock" },
+      "keywords": ["bunker", "lighthouse", "projeto", "escopo"]
+    }
+  ]
+}

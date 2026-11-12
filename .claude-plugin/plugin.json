@@ -1,0 +1,12 @@
+{
+  "name": "lighthouse",
+  "version": "0.1.0",
+  "description": "Uso pessoal da bunker-lighthouse-copilot antes de ir para o plugin da Bunker: o padrão para começar e conduzir um trabalho novo que quem executa ainda não domina, com fase de conhecimento, sentença e fase de execução.",
+  "author": {
+    "name": "Thiago Klock"
+  },
+  "homepage": "https://github.com/thg-k-bunker/bunker-lighthouse-copilot",
+  "repository": "https://github.com/thg-k-bunker/bunker-lighthouse-copilot",
+  "license": "UNLICENSED",
+  "keywords": ["bunker", "lighthouse", "projeto", "escopo", "levantamento"]
+}
