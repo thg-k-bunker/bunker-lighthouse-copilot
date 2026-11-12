@@ -83,6 +83,8 @@ A checagem funciona para qualquer projeto em três camadas: **(1)** as perguntas
 - **T** Que disponibilidade é aceitável, e quem dá suporte depois?
 
 ### Pessoas e decisão
+
+> **Superado em 11/11/2026** pela decisão "Quem decide" de [`../decisoes.md`](../decisoes.md): quem conduz o projeto é sempre o responsável, e a skill não pergunta quem decide, paga ou assina. Na skill, este bloco virou "Pessoas", em `skills/bunker-lighthouse-copilot/references/checagem-de-cobertura.md`.
 - **O** Quem decide o escopo e quem assina o aceite? Uma pessoa. *(o aceite formal nunca veio)*
 - **O** Quem paga, e é a mesma pessoa que decide? *(decisor comercial só mapeado em 20/10)*
 - **O** Quem pode travar o projeto se não for ouvido (TI, jurídico, diretoria)?
@@ -186,7 +188,7 @@ O levantamento acabou quando as seis condições valem:
 1. **Cobertura fechada:** todo item O, todo T aplicável, as lentes presentes e os itens do especialista estão respondidos, assumidos ou fora de escopo.
 2. **Quatro riscos tratados:** cada um com uma frase de evidência ou com a premissa a testar.
 3. **Saturação:** as duas últimas perguntas ou fontes não trouxeram nada que mude o escopo.
-4. **Decisor confirmou** o entendimento e o fora de escopo.
+4. **Decisor confirmou** o entendimento e o fora de escopo. *(Na skill: "quem conduz confirmou", pela mesma decisão.)*
 5. **Teste do executor:** alguém que não participou consegue estimar em faixa e começar sem nova pergunta de negócio.
 6. **Maior incerteza nomeada,** com o plano para resolvê-la primeiro. É ela que abre o caminho crítico da execução.
 
