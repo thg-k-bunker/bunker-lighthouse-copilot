@@ -2,26 +2,23 @@
 
 Atualizado em 12/11/2026.
 
-**Onde estamos:** a skill está na `main` deste repositório (versão 3, mais a decisão do aceite do cliente). O PR no plugin está pronto como patch em `integracao/`, conferido contra a `main` do plugin; falta só alguém com acesso de escrita abrir.
+**Onde estamos:** a skill está pronta e testada na `main` deste repositório, que também é um plugin pessoal do Claude Code (`lighthouse` 0.1.0, só da conta do Thiago). Agora é a fase de uso: instalar no PC do Thiago, usar num trabalho real e ajustar.
 
-**O que foi feito enquanto você estava fora**
-- Rascunho da skill (`skills/bunker-lighthouse-copilot/`) com 504 linhas, contando o `SKILL.md` e os quatro `references/`.
-- Revisão independente: 3 bloqueadores e 9 pontos importantes, todos corrigidos.
-- Evals de roteamento (`evals/rota-lighthouse/`): 6 de 6, na versão 1 e na 2.
-- Testes de comportamento (`testes/comportamento/`), duas rodadas cada:
-  - Clínica: 10 de 10 nas duas rodadas, com a fila caindo de 9 perguntas para 6.
-  - Metax: na v2, 8 itens inteiros, 3 em parte e 1 de fora, com a fila caindo de 12 perguntas para 10.
-- Pacote do PR para o plugin (`integracao/PR-plugin.md`), com a checagem oficial aprovada numa cópia local.
-- Conferências: zero achados no detector da `bunker-copy-copilot`, nenhum termo da Metax na skill, nenhum termo proibido da marca.
+**Próximo passo:** terminar a instalação no PC do Thiago (Windows, PowerShell).
+- O `gh` já está logado como `thg-k-bunker`, com acesso a repositório.
+- Falta o Claude Code de terminal. O comando `irm https://claude.ai/install.ps1 | iex` roda sem mostrar nada, e isso é normal. Depois dele: abrir um PowerShell novo e rodar `claude --version`. Se não for reconhecido, conferir `Test-Path "$env:USERPROFILE\.local\bin\claude.exe"`: com `True`, falta pôr essa pasta no PATH do usuário; com `False`, instalar com `winget install Anthropic.ClaudeCode`.
+- Com o `claude` funcionando: `claude plugin marketplace add thg-k-bunker/bunker-lighthouse-copilot` e `claude plugin install lighthouse@lighthouse`. Pelo app, a alternativa é `/plugin install lighthouse --marketplace thg-k-bunker/bunker-lighthouse-copilot` numa sessão de código.
 
-**Esperando você**
-1. ~~Aceite do cliente~~: decidido em 12/11/2026. O escopo vai ao cliente na emissão da sentença, e o aceite não bloqueia a execução.
-2. ~~Merge na `main`~~: feito em 12/11/2026.
-3. **Abrir o PR no `bunker-claude-skills`**, com o patch e os comandos de `integracao/PR-plugin.md`. A sessão do Claude só tem leitura no plugin.
-4. ~~Achado das descriptions acima do limite~~: já corrigido na `main` do plugin.
-5. **Correções nas skills donas, para o Guilherme:**
-   - a wsjf refaz as notas a cada rodada;
-   - a esteira de defeito foi aplicada a trabalho de projeto;
-   - a repo-pulse não separa a espera do cliente (`docs/decisoes.md`).
+**Depois da instalação**
+1. Usar a skill num trabalho real e anotar o que precisar ajustar.
+2. A cada mudança, subir a `version` em `.claude-plugin/plugin.json` e em `.claude-plugin/marketplace.json`; o Thiago atualiza com `claude plugin update lighthouse`.
+3. Quando quiser compartilhar com a Bunker: o PR está pronto em `integracao/` (patch e guia). Ao entrar no plugin da Bunker, desinstalar o pessoal.
 
-**Não refazer:** os testes v2 já rodaram. A v3 só esclarece regras e não mudou a `description`, então os evals continuam valendo.
+**Para conversar com o Guilherme, sem pressa:** a wsjf refaz as notas a cada rodada; a esteira de defeito foi aplicada a trabalho de projeto; a repo-pulse não separa a espera do cliente (`docs/decisoes.md`).
+
+**Onde está cada coisa**
+- A skill: `skills/bunker-lighthouse-copilot/`.
+- As decisões, todas fechadas: `docs/decisoes.md`.
+- Os testes: `evals/rota-lighthouse/` (roteamento, 6 de 6) e `testes/comportamento/` (dois casos, duas rodadas).
+
+**Não refazer:** pesquisa, decisões de desenho, testes v1 e v2, merge na `main`, patch do PR e plugin pessoal. Está tudo feito e no repositório.
