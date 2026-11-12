@@ -1,28 +1,32 @@
 # Perfil do projeto
 
-O perfil decide a profundidade do levantamento e quais práticas da execução entram. O Claude infere os quatro eixos pela transcrição e confirma numa linha, dentro do entendimento. Não é uma pergunta à parte.
+O perfil decide a profundidade do levantamento e quais práticas da execução entram. O Claude infere os quatro eixos pelo material e mostra o resultado numa linha, junto do entendimento. Não é uma pergunta à parte.
 
-Os eixos vêm do modelo do diamante de Shenhar e Dvir (*Reinventing Project Management*, 2007).
+Os eixos vêm do modelo do diamante de Shenhar e Dvir (*Reinventing Project Management*, 2007). Cada eixo vale baixo, médio ou alto.
 
 | Eixo | Baixo | Alto |
 |---|---|---|
-| Novidade | já fizemos igual, para este cliente ou outro | resultado novo para o cliente e para nós |
-| Tecnologia | ferramenta ou técnica conhecida de quem executa | ferramenta nova, ou uso dela que nunca fizemos |
-| Complexidade | uma peça | vários sistemas ou várias áreas |
-| Ritmo | prazo normal | urgente |
+| Novidade | quem executa, ou a Bunker, já fez trabalho igual | resultado novo para quem executa e para a Bunker |
+| Tecnologia | ferramenta ou técnica que quem executa conhece | ferramenta nova, uso dela que nunca fizemos, ou sistema que ainda não sabemos qual é |
+| Complexidade | uma peça, numa área | vários sistemas ou várias áreas |
+| Ritmo | prazo com folga | data fixa próxima, ou prazo pedido menor que a estimativa provável |
 
-Para a Bunker, o eixo que mais pesa é a novidade para nós: é a razão de existir desta skill.
+Para a Bunker, o eixo que mais pesa é a novidade: é a razão de existir desta skill.
+
+**Perfil alto** quer dizer novidade, tecnologia ou complexidade alta. Ritmo urgente muda o levantamento, mas sozinho não conta como perfil alto.
 
 ## O que muda com o perfil
 
+Quando mais de um eixo está alto, valem as linhas de todos eles.
+
 | Perfil | Levantamento | Execução |
 |---|---|---|
-| Baixo nos quatro eixos | Modo leve: perguntas universais obrigatórias e uma lente. Premissa explícita vale mais que mais uma pergunta | Evidência em todo passo |
-| Novidade ou tecnologia alta | Toda incerteza de ferramenta é resolvida com um teste curto antes do desenho; mais itens do especialista; maior incerteza resolvida primeiro; pre-mortem antes da sentença | Revisor independente nos marcos |
-| Complexidade alta | Donos e dependências de cada área mapeados; uma lente por área envolvida; pre-mortem antes da sentença | Marcos mais frequentes; revisor independente nos marcos |
-| Ritmo urgente | Fora de escopo explícito e cortado cedo; quem conduz disponível durante todo o levantamento | Tolerâncias apertadas e escalação cedo |
+| Baixo nos quatro eixos | Modo leve: perguntas universais respondidas pelo material ou assumidas, e a lente principal. Premissa explícita vale mais que mais uma pergunta | Evidência em todo passo |
+| Novidade ou tecnologia alta | Incerteza de ferramenta resolvida com teste curto antes do desenho; de 8 a 10 itens do especialista; pre-mortem antes da sentença | Maior incerteza resolvida cedo; revisor independente nos marcos |
+| Complexidade alta | Dependências entre as áreas mapeadas; uma lente por área envolvida; pre-mortem antes da sentença | Marcos mais frequentes; revisor independente nos marcos |
+| Ritmo urgente | Fora de escopo explícito e cortado cedo | Tolerâncias apertadas e escalação cedo |
 
-Ação irreversível pede revisor independente em qualquer perfil.
+Ação irreversível pede pre-mortem e revisor independente em qualquer perfil.
 
 ## Linha de perfil no entendimento
 

@@ -46,25 +46,29 @@ Espera estimada pelo cliente, à parte do esforço: <faixa>.
 ## Maior incerteza
 <qual é, e o passo que a resolve primeiro>
 
-## Passos
-| # | Passo | Depende de | Pronto quando | WSJF |
-|---|---|---|---|---|
+## Plano
+Muda sem aditamento, desde que fique dentro das tolerâncias.
 
-Só a próxima onda vem detalhada. O resto fica em pacotes, refinados a cada marco.
+| # | Passo | Pacote | Depende de | Pronto quando | Esforço (h) | WSJF |
+|---|---|---|---|---|---|---|
+
+Só o próximo pacote vem detalhado em passos. Os seguintes ficam numa linha cada e são detalhados quando chega a vez deles. O fim de cada pacote é um marco.
 
 ## Aditamentos
+Só para mudar resultado, critério de pronto ou tolerância.
+
 | Data | O que mudou | Por quê | Decidido por |
 |---|---|---|---|
 ```
 
 ## ESTADO.md
 
-Cabe numa tela. Reescrito inteiro a cada ciclo, nunca acumulado.
+Nasce na confirmação do entendimento. Cabe numa tela. Reescrito inteiro a cada turno, nunca acumulado.
 
 ```markdown
 # Estado: <nome do trabalho>
 
-Atualizado em DD/MM/AAAA, HHhMM.
+Fase: <conhecimento | execução>. Atualizado em DD/MM/AAAA, HHhMM.
 
 **Onde estamos:** <uma frase>
 **Próximo passo:** <o passo e por que ele vem agora>
@@ -78,6 +82,14 @@ Atualizado em DD/MM/AAAA, HHhMM.
 **Não refazer:** <o que já está feito e pode parecer pendente, com a evidência>
 ```
 
+Na fase de conhecimento, o estado traz também:
+
+```markdown
+**Perguntas abertas:** <as próximas da fila, em ordem>
+**Premissas a confirmar no catch:** <lista curta>
+**Em verificação pelo Claude:** <o que falta conferir>
+```
+
 ## Histórico
 
 Arquivo `HISTORICO.md`. Só acumula, do mais novo para o mais antigo.
@@ -86,8 +98,10 @@ Arquivo `HISTORICO.md`. Só acumula, do mais novo para o mais antigo.
 ## DD/MM/AAAA
 - **Feito:** <passo> · evidência: <link, id ou print>
 - **Decidido:** <decisão> · por <quem>
+- **Perguntado:** <pergunta> · resposta: <escolha> · <antes ou depois da sentença>
 - **Conversa nova:** <fonte> · confirmou / acrescentou / contradisse <o quê>
 - **Incidente:** <pequeno, médio ou grande> · <o que houve e o que se fez>
+- **Reaberto:** <passo> · <por quê>
 ```
 
 No encerramento, o histórico ganha uma seção final:
@@ -99,7 +113,7 @@ No encerramento, o histórico ganha uma seção final:
 **Por que houve diferença:** <...>
 **O que manter e o que mudar:** <...>
 
-Perguntas de negócio depois da sentença: <n> · aditamentos: <n> · passos reabertos: <n>
+Perguntas depois da sentença: <n> · aditamentos: <n> · passos reabertos: <n>
 Lições propostas para a skill: <lista, ou "nenhuma">
 ```
 
@@ -109,7 +123,7 @@ Gerado no fim de cada turno. Traz os caminhos dos arquivos, sem copiar o que est
 
 ```text
 Continuar <nome do trabalho> com a bunker-lighthouse-copilot, na fase de <conhecimento | execução>.
-Leia primeiro docs/lighthouse/ESTADO.md e depois docs/lighthouse/SENTENCA.md, no repositório <repositório>, branch <branch>. O histórico só se lê se o estado mandar.
+Leia primeiro docs/lighthouse/ESTADO.md e, se já existir, docs/lighthouse/SENTENCA.md, em <repositório ou pasta>, branch <branch>. O histórico só se lê se o estado mandar.
 Próximo passo: <o mesmo do ESTADO.md>.
 Portas de aprovação: <o que espera o ok de quem conduz>.
 ```

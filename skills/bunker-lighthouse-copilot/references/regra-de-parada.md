@@ -4,22 +4,23 @@ A completude do levantamento depende mais de quando se decide parar do que da ex
 
 ## As seis condições
 
-O levantamento acabou quando as seis valem ao mesmo tempo:
+O levantamento acaba quando as seis valem ao mesmo tempo:
 
-1. **Cobertura fechada.** Todo item **O**, todo **T** aplicável, as lentes presentes e os itens do especialista estão respondidos, assumidos ou fora de escopo.
+1. **Cobertura fechada.** Todo item **O**, todo **T** aplicável, as lentes presentes e os itens do especialista estão respondidos, assumidos, verificados ou fora de escopo. Nenhum está em "pergunta" ou "em verificação".
 2. **Quatro riscos tratados.** Vão usar, conseguem usar, dá para construir, faz sentido para o negócio: cada um com uma frase de evidência ou com a premissa a testar.
 3. **Saturação.** As duas últimas perguntas ou fontes não trouxeram nada que mude o escopo.
 4. **Quem conduz confirmou** o entendimento e o fora de escopo.
-5. **Teste do executor.** Alguém que não participou consegue estimar em faixa e começar sem nova pergunta de negócio.
-6. **Maior incerteza nomeada,** com o plano para resolvê-la primeiro. É ela que abre o caminho crítico da execução.
+5. **Teste do executor.** Um agente que não participou do levantamento, lendo só a sentença, consegue estimar em faixa e começar sem nova pergunta de negócio.
+6. **Maior incerteza nomeada,** com o plano para resolvê-la logo depois do que destrava o caminho crítico.
 
 **Proporção.** Em trabalho pequeno e fácil de desfazer, uma premissa explícita vale mais que mais uma pergunta. Em trabalho caro de desfazer (modelo de dados, integração, migração), pergunta-se até a saturação.
 
 ## Antes de emitir
 
-- Perfil alto: pre-mortem. "Daqui a X semanas isto fracassou; por quê?" Listar as causas concretas e levar as principais para a sentença como risco, com o que se faz para evitar cada uma.
-- Conferir que toda inferência cita o trecho da fonte ou leva o rótulo "premissa".
+- Em perfil alto, ou com ação irreversível no plano: pre-mortem. "Daqui a X semanas isto fracassou; por quê?" Listar as causas concretas e levar as principais para a sentença como risco, com o que se faz para evitar cada uma.
+- Conferir que toda inferência usada como requisito cita o trecho da fonte ou leva o rótulo "premissa".
 - Conferir que toda recomendação aceita trouxe o motivo e a alternativa mais forte.
+- Mostrar as premissas ainda não confirmadas a quem conduz, numa caixinha só.
 
 ## Antipadrões
 
