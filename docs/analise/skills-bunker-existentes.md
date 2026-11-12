@@ -24,9 +24,9 @@ Leitura feita em 11/11/2026, sobre o plugin `bunker` versão 1.116.0: README do 
 2. **Esteira de defeito aplicada a projeto.** A anatomia da fix-bug parte de "uma issue é um sintoma reportado". Não há regra para issue de trabalho de projeto, e foi aí que a fila da Metax inchou.
 3. **Relatório ao cliente.** A repo-pulse não trata issue bloqueada à parte. A issue que espera o ok do cliente aparece no relatório como trabalho que não anda.
 
-## Números do GitHub da Metax (preliminares)
+## Números do GitHub da Metax
 
-Medidos pela aba "Boas práticas + case Metax" sobre 41 issues, 5 PRs, 247 comentários e 876 eventos (28/09 a 10/10/2026). A leitura dos comentários ainda não terminou.
+Medidos pela aba "Boas práticas + case Metax" sobre 41 issues, 5 PRs, 247 comentários e 876 eventos (28/09 a 10/10/2026). A leitura dos comentários terminou: a análise completa está em [`metax-github.md`](metax-github.md), e os scripts em [`scripts-metax-github/`](scripts-metax-github/). Pela decisão de 11/11/2026, o processo no GitHub segue o padrão da Bunker; estes números ficam como referência.
 
 | Medida | Resultado |
 |---|---|
