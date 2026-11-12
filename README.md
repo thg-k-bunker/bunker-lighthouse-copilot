@@ -24,6 +24,6 @@ docs/
   decisoes.md     o que está fechado e o que está em aberto
   origem/         o pedido original (transcrição dos áudios)
     metax/        arquivos de trabalho do projeto Metax: o "onde paramos", os prompts de sessão e as decisões
-  pesquisa/       boas práticas e lições do projeto Metax
+  pesquisa/       padrão de levantamento, boas práticas de execução e evidências
   analise/        o que já existe nas skills da Bunker e onde há conflito
 ```
