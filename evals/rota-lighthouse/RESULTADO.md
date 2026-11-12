@@ -13,6 +13,8 @@ Rodados em 12/11/2026 com `claude plugin eval`, numa cópia do plugin `bunker` 1
 
 6 de 6 com nota máxima. Custo da rodada: US$ 0,87.
 
+**Versão 2** (description nova, mais estreita), rodada no mesmo dia: de novo 6 de 6 com nota máxima, com as mesmas diferenças em relação ao braço sem o plugin. Custo: US$ 0,94.
+
 Limite: os evals deste formato só testam qual skill carrega. O comportamento da skill está em `testes/comportamento/`.
 
 No PR para o plugin, esta pasta entra em `evals/rota-lighthouse/` sem este arquivo.
