@@ -33,6 +33,11 @@ Espera estimada pelo cliente, à parte do esforço: <faixa>.
 | Premissa | Fonte e confiança | O que a invalida | Confirmar até |
 |---|---|---|---|
 
+## Aceite do cliente
+Só quando o trabalho é para um cliente. Não bloqueia a execução.
+
+Situação: <pendente | obtido> · enviado em DD/MM/AAAA por <quem conduz> · aceito em DD/MM/AAAA por <quem, do lado do cliente>
+
 ## Decisões
 | Data | Pergunta | Escolha | Alternativa descartada |
 |---|---|---|---|

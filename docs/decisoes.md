@@ -34,6 +34,7 @@ Atualizado em 12/11/2026. A pesquisa terminou e as decisões para começar a pro
 | Métricas (D7) | Sem painel na v1. O histórico registra só três fatos: perguntas feitas depois da sentença, aditamentos e passos reabertos (Thiago, 12/11/2026) |
 | A Metax não é escopo | A Metax foi só o exemplo que originou a skill. Nada dela entra no que vai para o plugin (`SKILL.md`, `description`, `references/` e evals): nem nome, nem pessoas, nem números de issue, nem termos do projeto (tensor, NPX, Journey Builder, canais da Metax). Os exemplos da skill são genéricos, de qualquer domínio. Os parênteses "o que teria pegado na Metax" do [`padrao-global-levantamento.md`](pesquisa/padrao-global-levantamento.md) e os itens do especialista semeados a partir dela ficam só como pesquisa. Na skill, "o Thiago" vira "quem conduz o projeto", porque ela vai para outras pessoas da Bunker. As pastas `analise/` e `origem/metax/` são evidência e não vão para o plugin (Thiago, 12/11/2026) |
 | Testes | O caso Metax é usado como teste de comportamento à mão, só neste repositório, porque é o único com gabarito real do que faltou perguntar. Para os evals do plugin, um caso genérico de outro domínio. Nada da Metax vai para o plugin (Thiago, 12/11/2026) |
+| Aceite do cliente | Quando o trabalho é para um cliente, o escopo vai para ele no catch, ao fim da fase de conhecimento, quando já se sabe o que vai ser entregue e como. A skill prepara a versão em linguagem de negócio, e quem conduz revisa e envia. O aceite **não bloqueia nada**, nem o início da execução: a sentença só registra se está pendente ou obtido, e o pendente aparece no estado como espera do cliente. Mudança de ideia que vem do aprendizado de quem executa (como o número de e-mails na Metax) é parte do trabalho, e a skill não deve atrapalhar a curva de aprendizado (Thiago, 12/11/2026) |
 | Confete no catch | Na troca da fase de conhecimento para a de execução, a skill solta o confete da `bunker-confetes-ou-perguntas-copilot`, como numa entrega: a sentença emitida é verificável (o arquivo existe no caminho dito). Continua valendo o confete no fim da entrega (Thiago, 12/11/2026) |
 
 ## O que a skill usa sem copiar
@@ -50,7 +51,7 @@ Atualizado em 12/11/2026. A pesquisa terminou e as decisões para começar a pro
 
 Nenhuma decisão de desenho pendente: as sete da [`sintese-pre-producao.md`](sintese-pre-producao.md) (D1 a D7) foram fechadas em 12/11/2026, todas pela recomendação. O rascunho do `SKILL.md`, da `description` e dos `references/` está em `skills/bunker-lighthouse-copilot/`, na branch `feat/rascunho-skill` (12/11/2026), esperando a revisão do Thiago. Depois vêm os evals de roteamento e o teste de comportamento com a Metax.
 
-**Pendente para o Thiago:** no teste com o caso Metax, a skill não levantou o aceite formal do cliente antes de construir (item M6 de `testes/comportamento/metax-jornada/resultado-v1.md`). É consequência da decisão "Quem decide": a skill só pede a confirmação de quem conduz. Na Metax, a especificação chegou ao rascunho 10 sem o aceite do cliente. Falta decidir se a sentença pede o aceite do cliente quando o trabalho é para um cliente.
+Nenhuma decisão pendente. A última, sobre o aceite do cliente, foi fechada em 12/11/2026 (linha "Aceite do cliente" acima).
 
 Ficam registrados, sem bloquear a produção:
 

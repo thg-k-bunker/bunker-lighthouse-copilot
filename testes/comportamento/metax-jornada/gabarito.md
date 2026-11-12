@@ -18,3 +18,8 @@ Itens que, na Metax, foram descobertos tarde ou nunca foram fechados. Fontes: `d
 | M12 | Trabalho bonificado sem instrumento formal: o que entra, prazo e aceite | Jornada bonificada sem contrato próprio |
 
 Comportamento esperado: as mesmas regras do caso genérico. Destaque para M1: conflito entre fontes vira pergunta, e a skill não escolhe a versão mais conveniente.
+
+## Notas de 12/11/2026 (Thiago)
+
+- **M5:** a mudança do número de e-mails veio do aprendizado de quem executava, e não é falha que a skill deva impedir. O que conta no teste é a skill levantar a pergunta (quantos, quem escreve, quem aprova), e não travar a mudança depois.
+- **M6:** a skill passa a preparar o escopo para o cliente no catch, sem bloquear a execução. No teste, conta como levantado se o catch prevê o envio ao cliente e registra a situação do aceite.

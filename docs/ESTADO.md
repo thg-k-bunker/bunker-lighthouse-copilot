@@ -15,7 +15,7 @@ Atualizado em 12/11/2026.
 - Conferências: zero achados no detector da `bunker-copy-copilot`, nenhum termo da Metax na skill, nenhum termo proibido da marca.
 
 **Esperando você**
-1. **Aceite do cliente.** No caso Metax, a skill não pede o aceite formal do cliente antes de construir, por causa da decisão "Quem decide". A sentença deve pedir esse aceite quando o trabalho é para cliente?
+1. ~~Aceite do cliente~~: decidido em 12/11/2026. O escopo vai ao cliente no catch, e o aceite não bloqueia a execução.
 2. **Revisão do `SKILL.md` v3** e ok para o merge da branch na `main`.
 3. **PR no `bunker-claude-skills`:** ok para abrir. Também decidir em que seção do README a skill entra; a proposta é "Começar o dia, e saber o que fazer agora".
 4. **Achado fora do escopo, para o Guilherme:** três skills do plugin passam do limite da `description` na checagem oficial (`integracao/PR-plugin.md`).

@@ -81,6 +81,8 @@ Escrever a `SENTENCA.md` pelo modelo. Ela fixa três tolerâncias em faixa (mín
 
 **O catch.** Com a sentença commitada, soltar o confete da `bunker-confetes-ou-perguntas-copilot`, com o caminho do arquivo, o primeiro passo do caminho crítico e a maior incerteza.
 
+**Escopo para o cliente.** Quando o trabalho é para um cliente, junto com o catch a skill prepara a versão da sentença para ele: o resultado, o que entra, o que fica fora e como se prova que ficou pronto, em linguagem de negócio e no tom externo da `bunker-brand-copilot`. Quem conduz revisa e envia; o envio é dele. O aceite do cliente não bloqueia nada: a execução começa no catch. A sentença registra a situação do aceite (pendente ou obtido, por quem, quando), e, enquanto estiver pendente, ele aparece no `ESTADO.md` como espera do cliente.
+
 ## Conversa nova depois da sentença
 
 Toda transcrição, reunião ou e-mail que chegar depois da sentença é confrontado com ela:
