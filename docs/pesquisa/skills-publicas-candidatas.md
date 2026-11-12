@@ -103,8 +103,8 @@ Comparação de estrutura com referências públicas de ciclo de vida com portõ
 
 **Decisões de desenho ainda abertas (não são lacunas de pesquisa).** Conferidas em 11/11/2026 contra `../decisoes.md` e `padrao-global-levantamento.md`, já com a análise da Metax no repositório:
 1. ~~Quem decide e quem aprova~~ Decidido em 11/11/2026 (ver `../decisoes.md`): o Thiago é sempre o responsável, e quem puder travar o projeto vem na transcrição ou é informado por ele. A skill não pergunta isso.
-2. Tolerâncias: `boas-praticas-execucao.md` (C1, item 3, e C2, itens 1 e 7) propõe que a sentença fixe resultado, critério de pronto e tolerâncias, com o plano de passos revisável dentro delas. Falta decidir.
-3. Proporção do ritual: coberta pela Camada 0 (perfil do projeto em quatro eixos) do levantamento global. A `classify-size` do `genkovich/sdd` fica só como inspiração, porque os sinais dela são de software. Falta decidir se o perfil é perguntado ou inferido.
+2. ~~Tolerâncias~~ Decidido em 12/11/2026 (ver `../decisoes.md`): prazo, esforço e escopo, em faixa, com gestão por exceção. Método verificado em `prince2-tolerancias.md`.
+3. ~~Proporção do ritual~~ Decidido em 12/11/2026: o Claude infere o perfil do projeto e o confirma no entendimento de 3 ou 4 linhas. A `classify-size` fica só como inspiração.
 
 A fase de execução e o processo no GitHub deixaram de ser pendência de pesquisa: a análise da Metax foi concluída e o processo de issues ficou fora da Lighthouse (decisão de 11/11/2026).
 
