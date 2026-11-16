@@ -1,5 +1,13 @@
 # Histórico: fator de frete automático da Ultracheese
 
+## 16/11/2026, sentença
+- **Feito:** sentença emitida · evidência: `SENTENCA.md`
+- **Feito:** escopo para o cliente preparado, para Thiago revisar e enviar · evidência: `ESCOPO-CLIENTE.md`
+- **Feito:** teste do executor: a primeira leitura achou 12 pontos; 10 técnicos resolvidos na sentença (regras de cálculo, carga, conferência, esforço subiu de 29 h para 32 h provável) e 1 de negócio perguntado
+- **Perguntado:** com quanto movimento a loja tem frete próprio? · resposta: 3 entregas no mês · antes da sentença
+- **Decidido:** as 8 premissas confirmadas em bloco · por Thiago
+- **Feito:** pre-mortem com 5 riscos, registrados na sentença
+
 ## 16/11/2026, perguntas
 - **Perguntado:** a reunião de 13/11 aconteceu? · resposta: não aconteceu · antes da sentença
 - **Perguntado:** de onde vem o frete realizado? · resposta: do fechamento mensal que o Victor já monta, agora; conexão direta com o sistema de roteirização numa segunda entrega · antes da sentença
