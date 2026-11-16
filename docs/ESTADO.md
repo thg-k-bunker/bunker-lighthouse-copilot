@@ -1,6 +1,6 @@
 # Estado: bunker-lighthouse-copilot
 
-Atualizado em 12/11/2026.
+Atualizado em 16/11/2026.
 
 **Onde estamos:** a skill está pronta e testada na `main` deste repositório, que também é um plugin pessoal do Claude Code (`lighthouse` 0.1.0, só da conta do Thiago). Agora é a fase de uso: instalar no PC do Thiago, usar num trabalho real e ajustar.
 
@@ -13,6 +13,10 @@ Atualizado em 12/11/2026.
 1. Usar a skill num trabalho real e anotar o que precisar ajustar.
 2. A cada mudança, subir a `version` em `.claude-plugin/plugin.json` e em `.claude-plugin/marketplace.json`; o Thiago atualiza com `claude plugin update lighthouse`.
 3. Quando quiser compartilhar com a Bunker: o PR está pronto em `integracao/` (patch e guia). Ao entrar no plugin da Bunker, desinstalar o pessoal.
+
+**Ponto de atenção principal para as próximas mudanças:** a qualidade das perguntas da fase de conhecimento. Elas foram feitas para ser rápidas e objetivas, e isso pode custar qualidade na sentença. Validar em cada uso real pelos sinais de `docs/decisoes.md`, seção "Ponto de atenção principal". Nada muda agora.
+
+**Plugin da Bunker:** o PR está aberto em Bunker-Growth-and-Sales-Intelligence/bunker-claude-skills#245 (https://github.com/Bunker-Growth-and-Sales-Intelligence/bunker-claude-skills/pull/245), versão 1.118.0, esperando aprovação e merge. O Guilherme aceitou e quer testar. Depois do merge, desinstalar o plugin pessoal com `claude plugin uninstall lighthouse`.
 
 **Para conversar com o Guilherme, sem pressa:** a wsjf refaz as notas a cada rodada; a esteira de defeito foi aplicada a trabalho de projeto; a repo-pulse não separa a espera do cliente (`docs/decisoes.md`).
 

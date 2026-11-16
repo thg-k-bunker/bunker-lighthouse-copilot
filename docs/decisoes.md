@@ -47,6 +47,21 @@ Atualizado em 12/11/2026. A pesquisa terminou e as decisões para começar a pro
 | Como terminar o turno | `bunker-confetes-ou-perguntas-copilot` |
 | Relatório ao cliente | `bunker-repo-pulse-copilot` |
 
+## Ponto de atenção principal: a qualidade das perguntas
+
+Registrado pelo Thiago em 16/11/2026. **É o ponto mais crítico para as próximas mudanças da skill.** Não muda nada agora; é para validar no uso.
+
+A fase de conhecimento foi desenhada para perguntas rápidas e objetivas, que não tomem muito tempo: pergunta-se só o que muda escopo, custo ou risco, uma por vez, e o resto entra como premissa confirmada em bloco. O risco é a pressa custar qualidade na sentença: perguntas rasas demais, ou contexto de menos para trabalho complexo.
+
+O que observar em cada uso real:
+
+- **Premissa errada:** algo assumido na sentença que se mostrou falso depois.
+- **Pergunta que chegou tarde:** dúvida de negócio que só apareceu depois da sentença (o encerramento já soma essas perguntas no histórico).
+- **Aditamento por falta de pergunta:** mudança de escopo que uma pergunta na fase de conhecimento teria evitado.
+- **Pergunta rasa:** quem conduz sentiu que a pergunta não tocou no ponto difícil do trabalho, ou respondeu sem pensar porque a recomendação parecia óbvia.
+
+Se esses sinais aparecerem, a mudança provável é dar mais profundidade à fase de conhecimento quando o perfil do projeto for alto (mais contexto lido antes de perguntar, mais perguntas, ou perguntas mais abertas), sem perder a rapidez no trabalho pequeno.
+
 ## Em aberto
 
 Nenhuma decisão de desenho pendente: as sete da [`sintese-pre-producao.md`](sintese-pre-producao.md) (D1 a D7) foram fechadas em 12/11/2026, todas pela recomendação. O rascunho do `SKILL.md`, da `description` e dos `references/` está em `skills/bunker-lighthouse-copilot/`, na branch `feat/rascunho-skill` (12/11/2026), esperando a revisão do Thiago. Depois vêm os evals de roteamento e o teste de comportamento com a Metax.
