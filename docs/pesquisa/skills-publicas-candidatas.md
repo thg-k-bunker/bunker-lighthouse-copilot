@@ -60,7 +60,7 @@ Commits lidos: `genkovich/sdd` `b7e1e6e`, `OthmanAdi/planning-with-files` `51bf6
 ### O que ainda não foi lido
 
 - Os scripts do `planning-with-files` foram só varridos por padrões (rede, `curl`, `eval`, `rm -rf`, `git push`): nada de rede, e os ganchos só leem e escrevem em `.planning/` do projeto, mas o `session-catchup.py` lê as transcrições de sessões do usuário quando chamado de forma explícita. Não li as 550 KB linha a linha.
-- Não li os modelos e exemplos do `planning-with-files`, as skills de que `to-spec` e `wayfinder` dependem (`grilling`, `domain-modeling`, `research`, `prototype`, `writing-for-agents`), nem as demais skills de `agent-personas` e `great_cto` (por exemplo `process-architecture-levels` e `momtest-interviewing`).
+- Não li os modelos e exemplos do `planning-with-files`, as skills de que `to-spec` e `wayfinder` dependem (`domain-modeling`, `research`, `prototype`, `writing-for-agents`; a `grilling` foi lida em 16/11/2026, ver "Quarta leitura"), nem as demais skills de `agent-personas` e `great_cto` (por exemplo `process-architecture-levels` e `momtest-interviewing`).
 
 ## Conclusão: o que entra como referência de desenho
 
@@ -82,6 +82,21 @@ Commits lidos: `genkovich/sdd` `b7e1e6e`, `OthmanAdi/planning-with-files` `51bf6
 |---|---|
 | `process-architecture-levels` | Hierarquia L1 a L4 de processo, com correspondência ao APQC. Pensada para panorama de organização inteira, grande demais para uma skill por tarefa. Aproveitar só a **matriz de cobertura** (o que a evidência sustenta em cada nível) e duas regras: "nunca fabricar detalhe fino a partir de conversa grosseira" e "não colapsar evidência rica numa caixa e perdê-la: guardar como candidata" |
 | `momtest-interviewing` | Entrevistar comportamento passado, não opinião. Curta e já coberta pela escala de confiança da `process-source-elicitation` (observado vale mais que dito, dito vale mais que desejo). Descartar por redundância |
+
+## Quarta leitura (`mattpocock/skills`, MIT, commit `5863806`, 16/11/2026)
+
+Lidas `grill-me` e `grilling`. A `grill-me` só chama a `grilling` e roda apenas quando o usuário digita `/grill-me`. Nenhuma das duas tem script nem referência de rede.
+
+| Skill | O que faz de fato | Veredito |
+|---|---|---|
+| `grilling` | Entrevista o usuário até o entendimento ficar comum. Organiza as decisões numa árvore de dependência e, a cada rodada, faz de uma vez todas as perguntas cujos pré-requisitos já estão resolvidos, numeradas e com resposta recomendada, redigidas para que "sim" aceite a recomendação. Fato é trabalho do agente: um subagente busca no ambiente sem travar as perguntas que não dependem dele; decisão é do usuário. Termina quando nada ficou assumido em silêncio, e não age antes da confirmação | A Lighthouse já cobre o núcleo na fase de conhecimento (pergunta com recomendação, o Claude pesquisa o técnico, regra de parada) e vai além (sentença, arquivos, execução). Não adotar como skill. Descartar a rodada com todas as perguntas de uma vez (contraria "uma pergunta por vez" da casa) e o "nada assumido" (a Lighthouse assume de propósito o que não muda escopo, custo ou risco e confirma em bloco na sentença) |
+
+**Ideias candidatas, sem entrar na skill agora.** Decisão do Thiago em 16/11/2026: só registrar; o foco é pôr a Lighthouse em uso. Cada ideia entra só se o uso real mostrar o sinal correspondente.
+
+| Ideia | Sinal no uso real que justifica entrar | Cuidado |
+|---|---|---|
+| Ordem pela dependência: uma pergunta só vai quando as perguntas de que ela depende já foram respondidas | Pergunta feita antes da resposta de que dependia | Não mudar o lote da pressa (até quatro, como na `bunker-fix-bug-copilot`), para não se afastar do padrão da casa |
+| Subagente busca o fato sem travar a conversa; esperam só as perguntas que dependem dele | Conversa parada esperando o Claude conferir algo no ambiente ou na documentação | Custa tokens, e nem todo lugar onde a skill roda tem subagente (o chat do claude.ai, por exemplo) |
 
 ## Fechamento da etapa de pesquisa de skills públicas
 
