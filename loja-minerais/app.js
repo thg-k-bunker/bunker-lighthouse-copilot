@@ -1,5 +1,5 @@
 /* Dados fictícios — substituir pelo acervo real. */
-const BRAND='ATELIER MINERAL'; // nome provisório
+const BRAND='PERIDOT'; // nome provisório
 const FAMILIES={ametista:['#1b0b2e','#6b3fa0','#d9b8ff'],quartzo:['#16181c','#7f8794','#f2f4f8'],malaquita:['#04140e','#0f6b45','#9be3bd'],fluorita:['#07121f','#2b7a8f','#b6f0e0'],turmalina:['#12060a','#a3224f','#ff9fbf'],azurita:['#030b1d','#1f3f9e','#8fb0ff']};
 const P=[
 {id:'aurora-ametista',nome:'Drusa Aurora',mineral:'Ametista',fam:'ametista',origem:'Artigas, Uruguai',peso:'38 kg',dim:'62 × 41 × 30 cm',preco:48000,tag:'Peça única',txt:'Cavidade de ametista de cor profunda e cristais de terminação limpa, com fundo de ágata preservado.'},
