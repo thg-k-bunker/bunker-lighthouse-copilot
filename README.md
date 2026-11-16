@@ -1,6 +1,6 @@
 # bunker-lighthouse-copilot
 
-Repositório de trabalho da skill **Lighthouse** (apelido nas conversas: Farol): o padrão de processo da Bunker para executar, com produtividade, trabalhos e projetos que ainda não dominamos.
+Repositório de trabalho da skill **Lighthouse** (apelido nas conversas: Farol): o padrão de processo da Bunker para executar, com produtividade, trabalhos e projetos.
 
 **Status:** versão 2 do rascunho na branch `feat/rascunho-skill`, testada e esperando a revisão do Thiago. Nada foi enviado ao plugin.
 
