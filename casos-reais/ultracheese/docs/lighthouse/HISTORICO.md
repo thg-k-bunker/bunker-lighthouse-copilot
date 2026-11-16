@@ -1,5 +1,12 @@
 # Histórico: fator de frete automático da Ultracheese
 
+## 16/11/2026, perguntas
+- **Perguntado:** a reunião de 13/11 aconteceu? · resposta: não aconteceu · antes da sentença
+- **Perguntado:** de onde vem o frete realizado? · resposta: do fechamento mensal que o Victor já monta, agora; conexão direta com o sistema de roteirização numa segunda entrega · antes da sentença
+- **Perguntado:** o frete de transferência fábrica-CD (T1) entra? · resposta: até 25/11 só o frete de entrega; o lugar da transferência fica pronto e zerado até a controladoria decidir · antes da sentença
+- **Perguntado:** o nível cliente é loja ou grupo? · resposta: loja, depois município, depois estado; grupo não entra · antes da sentença
+- **Perguntado:** a comparação previsto x realizado entra até 25/11? · resposta: o previsto é gravado em cada pedido desde o primeiro dia; o relatório vem na segunda entrega · antes da sentença
+
 ## 16/11/2026
 - **Decidido:** os arquivos do projeto ficam neste repositório, em `casos-reais/ultracheese/`, porque a Ultracheese não tem repositório · por Thiago
 - **Perguntado:** o entendimento está certo? · resposta: está certo · antes da sentença
